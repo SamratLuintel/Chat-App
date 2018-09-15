@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import formFields from "./formFields";
-import SignUpField from "./SignUpField/SignUpField";
+import LoginField from "./LoginField/LoginField";
 import _ from "lodash";
-import { signUpFormSubmit } from "../../store/actions/profile/profile";
+import { loginFormSubmit } from "../../store/actions/profile/profile";
 import { SubmissionError } from "redux-form";
 
-class SignUp extends Component {
+class Login extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name }) => {
       return (
-        <Field component={SignUpField} type="text" label={label} name={name} />
+        <Field component={LoginField} type="text" label={label} name={name} />
       );
     });
   }
@@ -22,11 +22,11 @@ class SignUp extends Component {
       <div>
         <form
           onSubmit={handleSubmit(values =>
-            signUpFormSubmit(values, history, SubmissionError)
+            loginFormSubmit(values, history, SubmissionError)
           )}
         >
           {this.renderFields()}
-          <button type="Submit">Send the Survey</button>
+          <button type="submit">Send the Survey</button>
         </form>
       </div>
     );
@@ -34,9 +34,9 @@ class SignUp extends Component {
 }
 export default connect(
   null,
-  { signUpFormSubmit }
+  { loginFormSubmit }
 )(
   reduxForm({
-    form: "signupform"
-  })(SignUp)
+    form: "loginform"
+  })(Login)
 );

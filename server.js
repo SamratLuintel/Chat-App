@@ -16,6 +16,7 @@ mongoose.connect(
   "mongodb://localhost/chat-app",
   { useNewUrlParser: true }
 );
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -31,7 +32,7 @@ require("./routes/users")(router);
 // users.setRouting(router);
 
 app.use(express.static("public"));
-app.use(cors());
+
 app.use(cookieParser);
 app.use(validator());
 
@@ -48,6 +49,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-server.listen(4000, () => {
-  console.log("Server is listening on the port 4000");
+server.listen(5000, () => {
+  console.log("Server is listening on the port 5000");
 });
