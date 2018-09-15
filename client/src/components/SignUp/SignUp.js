@@ -20,6 +20,8 @@ class SignUp extends Component {
     const { handleSubmit, history } = this.props;
     return (
       <div>
+        <a href="/api/auth/facebook">Sign Up Facebook</a>
+        <a href="/api/auth/google">Sign Up Google</a>
         <form
           onSubmit={handleSubmit(values =>
             signUpFormSubmit(values, history, SubmissionError)

@@ -21,8 +21,7 @@ const LogInValidation = [
     .isEmail()
     .exists()
     .withMessage("Email field must be provided"),
-  check("password", "Password must not be less than 5")
-    .isLength({ min: 5 })
+  check("password")
     .exists()
     .withMessage("Password filed must be provided")
 ];

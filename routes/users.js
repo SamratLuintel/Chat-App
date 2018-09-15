@@ -8,6 +8,10 @@ const {
 } = require("../helpers/authValidation");
 
 module.exports = router => {
+  router.get("/", (req, res) => {
+    console.log("Home route is called");
+    res.send("You are on home page");
+  });
   //@route POST /api/signup
   //@desc Signs up the user
   //@access Public
@@ -65,4 +69,44 @@ module.exports = router => {
       res.status(401).send(err);
     }
   });
+
+  //@route GET api/auth/facebook
+  //@desc Facebook O Auth
+  //@access Public
+  router.get(
+    "/api/auth/facebook",
+    passport.authenticate("facebook", {
+      scope: "email"
+    })
+  );
+  //@route GET api/auth/facebook/callback
+  //@desc Facebook O Auth
+  //@access Public
+  router.get(
+    "/api/auth/facebook/callback",
+    passport.authenticate("facebook", { session: false }),
+    (req, res) => {
+      console.log("This route is caleld");
+      res.redirect("/");
+    }
+  );
+
+  router.get(
+    "/api/auth/google",
+    passport.authenticate("google", {
+      scope: [
+        "https://www.googleapis.com/auth/plus.login",
+        "https://www.googleapis.com/auth/plus.profile.emails.read"
+      ]
+    })
+  );
+
+  router.get(
+    "/api/auth/google/callback",
+    passport.authenticate("google"),
+    (req, res) => {
+      console.log("This google route is caleld");
+      res.redirect("/");
+    }
+  );
 };

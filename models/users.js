@@ -3,18 +3,18 @@ const bcrypt = require("bcryptjs");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  username: { type: String, unique: true },
+  username: { type: String },
   fullname: { type: String }, //{ type: String, unique: true, default: "" },
-  email: { type: String, unique: true },
+  email: { type: String },
   password: { type: String, default: "" },
   userImage: { type: String, default: "default.png" },
   facebook: { type: String, default: "" },
-  fbToken: Array,
-  google: { type: String, default: "" },
-  googleTokens: Array
+  fbTokens: Array,
+  google: { type: String, default: "" }
 });
 
 UserSchema.pre("save", function(next) {
+  ``;
   const user = this;
 
   // only hash the password if it has been modified (or is new)

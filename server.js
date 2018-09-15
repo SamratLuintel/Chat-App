@@ -23,6 +23,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //require the models
 require("./models/users.js");
 
+app.use(passport.initialize());
+app.use(passport.session());
 //require passport
 require("./services/passport");
 
@@ -45,9 +47,6 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 server.listen(5000, () => {
   console.log("Server is listening on the port 5000");
