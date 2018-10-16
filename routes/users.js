@@ -17,6 +17,7 @@ module.exports = router => {
   //@access Public
   router.post("/api/signup", SignUpValidation, (req, res, next) => {
     passport.authenticate("local.signup", function(err, user, info) {
+      console.log("Sign up route is hit");
       // Error from validation
       let errors = {};
       req._validationErrors.forEach(error => {
@@ -76,6 +77,7 @@ module.exports = router => {
   router.get(
     "/api/auth/facebook",
     passport.authenticate("facebook", {
+      prompt: "select_account",
       scope: "email"
     })
   );
@@ -86,7 +88,7 @@ module.exports = router => {
     "/api/auth/facebook/callback",
     passport.authenticate("facebook", { session: false }),
     (req, res) => {
-      console.log("This route is caleld");
+      console.log("Facebook callback route is called");
       res.redirect("/");
     }
   );
@@ -94,6 +96,7 @@ module.exports = router => {
   router.get(
     "/api/auth/google",
     passport.authenticate("google", {
+      prompt: "select_account",
       scope: [
         "https://www.googleapis.com/auth/plus.login",
         "https://www.googleapis.com/auth/plus.profile.emails.read"
@@ -105,7 +108,7 @@ module.exports = router => {
     "/api/auth/google/callback",
     passport.authenticate("google"),
     (req, res) => {
-      console.log("This google route is caleld");
+      console.log("Google callback route is called");
       res.redirect("/");
     }
   );

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
-import formFields from "./formFields";
-import LoginField from "./LoginField/LoginField";
+import formFields from "components/Login/formFields";
+import LoginField from "components/Login/LoginField/LoginField";
 import _ from "lodash";
-import { loginFormSubmit } from "../../store/actions/profile/profile";
+import { loginFormSubmit } from "store/actions/profile/profile";
 import { SubmissionError } from "redux-form";
 
 class Login extends Component {
