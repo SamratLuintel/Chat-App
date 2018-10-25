@@ -7,11 +7,17 @@ import _ from "lodash";
 import { loginFormSubmit } from "store/actions/profile/profile";
 import { SubmissionError } from "redux-form";
 
-class Login extends Component {
+export class Login extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name }) => {
       return (
-        <Field component={LoginField} type="text" label={label} name={name} />
+        <Field
+          component={LoginField}
+          type="text"
+          key={label}
+          label={label}
+          name={name}
+        />
       );
     });
   }

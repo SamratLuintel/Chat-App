@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
-import formFields from "./formFields";
-import SignUpField from "./SignUpField/SignUpField";
+import formFields from "components/SignUp/formFields";
+import SignUpField from "components/SignUp/SignUpField/SignUpField";
 import _ from "lodash";
-import { signUpFormSubmit } from "../../store/actions/profile/profile";
+import { signUpFormSubmit } from "store/actions/profile/profile";
 import { SubmissionError } from "redux-form";
 
-class SignUp extends Component {
+export class SignUp extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name }) => {
       return (
-        <Field component={SignUpField} type="text" label={label} name={name} />
+        <Field
+          component={SignUpField}
+          type="text"
+          key={label}
+          label={label}
+          name={name}
+        />
       );
     });
   }

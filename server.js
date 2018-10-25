@@ -5,23 +5,33 @@ const app = express();
 const server = http.createServer(app);
 const router = require("express-promise-router")();
 const cors = require("cors");
+const cloudinary = require("cloudinary");
 const cookieParser = require("cookie-parser");
 const validator = require("express-validator");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const passport = require("passport");
-
+const keys = require("./config/keys");
 mongoose.connect(
   "mongodb://localhost/chat-app",
-  { useNewUrlParser: true }
+  { useNewUrlParser: true },
+  () => console.log("Connected to Mongo Server")
 );
+
+cloudinary.config({
+  cloud_name: keys.cloudinaryName,
+  api_key: keys.cloudinaryApiKey,
+  api_secret: keys.cloudinaryApiSecret
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //require the models
 require("./models/users.js");
+require("./models/groups.js");
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -31,7 +41,7 @@ require("./services/passport");
 app.use(router);
 
 require("./routes/users")(router);
-// users.setRouting(router);
+require("./routes/admin")(router);
 
 app.use(express.static("public"));
 
