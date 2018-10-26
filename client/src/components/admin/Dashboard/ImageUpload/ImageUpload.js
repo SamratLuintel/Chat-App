@@ -22,7 +22,7 @@ class ImageUpload extends Component {
     this.setState({ uploading: true });
     const formData = new FormData();
     files.forEach((file, i) => {
-      //name it image
+      //name it image for the sake of backend
       formData.append("image", file);
     });
     this.sendFormData(formData);
@@ -36,7 +36,6 @@ class ImageUpload extends Component {
       this.setState({
         uploading: false
       });
-      console.log("Image sa  from image upload", image.data);
     } catch (error) {
       console.log("This errors is coming from ImageUpload.js");
       console.log(error);
