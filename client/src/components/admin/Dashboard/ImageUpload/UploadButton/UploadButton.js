@@ -5,7 +5,7 @@ const UploadButton = props => {
     <div>
       <div className="button">
         <label htmlFor="single">
-          <i class="fas fa-upload" />
+          <i className="fas fa-upload" />
         </label>
         <input
           type="file"

@@ -15,7 +15,7 @@ class ImageUpload extends Component {
     uploading: false
   };
 
-  onChange = async e => {
+  onChange = e => {
     const files = Array.from(e.target.files);
 
     e.target.textContent = files;
@@ -25,19 +25,23 @@ class ImageUpload extends Component {
       //name it image
       formData.append("image", file);
     });
+    this.sendFormData(formData);
+  };
+
+  sendFormData = async formData => {
     try {
       const image = await axios.post("/api/image-upload", formData);
+
       this.props.onFileNameChange(image.data);
-      console.log("Image from image upload", image.data);
       this.setState({
         uploading: false
       });
+      console.log("Image sa  from image upload", image.data);
     } catch (error) {
       console.log("This errors is coming from ImageUpload.js");
       console.log(error);
     }
   };
-
   render() {
     let loading = null;
     if (this.state.uploading) {

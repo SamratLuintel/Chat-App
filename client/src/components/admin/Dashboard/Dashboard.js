@@ -3,10 +3,25 @@ import ImageUpload from "./ImageUpload/ImageUpload";
 import axios from "axios";
 class Dashboard extends Component {
   state = {
-    fileName: ""
+    fileName: "",
+    group: "",
+    country: ""
+  };
+
+  onGroupChange = e => {
+    this.setState({
+      group: e.target.value
+    });
+  };
+
+  onCountryChange = e => {
+    this.setState({
+      country: e.target.value
+    });
   };
 
   onFormSubmit = e => {
+    console.log("on form submit has been called");
     e.preventDefault();
     const { group, country } = e.target;
     axios.post("/api/dashboard", {
@@ -25,8 +40,20 @@ class Dashboard extends Component {
     return (
       <div>
         <form onSubmit={this.onFormSubmit}>
-          <input type="text" name="group" placeholder="Group Name" />
-          <input type="text" name="country" placeholder="Country" />
+          <input
+            type="text"
+            onChange={this.onGroupChange}
+            name="group"
+            placeholder="Group Name"
+            value={this.state.group}
+          />
+          <input
+            type="text"
+            onChange={this.onCountryChange}
+            name="country"
+            placeholder="Country"
+            value={this.state.country}
+          />
           <ImageUpload
             fileName={this.state.fileName}
             onFileNameChange={this.onFileNameChange}
