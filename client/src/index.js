@@ -5,6 +5,8 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import Root from "./Root";
 
+//Sass uses the relative imports
+//React Js uses the absolute imports
 ReactDOM.render(
   <Root>
     <Router>

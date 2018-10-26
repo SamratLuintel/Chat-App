@@ -1,0 +1,68 @@
+$header-height: 50px;
+$navitem-paddingX: 20px;
+$navitem-paddingY: 15px;
+
+@import "ProfileDropDown/ProfileDropDown";
+
+//When the user is not logged in the navbar will be of white color
+// When the user is logged in the navbar will be of dark color
+// So I have make use of --loggedIn and --loggedOut for changing their behaviour.
+// The hover color will be different for two kind of navbar
+
+.Header {
+  display: flex;
+  width: "100%";
+  box-sizing: border-box;
+  height: $header-height;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+}
+
+.Header--light {
+  background-color: $light-header-color;
+}
+
+.Header--dark {
+  background-color: $dark-header-color;
+}
+
+.Header__brand {
+  padding-left: 40px;
+  padding-top: 15px;
+  font-weight: bold;
+  font-family: Mali;
+}
+
+.navbar {
+  list-style: none;
+  display: none;
+
+  @include for-tablet-landscape-up {
+    display: flex;
+  }
+}
+
+.navbar__navitem {
+  padding: $navitem-paddingY $navitem-paddingX;
+  color: $navitem-color;
+  display: inline-block;
+  vertical-align: top;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.navbar__navitem--loggedIn:hover {
+  background-color: darken($dark-header-color, 5%);
+}
+
+.navbar__navitem--loggedOut:hover {
+  background-color: darken($light-header-color, 5%);
+}
+.signin {
+  text-decoration: none;
+  border: 1px solid rgba(66, 66, 66, 0.2);
+  padding: 8px 17px;
+  border-radius: 18px;
+  white-space: nowrap;
+  vertical-align: top;
+}

@@ -21,12 +21,6 @@ mongoose.connect(
   () => console.log("Connected to Mongo Server")
 );
 
-// cloudinary.config({
-//   cloud_name: keys.cloudinaryName,
-//   api_key: keys.cloudinaryApiKey,
-//   api_secret: keys.cloudinaryApiSecret
-// });
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,6 +38,7 @@ app.use(router);
 
 require("./routes/users")(router);
 require("./routes/admin")(router);
+require("./routes/home")(router);
 
 app.use(express.static("public"));
 

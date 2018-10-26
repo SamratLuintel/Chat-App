@@ -1,0 +1,14 @@
+@import "GroupSearch/GroupSearch";
+@import "Filter/Filter";
+@import "ChatGroups/ChatGroups";
+
+.Home {
+  background-color: rgb(218, 216, 216);
+  height: 100vh;
+}
+
+.Home__body {
+  width: 1300px;
+  margin: 0 auto;
+  display: flex;
+}
