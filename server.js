@@ -5,7 +5,6 @@ const app = express();
 const server = http.createServer(app);
 const router = require("express-promise-router")();
 const cors = require("cors");
-const cloudinary = require("cloudinary");
 const cookieParser = require("cookie-parser");
 const validator = require("express-validator");
 const session = require("express-session");
@@ -13,17 +12,20 @@ const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const passport = require("passport");
 const keys = require("./config/keys");
+
+//import cloudinary
+require("./services/cloudinaryUpload");
 mongoose.connect(
   "mongodb://localhost/chat-app",
   { useNewUrlParser: true },
   () => console.log("Connected to Mongo Server")
 );
 
-cloudinary.config({
-  cloud_name: keys.cloudinaryName,
-  api_key: keys.cloudinaryApiKey,
-  api_secret: keys.cloudinaryApiSecret
-});
+// cloudinary.config({
+//   cloud_name: keys.cloudinaryName,
+//   api_key: keys.cloudinaryApiKey,
+//   api_secret: keys.cloudinaryApiSecret
+// });
 
 app.use(cors());
 app.use(bodyParser.json());

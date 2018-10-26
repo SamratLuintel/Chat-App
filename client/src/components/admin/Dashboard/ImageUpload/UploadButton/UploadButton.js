@@ -4,10 +4,15 @@ const UploadButton = props => {
   return (
     <div>
       <div className="button">
-        <label htmlFor="multi">
+        <label htmlFor="single">
           <i class="fas fa-upload" />
         </label>
-        <input type="file" id="multi" onChange={props.onChange} multiple />
+        <input
+          type="file"
+          id="single"
+          name="upload"
+          onChange={props.onChange}
+        />
       </div>
     </div>
   );
