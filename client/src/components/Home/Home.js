@@ -4,7 +4,7 @@ import GroupSearch from "components/Home/GroupSearch/GroupSearch";
 import Filter from "components/Home/Filter/Filter";
 import ChatGroups from "./ChatGroups/ChatGroups";
 import { connect } from "react-redux";
-import { fetchGroups } from "store/actions/groups/groups";
+import { fetchGroups } from "store/actions/group/group";
 
 class Home extends Component {
   componentDidMount = () => {

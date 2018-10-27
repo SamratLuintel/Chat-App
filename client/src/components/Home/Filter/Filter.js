@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { bindActionCreators } from "redux";
-
-class Filter extends Component {
-  // Keeps the track of which element is currently selected
-
-  //"Filter__listItem Filter__listItem--selected"
+export class Filter extends Component {
+  renderOptions = () => {
+    let render = null;
+    if (this.props.countries) {
+      render = this.props.countries.map((country, index) => {
+        return (
+          <option value={country._id} key={index}>
+            {country._id}
+          </option>
+        );
+      });
+    }
+    return render;
+  };
   render() {
     return (
       <div className="Filter">
@@ -14,9 +22,7 @@ class Filter extends Component {
           <option selected value="country">
             Select By Country
           </option>
-          <option value="city">Select By City</option>
-          <option value="coconut">Coconut</option>
-          <option value="mango">Mango</option>
+          {this.renderOptions()}
         </select>
         <button>Apply</button>
       </div>
@@ -24,4 +30,8 @@ class Filter extends Component {
   }
 }
 
-export default Filter;
+const mapStateToProps = state => ({
+  countries: state.group.countries
+});
+
+export default connect(mapStateToProps)(Filter);

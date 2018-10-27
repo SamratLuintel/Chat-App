@@ -5,7 +5,8 @@ class Dashboard extends Component {
   state = {
     fileName: "",
     group: "",
-    country: ""
+    country: "",
+    error: ""
   };
 
   onGroupChange = e => {
@@ -20,17 +21,19 @@ class Dashboard extends Component {
     });
   };
 
-  onFormSubmit = e => {
-    console.log("on form submit has been called");
+  onFormSubmit = async e => {
     e.preventDefault();
     const { group, country } = e.target;
-    axios.post("/api/dashboard", {
-      name: group.value,
-      country: country.value,
-      image: this.state.fileName
-    });
-
-    //TODO redirect the user
+    try {
+      await axios.post("/api/dashboard", {
+        name: group.value,
+        country: country.value,
+        image: this.state.fileName
+      });
+    } catch (error) {
+      console.log(error.response.data.message);
+      this.setState({ error: error.response.data.message });
+    }
   };
 
   onFileNameChange = name => {
@@ -47,6 +50,7 @@ class Dashboard extends Component {
             placeholder="Group Name"
             value={this.state.group}
           />
+          {this.state.error}
           <input
             type="text"
             onChange={this.onCountryChange}

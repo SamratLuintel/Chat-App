@@ -1,14 +1,14 @@
 .GroupSearch {
+  display: flex;
   text-align: center;
+  justify-content: center;
 }
 .GroupSearch__input {
   width: 500px;
   padding: 10px 10px;
-  vertical-align: middle;
 }
 .GroupSearch__search-btn {
-  vertical-align: middle;
+  align-items: center;
   background-color: rgb(0, 92, 128);
   color: white;
-  height: 100%;
 }

@@ -1,1 +1,1 @@
-export const UPDATE_GROUPS = "update_groups";
+export const UPDATE_GROUP = "update_group";

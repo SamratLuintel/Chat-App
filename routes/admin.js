@@ -37,6 +37,12 @@ module.exports = router => {
   });
 
   router.post("/api/dashboard", async (req, res) => {
+    const group = await Group.findOne({ name: req.body.name });
+    if (group) {
+      return res
+        .status(400)
+        .send({ message: "Group with provided name already exist" });
+    }
     const newGroup = new Group({
       name: req.body.name,
       country: req.body.country,

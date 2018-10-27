@@ -1,8 +1,17 @@
 import React from "react";
 import Dashboard from "components/admin/Dashboard/Dashboard";
 import { shallow, render } from "enzyme";
+import axios from "axios";
+import moxios from "moxios";
 
 describe("The Dashboard component", () => {
+  beforeEach(function() {
+    moxios.install(axios);
+  });
+
+  afterEach(function() {
+    moxios.uninstall(axios);
+  });
   it("should not regress", () => {
     const wrapper = render(<Dashboard />);
     expect(wrapper).toMatchSnapshot();
@@ -30,5 +39,26 @@ describe("The Dashboard component", () => {
         target: { value }
       });
     expect(wrapper.state("country")).toBe(value);
+  });
+
+  it.skip("should set error state when dashboard api returns error", async () => {
+    const errorMsg = "Group already exist";
+    moxios.stubRequest("/api/dashboard", {
+      status: 400,
+      response: {
+        message: errorMsg
+      }
+    });
+    const event = {
+      preventDefault: () => {},
+      target: {
+        group: "",
+        country: ""
+      }
+    };
+    const wrapper = shallow(<Dashboard />);
+    await wrapper.find("form").simulate("submit", event);
+    wrapper.update();
+    expect(wrapper.state("error")).toBe(errorMsg);
   });
 });

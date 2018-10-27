@@ -1,4 +1,6 @@
 @import "ChatGroup/ChatGroup";
 .ChatGroups {
   margin-left: 10px;
+  flex-wrap: wrap;
+  display: flex;
 }

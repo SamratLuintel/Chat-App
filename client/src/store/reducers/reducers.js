@@ -1,11 +1,11 @@
 import { reducer as formReducer } from "redux-form";
-import authReducer from "./authReducer";
+import authReducer from "store/reducers/authReducer";
 import { combineReducers } from "redux";
-import groupsReducer from "./groupsReducer";
+import groupReducer from "store/reducers/groupReducer";
 
 export default combineReducers({
   form: formReducer,
   auth: authReducer,
   //Contains the list of chat groups
-  groups: groupsReducer
+  group: groupReducer
 });

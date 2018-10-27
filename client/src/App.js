@@ -5,6 +5,7 @@ import Login from "components/Login/Login";
 import Landing from "components/Landing/Landing";
 import Dashboard from "components/admin/Dashboard/Dashboard";
 import Home from "components/Home/Home";
+import Group from "components/Group/Group";
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/group/:name" component={Group} />
       </div>
     );
   }
