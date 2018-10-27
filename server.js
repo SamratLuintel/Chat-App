@@ -1,16 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const socketIO = require("socket.io");
+
 const http = require("http");
 const app = express();
 const server = http.createServer(app);
-const router = require("express-promise-router")();
+const io = socketIO(server);
+
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
 const validator = require("express-validator");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
-const passport = require("passport");
 const keys = require("./config/keys");
 
 //import cloudinary
@@ -22,39 +23,37 @@ mongoose.connect(
 );
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 //require the models
 require("./models/users.js");
 require("./models/groups.js");
 
-app.use(passport.initialize());
-app.use(passport.session());
 //require passport
-require("./services/passport");
-
-app.use(router);
-
-require("./routes/users")(router);
-require("./routes/admin")(router);
-require("./routes/home")(router);
-
+const passport = require("./services/passport");
 app.use(express.static("public"));
-
-app.use(cookieParser);
-app.use(validator());
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "thisisasecretkey",
     resave: true,
-    saveInitialized: true,
     saveUninitialized: true,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
+//Require sockets
+require("./sockets/groupchat")(io);
+
+//Require routes
+require("./routes/users")(app);
+require("./routes/admin")(app);
+require("./routes/home")(app);
+require("./routes/group")(app);
+
+app.use(validator());
 server.listen(5000, () => {
   console.log("Server is listening on the port 5000");
 });

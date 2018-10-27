@@ -5,9 +5,17 @@ import Login from "components/Login/Login";
 import Landing from "components/Landing/Landing";
 import Dashboard from "components/admin/Dashboard/Dashboard";
 import Home from "components/Home/Home";
-import Group from "components/Group/Group";
+import GroupChat from "components/GroupChat/GroupChat";
+import { connect } from "react-redux";
+import { fetchUser } from "store/actions/profile/profile";
+import { withRouter, Switch } from "react-router-dom";
+import PrivateRoute from "hoc/PrivateRoute";
 
 class App extends Component {
+  componentDidMount = () => {
+    this.props.fetchUser();
+  };
+
   render() {
     return (
       <div>
@@ -16,10 +24,17 @@ class App extends Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/group/:name" component={Group} />
+        <Switch>
+          <PrivateRoute exact path="/group/:name" component={GroupChat} />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(
+  connect(
+    null,
+    { fetchUser }
+  )(App)
+);

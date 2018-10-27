@@ -1,0 +1,31 @@
+@import "GroupProfile/GroupProfile";
+@import "OnlineFriends/OnlineFriends";
+@import "ChatSection/ChatSection";
+@import "OnlineGroup/OnlineGroup";
+
+.GroupChat {
+  background-color: $grey-background;
+  min-height: 100vh;
+}
+
+.GroupChat__body {
+  width: 1300px;
+  margin: 0 auto;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.GroupChat__left {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.GroupChat__middle {
+  width: 500px;
+}
+
+.GroupChat__right {
+  width: 350px;
+}

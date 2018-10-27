@@ -41,7 +41,7 @@ describe("The Dashboard component", () => {
     expect(wrapper.state("country")).toBe(value);
   });
 
-  it.skip("should set error state when dashboard api returns error", async () => {
+  it("should set error state when dashboard api returns error", async () => {
     const errorMsg = "Group already exist";
     moxios.stubRequest("/api/dashboard", {
       status: 400,
@@ -57,8 +57,7 @@ describe("The Dashboard component", () => {
       }
     };
     const wrapper = shallow(<Dashboard />);
-    await wrapper.find("form").simulate("submit", event);
-    wrapper.update();
+    await wrapper.instance().onFormSubmit(event);
     expect(wrapper.state("error")).toBe(errorMsg);
   });
 });

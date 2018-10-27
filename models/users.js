@@ -3,14 +3,14 @@ const bcrypt = require("bcryptjs");
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  username: { type: String },
-  fullname: { type: String }, //{ type: String, unique: true, default: "" },
+  username: { type: String, sparse: true },
+  fullname: { type: String, sparse: true }, //{ type: String, unique: true, default: "" },
   email: { type: String },
-  password: { type: String, default: "" },
+  password: { type: String, sparse: true },
   userImage: { type: String, default: "default.png" },
-  facebook: { type: String, default: "" },
+  facebook: { type: String, sparse: true },
   fbTokens: Array,
-  google: { type: String, default: "" }
+  google: { type: String, sparse: true }
 });
 
 UserSchema.pre("save", function(next) {

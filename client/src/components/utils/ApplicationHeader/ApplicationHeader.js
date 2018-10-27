@@ -8,7 +8,12 @@ class ApplicationHeader extends Component {
   render() {
     return (
       <div className="Header Header--dark">
-        <div className="Header__brand">Chat App</div>
+        <div className="Header__brand">
+          {" "}
+          <Link to="/home" className="Header__brand-text">
+            Chat App
+          </Link>
+        </div>
         <ul className="navbar">
           <Link
             className="navbar__navitem navbar__navitem--loggedIn"

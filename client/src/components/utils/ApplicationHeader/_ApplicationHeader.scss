@@ -33,6 +33,10 @@ $navitem-paddingY: 15px;
   font-family: Mali;
 }
 
+.Header__brand-text {
+  text-decoration: none;
+  color: black;
+}
 .navbar {
   list-style: none;
   display: none;

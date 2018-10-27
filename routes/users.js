@@ -112,4 +112,15 @@ module.exports = router => {
       res.redirect("/");
     }
   );
+
+  router.get("/api/get-user", (req, res) => {
+    if (req.user) {
+      return res.status(200).send(req.user);
+    }
+    return res.status(401).send({ message: "The user does not exist" });
+  });
+
+  router.get("/api/logout", (req, res) => {
+    req.logOut();
+  });
 };
