@@ -1,3 +1,9 @@
+@import "SingleGroupMessage/SingleGroupMessage";
+
 .ChatMessage {
   height: 300px;
+}
+
+.ChatMessage__messages {
+  list-style: none;
 }

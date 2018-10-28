@@ -14,6 +14,7 @@ const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 
+const Users = require("./helpers/UsersClass");
 //import cloudinary
 require("./services/cloudinaryUpload");
 mongoose.connect(
@@ -45,7 +46,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Require sockets
-require("./sockets/groupchat")(io);
+require("./sockets/groupchat")(io, Users);
 
 //Require routes
 require("./routes/users")(app);

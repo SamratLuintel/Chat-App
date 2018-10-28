@@ -4,11 +4,12 @@ import SendMessage from "components/GroupChat/ChatSection/SendMessage/SendMessag
 
 class ChatSection extends Component {
   render() {
+    const { props } = this;
     return (
       <div className="ChatSection">
-        <h2 className="ChatSection__header">Group Name</h2>
+        <h2 className="ChatSection__header">{props.groupname}</h2>
         <ChatMessage />
-        <SendMessage groupname={this.props.groupname} />
+        <SendMessage groupname={props.groupname} />
       </div>
     );
   }

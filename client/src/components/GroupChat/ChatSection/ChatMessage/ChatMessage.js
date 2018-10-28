@@ -1,13 +1,22 @@
 import React, { Component } from "react";
+import SingleGroupMessage from "components/GroupChat/ChatSection/ChatMessage/SingleGroupMessage/SingleGroupMessage";
+import { connect } from "react-redux";
 
 class ChatMessage extends Component {
+  renderMessages = () => {
+    return this.props.messages.map((message, i) => (
+      <SingleGroupMessage name={message.from} message={message.text} key={i} />
+    ));
+  };
   render() {
     return (
       <div className="ChatMessage">
-        <p>All the Chat Message goes here</p>
+        <ul className="ChatMessage__messages">{this.renderMessages()}</ul>
       </div>
     );
   }
 }
-
-export default ChatMessage;
+const mapStateToProps = state => ({
+  messages: state.groupchat.messages
+});
+export default connect(mapStateToProps)(ChatMessage);

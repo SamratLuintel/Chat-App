@@ -8,7 +8,11 @@ class SendMessage extends Component {
   };
   onFormSubmit = e => {
     e.preventDefault();
-    this.props.sendGroupMessage(this.state.message, this.props.groupname);
+    this.props.sendGroupMessage(
+      this.state.message,
+      this.props.groupname,
+      this.props.profile
+    );
     this.setState({ message: "" });
   };
 
@@ -33,7 +37,11 @@ class SendMessage extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  profile: state.profile
+});
 export default connect(
-  null,
+  mapStateToProps,
   { sendGroupMessage }
 )(SendMessage);

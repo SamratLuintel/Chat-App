@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { fetchUser } from "store/actions/profile/profile";
 import { withRouter, Switch } from "react-router-dom";
 import PrivateRoute from "hoc/PrivateRoute";
+import GroupChatErrorPage from "components/GroupChat/GroupChatErrorPage/GroupChatErrorPage";
 
 class App extends Component {
   componentDidMount = () => {
@@ -24,6 +25,13 @@ class App extends Component {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Switch>
+          <PrivateRoute
+            exact
+            path="/group/error"
+            component={GroupChatErrorPage}
+          />
+        </Switch>
         <Switch>
           <PrivateRoute exact path="/group/:name" component={GroupChat} />
         </Switch>
