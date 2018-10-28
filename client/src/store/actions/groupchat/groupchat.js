@@ -1,34 +1,21 @@
-import socket from "services/socket";
-import {
-  UPDATE_GROUPCHAT_MESSAGE,
-  UPDATE_GROUPCHAT_ONLINE_MEMBERS
-} from "store/types";
+import { SEND_GROUP_MESSAGE, JOIN_ROOM } from "store/types";
 
 export const sendGroupMessage = (message, groupname, sender) => dispatch => {
-  socket.emit("createMessage", {
+  const data = {
     text: message,
     room: groupname,
     sender
-  });
-};
-
-//Updates the state of group chat
-export const updateGroupChatMessage = data => dispatch => {
-  console.log("From update Group message", data);
-  const newMessage = {
-    text: data.text,
-    from: data.from
   };
+
   dispatch({
-    type: UPDATE_GROUPCHAT_MESSAGE,
-    payload: newMessage
+    type: SEND_GROUP_MESSAGE,
+    payload: data
   });
 };
 
-//Update the state of online users
-export const updateGroupChatOnlineMembers = users => dispatch => {
+export const joinRoom = params => dispatch => {
   dispatch({
-    type: UPDATE_GROUPCHAT_ONLINE_MEMBERS,
-    payload: users
+    type: JOIN_ROOM,
+    payload: params
   });
 };

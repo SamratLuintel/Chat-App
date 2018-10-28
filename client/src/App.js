@@ -11,7 +11,6 @@ import { fetchUser } from "store/actions/profile/profile";
 import { withRouter, Switch } from "react-router-dom";
 import PrivateRoute from "hoc/PrivateRoute";
 import GroupChatErrorPage from "components/GroupChat/GroupChatErrorPage/GroupChatErrorPage";
-
 class App extends Component {
   componentDidMount = () => {
     this.props.fetchUser();

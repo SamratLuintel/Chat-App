@@ -29,12 +29,4 @@ class ApplicationHeader extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   profile: state.profile
-// });
-// export default connect(
-//   mapStateToProps,
-//   { clearCurrentProfile, logoutUser }
-// )(withRouter(LoggedInHeader));
-
-export default ApplicationHeader;
+export default connect()(ApplicationHeader);

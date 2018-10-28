@@ -8,10 +8,7 @@ import socket from "services/socket";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import {
-  updateGroupChatMessage,
-  updateGroupChatOnlineMembers
-} from "store/actions/groupchat/groupchat";
+import { joinRoom } from "store/actions/groupchat/groupchat";
 
 class GroupChat extends Component {
   state = {
@@ -35,22 +32,7 @@ class GroupChat extends Component {
 
     // Joins the room and stores the user information in server
     // to keep track of online users in particular group
-    socket.emit("join", params, () => {
-      console.log("User is connected to the server");
-      // this.props.updateGroupChatOnlineFriends(user);
-    });
-
-    socket.on("usersList", users => {
-      console.log(users);
-      //updates the list of online group members
-      this.props.updateGroupChatOnlineMembers(users);
-    });
-
-    socket.on("newMessage", data => {
-      console.log("This message is receieved from server", data);
-      //updates the state of group chat on new message received
-      this.props.updateGroupChatMessage(data);
-    });
+    this.props.joinRoom(params);
   };
 
   checkGroupExist = async groupname => {
@@ -94,6 +76,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { updateGroupChatMessage, updateGroupChatOnlineMembers }
+    { joinRoom }
   )(GroupChat)
 );

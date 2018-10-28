@@ -9,9 +9,12 @@ class OnlineGroupMembers extends Component {
     });
   };
   render() {
+    const { props } = this;
     return (
       <div className="OnlineGroupMembers">
-        <h2 className="OnlineGroupMembers__header">Online Groups</h2>
+        <h2 className="OnlineGroupMembers__header">
+          Online Group Members ({props.onlineMembers.length})
+        </h2>
         <ul className="OnlineGroupMembers__members-list">
           {this.renderOnlineFriends()}
         </ul>

@@ -20,6 +20,11 @@ class ProfileDropDown extends Component {
   };
 
   render() {
+    const { props } = this;
+    let name = "";
+    if (props.profile) {
+      name = props.profile.fullname;
+    }
     return (
       <div className="ProfileDropDown">
         <div
@@ -27,7 +32,7 @@ class ProfileDropDown extends Component {
           className="ProfileDropDown__button-container"
         >
           <div className="ProfileDropDown__button-container__text">
-            {"DropDown"} {"  "} <i class="fas fa-chevron-down" />
+            {name} {"  "} <i class="fas fa-chevron-down" />
           </div>
         </div>
         {this.state.displayMenu ? (
@@ -49,5 +54,8 @@ class ProfileDropDown extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  profile: state.profile
+});
 
-export default ProfileDropDown;
+export default connect(mapStateToProps)(ProfileDropDown);

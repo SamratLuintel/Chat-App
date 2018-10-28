@@ -20,6 +20,7 @@ export const loginFormSubmit = async (values, history, SubmissionError) => {
 };
 
 export const fetchUser = () => async dispatch => {
+  console.log("Fetch user is called");
   try {
     const res = await axios.get("/api/get-user");
     dispatch({

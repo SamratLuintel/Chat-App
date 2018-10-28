@@ -47,6 +47,7 @@ app.use(passport.session());
 
 //Require sockets
 require("./sockets/groupchat")(io, Users);
+require("./sockets/sendrequest")(io);
 
 //Require routes
 require("./routes/users")(app);

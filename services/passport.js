@@ -35,6 +35,7 @@ passport.use(
         }
         const newUser = new User();
         newUser.username = req.body.username;
+        newUser.fullname = req.body.username;
         newUser.email = req.body.email;
         newUser.password = req.body.password;
         const savedUser = await newUser.save();
@@ -65,6 +66,7 @@ passport.use(
         const newUser = new User();
         newUser.facebook = profile.id;
         newUser.fullname = profile.displayName;
+        newUser.username = profile.username;
         newUser.email = profile._json.email;
         newUser.userImage = `https://graph.facebook.com/${
           profile.id
@@ -98,6 +100,7 @@ passport.use(
         const newUser = new User();
         newUser.google = profile.id;
         newUser.fullname = profile.displayName;
+        newUser.username = profile.displayName;
         newUser.email = profile.emails[0].value;
         newUser.userImage = profile._json.image.url;
         const savedUser = await newUser.save();
