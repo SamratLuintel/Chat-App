@@ -1,11 +1,13 @@
 import {
   UPDATE_GROUPCHAT_MESSAGE,
-  UPDATE_GROUPCHAT_ONLINE_MEMBERS
+  UPDATE_GROUPCHAT_ONLINE_MEMBERS,
+  UPDATE_GROUPNAME
 } from "store/types";
 
 const initialState = {
   messages: [],
-  onlineFriends: []
+  onlineFriends: [],
+  groupname: ""
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +21,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         onlineMembers: action.payload
+      };
+    case UPDATE_GROUPNAME:
+      return {
+        ...state,
+        groupname: action.payload
       };
     default:
       return state;

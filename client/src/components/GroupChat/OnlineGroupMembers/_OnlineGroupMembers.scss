@@ -1,5 +1,11 @@
+@import "OnlineGroupMember/OnlineGroupMember";
+
 .OnlineGroupMembers {
   background-color: white;
   padding: 10px 10px;
   height: 400px;
+}
+
+.OnlineGroupMembers__members-list {
+  list-style: none;
 }

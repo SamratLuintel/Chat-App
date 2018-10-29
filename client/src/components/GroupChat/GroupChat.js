@@ -8,11 +8,11 @@ import socket from "services/socket";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { joinRoom } from "store/actions/groupchat/groupchat";
+import { joinRoom, updateGroupName } from "store/actions/groupchat/groupchat";
+import { joinRequest } from "store/actions/friend/friend";
 
 class GroupChat extends Component {
   state = {
-    groupname: "",
     exist: false
   };
   componentDidMount = () => {
@@ -22,9 +22,7 @@ class GroupChat extends Component {
     //redirects the user to error page if it is invalid group name
     this.checkGroupExist(groupname);
 
-    //if verification is passed it sets the group name
-    this.setState({ groupname });
-
+    this.props.updateGroupName(groupname);
     const params = {
       room: groupname,
       name: this.props.profile.fullname
@@ -33,6 +31,8 @@ class GroupChat extends Component {
     // Joins the room and stores the user information in server
     // to keep track of online users in particular group
     this.props.joinRoom(params);
+
+    this.props.joinRequest(params.name);
   };
 
   checkGroupExist = async groupname => {
@@ -56,7 +56,7 @@ class GroupChat extends Component {
               <OnlineFriends />
             </div>
             <div className="GroupChat__middle">
-              <ChatSection groupname={this.state.groupname} />
+              <ChatSection groupname={this.props.groupname} />
             </div>
             <div className="GroupChat__right">
               <OnlineGroupMembers />
@@ -70,12 +70,13 @@ class GroupChat extends Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  groupname: state.groupchat.groupname
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { joinRoom }
+    { joinRoom, joinRequest, updateGroupName }
   )(GroupChat)
 );

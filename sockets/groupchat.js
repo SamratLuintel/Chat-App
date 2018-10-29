@@ -20,7 +20,7 @@ module.exports = (io, Users) => {
     });
 
     socket.on("createMessage", data => {
-      console.log("Create message is called", data);
+      console.log("Create message is called");
       io.to(data.room).emit("newMessage", {
         text: data.text,
         room: data.room,

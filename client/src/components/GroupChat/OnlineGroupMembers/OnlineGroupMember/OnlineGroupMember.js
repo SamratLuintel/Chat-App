@@ -4,7 +4,7 @@ import AddFriendModal from "components/GroupChat/OnlineGroupMembers/OnlineGroupM
 const OnlineGroupMember = props => {
   return (
     <li className="OnlineGroupMember">
-      <AddFriendModal triggerText={props.name} />
+      <AddFriendModal triggerText={props.name} name={props.name} />
     </li>
   );
 };

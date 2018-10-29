@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const Group = mongoose.model("groups");
+const User = mongoose.model("users");
 
 module.exports = router => {
   router.get("/api/get-group/:name", async (req, res) => {
-    console.log("Get Group is called", req.params.name);
     try {
       const group = await Group.findOne({ name: req.params.name });
       if (group) {

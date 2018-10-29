@@ -54,7 +54,7 @@ require("./routes/users")(app);
 require("./routes/admin")(app);
 require("./routes/home")(app);
 require("./routes/group")(app);
-
+require("./routes/friend")(app);
 app.use(validator());
 server.listen(5000, () => {
   console.log("Server is listening on the port 5000");
