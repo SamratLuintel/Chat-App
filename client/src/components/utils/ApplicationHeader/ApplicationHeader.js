@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import ProfileDropDown from "components/utils/ApplicationHeader/ProfileDropDown/ProfileDropDown";
+import NotificationDropDown from "components/utils/ApplicationHeader/NotificationDropDown/NotificationDropDown";
+
 import { withRouter } from "react-router-dom";
 
 class ApplicationHeader extends Component {
@@ -15,13 +17,7 @@ class ApplicationHeader extends Component {
           </Link>
         </div>
         <ul className="navbar">
-          <Link
-            className="navbar__navitem navbar__navitem--loggedIn"
-            to="/templates"
-          >
-            Members
-          </Link>
-          {}
+          <NotificationDropDown />
           <ProfileDropDown />
         </ul>
       </div>

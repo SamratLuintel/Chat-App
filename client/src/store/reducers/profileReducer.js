@@ -5,9 +5,18 @@ const initialState = null;
 export default (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_PROFILE_LOGGEDIN:
+      //contains all the friend request
+      const requests = action.payload.requests.map(request => ({
+        fullname: request.userId.fullname,
+        userImage: request.userId.userImage,
+        id: request.userId._id
+      }));
       return {
         loggedIn: true,
-        fullname: action.payload.fullname
+        fullname: action.payload.fullname,
+        totalRequest: action.payload.totalRequest,
+        requests: requests,
+        friends: action.payload.friendsList
       };
     case UPDATE_PROFILE_LOGGEDOUT:
       return {

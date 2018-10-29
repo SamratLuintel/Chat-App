@@ -1,0 +1,15 @@
+.FriendRequest {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.FriendRequest__friend-name {
+  text-align: center;
+}
+
+.FriendRequest__lower-section {
+  display: flex;
+  justify-content: space-between;
+}

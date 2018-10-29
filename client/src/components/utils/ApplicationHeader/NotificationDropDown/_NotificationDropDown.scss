@@ -1,0 +1,26 @@
+@import "FriendRequest/FriendRequest";
+
+.notification-icon {
+  font-size: 15px !important;
+}
+.NotificationDropDown__dropdown {
+  width: 12rem;
+  padding: 10px 10px;
+}
+
+.NotificationDropDown {
+  position: relative;
+}
+.NotificationDropDown__total-notifications {
+  position: absolute;
+  left: 70%;
+  top: 2px;
+  font-size: 13px;
+}
+.NotificationDropDown__friend-requests-header {
+  font-size: 20px;
+}
+
+.NotificationDropDown__friend-requests-list {
+  list-style: none;
+}

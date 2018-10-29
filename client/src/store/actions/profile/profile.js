@@ -23,6 +23,7 @@ export const fetchUser = () => async dispatch => {
   console.log("Fetch user is called");
   try {
     const res = await axios.get("/api/get-user");
+    console.log("User from server is", res);
     dispatch({
       type: UPDATE_PROFILE_LOGGEDIN,
       payload: res.data

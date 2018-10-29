@@ -16,7 +16,7 @@ const UserSchema = new Schema({
       username: { type: String }
     }
   ],
-  request: [
+  requests: [
     {
       userId: { type: mongoose.Schema.Types.ObjectId, ref: "users" }
     }

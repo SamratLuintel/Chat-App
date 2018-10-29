@@ -2,6 +2,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 
 const User = mongoose.model("users");
+
 const {
   SignUpValidation,
   LogInValidation
@@ -9,7 +10,6 @@ const {
 
 module.exports = router => {
   router.get("/", (req, res) => {
-    console.log("Home route is called");
     res.send("You are on home page");
   });
   //@route POST /api/signup
@@ -17,7 +17,6 @@ module.exports = router => {
   //@access Public
   router.post("/api/signup", SignUpValidation, (req, res, next) => {
     passport.authenticate("local.signup", function(err, user, info) {
-      console.log("Sign up route is hit");
       // Error from validation
       let errors = {};
       req._validationErrors.forEach(error => {
@@ -113,9 +112,17 @@ module.exports = router => {
     }
   );
 
-  router.get("/api/get-user", (req, res) => {
+  router.get("/api/get-user", async (req, res) => {
     if (req.user) {
-      return res.status(200).send(req.user);
+      try {
+        const user = await User.findOne({
+          username: req.user.username
+        }).populate("requests.userId");
+        return res.status(200).send(user);
+      } catch (err) {
+        console.log(err);
+        return res.status(400).send({ message: "Some error occured" });
+      }
     }
     return res.status(401).send({ message: "The user does not exist" });
   });

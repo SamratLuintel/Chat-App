@@ -3,7 +3,7 @@ $navitem-paddingX: 20px;
 $navitem-paddingY: 15px;
 
 @import "ProfileDropDown/ProfileDropDown";
-
+@import "NotificationDropDown/NotificationDropDown";
 //When the user is not logged in the navbar will be of white color
 // When the user is logged in the navbar will be of dark color
 // So I have make use of --loggedIn and --loggedOut for changing their behaviour.

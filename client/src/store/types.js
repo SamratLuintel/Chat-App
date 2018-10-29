@@ -13,3 +13,4 @@ export const JOIN_ROOM = "join_room";
 
 export const JOIN_REQUEST = "join_request";
 export const FRIEND_REQUEST = "friend_request";
+export const FRIEND_REQUEST_RESPONDED = "friend_request_responded";
