@@ -129,5 +129,6 @@ module.exports = router => {
 
   router.get("/api/logout", (req, res) => {
     req.logOut();
+    res.status(200).send({ msg: "Successfully logout" });
   });
 };

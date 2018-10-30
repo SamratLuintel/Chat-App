@@ -46,3 +46,12 @@ export const joinGlobalRoom = user => async dispatch => {
     payload: user
   });
 };
+
+export const logoutUser = history => async dispatch => {
+  try {
+    await axios.get("/api/logout");
+    history.push("/");
+  } catch (error) {
+    console.log(error);
+  }
+};

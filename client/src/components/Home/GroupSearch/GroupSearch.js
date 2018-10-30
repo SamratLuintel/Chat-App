@@ -1,16 +1,38 @@
-import React from "react";
+import React, { Component } from "react";
+import { updateGroupFilterText } from "store/actions/group/group";
+import { connect } from "react-redux";
 
-const GroupSearch = props => {
-  return (
-    <div className="GroupSearch">
-      <input
-        className="GroupSearch__input"
-        type="text"
-        placeholder="Enter Your Group Name"
-      />
-      <span className="GroupSearch__search-btn">Search</span>
-    </div>
-  );
-};
+class GroupSearch extends Component {
+  state = {
+    searchValue: ""
+  };
 
-export default GroupSearch;
+  onInputChange = e => {
+    this.setState({ searchValue: e.target.value });
+  };
+
+  onSearchClick = () => {
+    this.props.updateGroupFilterText(this.state.searchValue);
+  };
+  render() {
+    return (
+      <div className="GroupSearch">
+        <input
+          className="GroupSearch__input"
+          type="text"
+          value={this.state.searchValue}
+          onChange={this.onInputChange}
+          placeholder="Enter Your Group Name"
+        />
+        <span onClick={this.onSearchClick} className="GroupSearch__search-btn">
+          Search
+        </span>
+      </div>
+    );
+  }
+}
+
+export default connect(
+  null,
+  { updateGroupFilterText }
+)(GroupSearch);

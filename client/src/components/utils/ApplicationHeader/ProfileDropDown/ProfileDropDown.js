@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import DropDown from "components/utils/DropDown/DropDown";
+import { logoutUser } from "store/actions/profile/profile";
+import { withRouter } from "react-router-dom";
 
 class ProfileDropDown extends Component {
+  onLogoutClick = () => {
+    const history = this.props.history;
+    this.props.logoutUser(history);
+  };
   render() {
     const { props } = this;
     let name = "";
@@ -19,9 +25,12 @@ class ProfileDropDown extends Component {
               Placeholder
             </a>
           </li>
-          <li className="ProfileDropDown__links-container__link">
+          <li
+            onClick={this.onLogoutClick}
+            className="ProfileDropDown__links-container__link"
+          >
             <i class="fas fa-sign-out-alt" /> {"  "}
-            <a href="#Manage Pages">Logout</a>
+            <span>Logout</span>
           </li>
         </ul>
       </DropDown>
@@ -32,4 +41,9 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps)(ProfileDropDown);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { logoutUser }
+  )(ProfileDropDown)
+);

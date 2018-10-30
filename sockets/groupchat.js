@@ -15,6 +15,7 @@ module.exports = io => {
 
       users.AddUserData(socket.id, params.name, params.room);
 
+      // online members in a particular group
       io.to(params.room).emit(
         "groupUsersList",
         users.GetUsersList(params.room)
