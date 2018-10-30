@@ -1,7 +1,8 @@
 const chatgroup = (socket, types) => {
   return store => {
     //Updates group chat online members
-    socket.on("usersList", users => {
+    socket.on("groupUsersList", users => {
+      console.log("group user list is called", users);
       store.dispatch({
         type: types.UPDATE_GROUPCHAT_ONLINE_MEMBERS,
         payload: users

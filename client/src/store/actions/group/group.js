@@ -13,3 +13,11 @@ export const fetchGroups = () => async dispatch => {
     //TODO update the error list
   }
 };
+
+export const addGroupToFavourite = data => async dispatch => {
+  console.log("Add Group to Favourite called");
+  try {
+    await axios.post("/api/group/add-to-favourite", data);
+    console.log("Group added to favourite");
+  } catch (error) {}
+};

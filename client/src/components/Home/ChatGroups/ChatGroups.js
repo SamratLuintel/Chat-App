@@ -14,7 +14,9 @@ export class ChatGroups extends Component {
             name={group.name}
             country={group.country}
             image={`${rawImageLink}${group.image}`}
-            key={i}
+            id={group._id}
+            key={group._id}
+            favourites={group.favourites.length}
           />
         );
       });

@@ -1,4 +1,6 @@
-module.exports = (io, Users) => {
+const Users = require("../helpers/UsersClass");
+
+module.exports = io => {
   const users = new Users();
 
   io.on("connection", socket => {
@@ -13,7 +15,10 @@ module.exports = (io, Users) => {
 
       users.AddUserData(socket.id, params.name, params.room);
 
-      io.to(params.room).emit("usersList", users.GetUsersList(params.room));
+      io.to(params.room).emit(
+        "groupUsersList",
+        users.GetUsersList(params.room)
+      );
 
       console.log(users);
       callback();
@@ -32,7 +37,7 @@ module.exports = (io, Users) => {
       const user = users.RemoveUser(socket.id);
 
       if (user) {
-        io.to(user.room).emit("usersList", users.GetUsersList(user.room));
+        io.to(user.room).emit("groupUsersList", users.GetUsersList(user.room));
       }
     });
   });

@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   messages: [],
-  onlineFriends: [],
+  onlineMembers: [],
   groupname: ""
 };
 

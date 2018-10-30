@@ -1,8 +1,8 @@
 import { UPDATE_GROUP } from "store/types";
 
 const defaultState = {
-  lists: null,
-  countries: null
+  lists: [],
+  countries: []
 };
 export default (state = defaultState, action) => {
   switch (action.type) {

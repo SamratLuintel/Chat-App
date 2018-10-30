@@ -14,7 +14,6 @@ const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 
-const Users = require("./helpers/UsersClass");
 //import cloudinary
 require("./services/cloudinaryUpload");
 mongoose.connect(
@@ -46,15 +45,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Require sockets
-require("./sockets/groupchat")(io, Users);
+require("./sockets/groupchat")(io);
 require("./sockets/sendrequest")(io);
+require("./sockets/globalroom")(io);
 
 //Require routes
 require("./routes/users")(app);
 require("./routes/admin")(app);
-require("./routes/home")(app);
 require("./routes/group")(app);
 require("./routes/friend")(app);
+
 app.use(validator());
 server.listen(5000, () => {
   console.log("Server is listening on the port 5000");

@@ -13,10 +13,10 @@ const groupSchema = mongoose.Schema({
     type: String,
     default: "default.png"
   },
-  fans: [
+  favourites: [
     {
-      username: { type: String, default: "" },
-      email: { type: String, default: "" }
+      username: { type: String },
+      email: { type: String }
     }
   ]
 });

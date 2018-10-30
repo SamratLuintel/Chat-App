@@ -1,5 +1,9 @@
 import axios from "axios";
-import { UPDATE_PROFILE_LOGGEDIN, UPDATE_PROFILE_LOGGEDOUT } from "store/types";
+import {
+  UPDATE_PROFILE_LOGGEDIN,
+  UPDATE_PROFILE_LOGGEDOUT,
+  JOIN_GLOBAL_ROOM
+} from "store/types";
 
 export const signUpFormSubmit = async (values, history, SubmissionError) => {
   try {
@@ -33,4 +37,12 @@ export const fetchUser = () => async dispatch => {
       type: UPDATE_PROFILE_LOGGEDOUT
     });
   }
+};
+
+export const joinGlobalRoom = user => async dispatch => {
+  console.log("Join Global room is called");
+  dispatch({
+    type: JOIN_GLOBAL_ROOM,
+    payload: user
+  });
 };
