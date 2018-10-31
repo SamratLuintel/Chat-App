@@ -85,7 +85,7 @@ module.exports = router => {
   //@access Public
   router.get(
     "/api/auth/facebook/callback",
-    passport.authenticate("facebook", { session: false }),
+    passport.authenticate("facebook", { session: true }),
     (req, res) => {
       console.log("Facebook callback route is called");
       res.redirect("/");

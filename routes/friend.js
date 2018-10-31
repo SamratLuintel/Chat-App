@@ -5,7 +5,7 @@ module.exports = router => {
   // send friend request
   router.post("/api/send-friend-request", async (req, res) => {
     console.log("Friend request route is called");
-    if (req.body.receiver && req.body.receiver !== req.user.username) {
+    if (req.body.receiver) {
       try {
         const receiverUpdate = User.update(
           {

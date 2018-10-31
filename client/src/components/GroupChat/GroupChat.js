@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
-import GroupProfile from "components/GroupChat/GroupProfile/GroupProfile";
-import OnlineFriends from "components/GroupChat/OnlineFriends/OnlineFriends";
+import UserProfile from "components/utils/Chat/UserProfile/UserProfile";
+import OnlineFriends from "components/utils/Chat/OnlineFriends/OnlineFriends";
 import ChatSection from "components/GroupChat/ChatSection/ChatSection";
 import OnlineGroupMembers from "components/GroupChat/OnlineGroupMembers/OnlineGroupMembers";
-import socket from "services/socket";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -52,7 +51,7 @@ class GroupChat extends Component {
           <ApplicationHeader />
           <div className="GroupChat__body">
             <div className="GroupChat__left">
-              <GroupProfile fullname={props.profile.fullname} />
+              <UserProfile fullname={props.profile.fullname} />
               <OnlineFriends />
             </div>
             <div className="GroupChat__middle">

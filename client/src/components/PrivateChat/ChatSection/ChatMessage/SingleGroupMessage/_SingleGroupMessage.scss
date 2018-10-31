@@ -1,0 +1,12 @@
+.PrivateChat__SingleGroupMessage {
+  display: flex;
+}
+
+.PrivateChat__SingleGroupMessage__image {
+  border-radius: 50%;
+}
+
+.PrivateChat__SingleGroupMessage__body {
+  align-self: center;
+  margin-left: 10px;
+}

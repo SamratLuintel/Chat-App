@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { fetchUser, joinGlobalRoom } from "store/actions/profile/profile";
 import { withRouter, Switch } from "react-router-dom";
 import PrivateRoute from "hoc/PrivateRoute";
+import PrivateChat from "components/PrivateChat/PrivateChat";
 import GroupChatErrorPage from "components/GroupChat/GroupChatErrorPage/GroupChatErrorPage";
 
 class App extends Component {
@@ -43,12 +44,12 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" component={Landing} />
-        <Switch>
-          <PrivateRoute exact path="/home" component={Home} />
-        </Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={Dashboard} />
+        <Switch>
+          <PrivateRoute exact path="/home" component={Home} />
+        </Switch>
         <Switch>
           <PrivateRoute
             exact
@@ -58,6 +59,9 @@ class App extends Component {
         </Switch>
         <Switch>
           <PrivateRoute exact path="/group/:name" component={GroupChat} />
+        </Switch>
+        <Switch>
+          <PrivateRoute exact path="/chat/:name" component={PrivateChat} />
         </Switch>
       </div>
     );

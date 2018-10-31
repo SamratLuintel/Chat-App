@@ -9,6 +9,7 @@ import chatgroup from "redux-middlewares/sockets/chatgroup";
 import sendrequest from "redux-middlewares/sockets/sendrequest";
 import globalroom from "redux-middlewares/sockets/globalroom";
 import { fetchUser } from "store/actions/profile/profile";
+import privatemessage from "redux-middlewares/sockets/privatemessage";
 
 //Important actions which are repeatedly needed in reducer
 const actions = {
@@ -27,7 +28,8 @@ export default ({ children, initialState = {} }) => {
             reduxThunk,
             chatgroup(socket, types),
             sendrequest(socket, types, actions),
-            globalroom(socket, types)
+            globalroom(socket, types),
+            privatemessage(socket, types)
           )
         )
       )}

@@ -3,10 +3,13 @@ import { combineReducers } from "redux";
 import groupReducer from "store/reducers/groupReducer";
 import profileReducer from "store/reducers/profileReducer";
 import groupchatReducer from "store/reducers/groupchatReducer";
+import privatechatReducer from "store/reducers/privatechatReducer";
+
 export default combineReducers({
   form: formReducer,
   profile: profileReducer,
   //Contains the list of chat groups
   group: groupReducer,
-  groupchat: groupchatReducer
+  groupchat: groupchatReducer,
+  privatechat: privatechatReducer
 });

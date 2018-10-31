@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import OnlineFriend from "components/GroupChat/OnlineFriends/OnlineFriend/OnlineFriend";
+import OnlineFriend from "components/utils/Chat/OnlineFriends/OnlineFriend/OnlineFriend";
 
 class OnlineFriends extends Component {
   renderOnlineFriends = () => {
     if (this.props.profile && this.props.profile.onlineFriends) {
       return this.props.profile.onlineFriends.map(friend => {
-        return <OnlineFriend name={friend.name} />;
+        return (
+          <OnlineFriend
+            name={friend.name}
+            username={this.props.profile.fullname}
+          />
+        );
       });
     }
   };

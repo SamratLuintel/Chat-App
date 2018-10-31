@@ -1,29 +1,27 @@
 @import "ChatSection/ChatSection";
-@import "OnlineGroupMembers/OnlineGroupMembers";
-
-.GroupChat {
+.PrivateChat {
   background-color: $grey-background;
   min-height: 100vh;
 }
 
-.GroupChat__body {
+.PrivateChat__body {
   width: 1300px;
   margin: 0 auto;
   margin-top: 10px;
   display: flex;
-  justify-content: space-between;
 }
 
-.GroupChat__left {
+.PrivateChat__left {
   width: 300px;
   display: flex;
   flex-direction: column;
 }
 
-.GroupChat__middle {
+.PrivateChat__middle {
   width: 500px;
+  margin-left: 50px;
 }
 
-.GroupChat__right {
+.PrivateChat__right {
   width: 350px;
 }

@@ -18,3 +18,7 @@ export const JOIN_REQUEST = "join_request";
 export const FRIEND_REQUEST = "friend_request";
 export const FRIEND_REQUEST_RESPONDED = "friend_request_responded";
 export const JOIN_GLOBAL_ROOM = "join_global_room";
+
+export const JOIN_PRIVATE_CHAT_ROOM = "join_private_chat_room";
+export const SEND_PRIVATE_MESSAGE = "send_private_message";
+export const UPDATE_PRIVATE_CHAT_MESSAGE = "update_private_chat_message";

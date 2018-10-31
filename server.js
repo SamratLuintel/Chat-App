@@ -48,12 +48,14 @@ app.use(passport.session());
 require("./sockets/groupchat")(io);
 require("./sockets/sendrequest")(io);
 require("./sockets/globalroom")(io);
+require("./sockets/privatemessage")(io);
 
 //Require routes
 require("./routes/users")(app);
 require("./routes/admin")(app);
 require("./routes/group")(app);
 require("./routes/friend")(app);
+require("./routes/privatechat")(app);
 
 app.use(validator());
 server.listen(5000, () => {
