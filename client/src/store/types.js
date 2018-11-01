@@ -22,3 +22,6 @@ export const JOIN_GLOBAL_ROOM = "join_global_room";
 export const JOIN_PRIVATE_CHAT_ROOM = "join_private_chat_room";
 export const SEND_PRIVATE_MESSAGE = "send_private_message";
 export const UPDATE_PRIVATE_CHAT_MESSAGE = "update_private_chat_message";
+export const SAVE_PRIVATE_MESSAGE = "save_private_message";
+export const FETCH_PRIVATE_CHAT_MESSAGE = "fetch_private_chat_message";
+export const UPDATE_LAST_PRIVATE_MESSAGES = "update_last_private_messages";

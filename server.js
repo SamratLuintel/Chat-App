@@ -25,8 +25,9 @@ mongoose.connect(
 app.use(cors());
 
 //require the models
-require("./models/users.js");
-require("./models/groups.js");
+require("./models/users");
+require("./models/groups");
+require("./models/messages");
 
 //require passport
 const passport = require("./services/passport");

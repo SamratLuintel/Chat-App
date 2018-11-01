@@ -3,24 +3,24 @@
 .notification-icon {
   font-size: 15px !important;
 }
-.NotificationDropDown__dropdown {
+.FriendRequest__dropdown {
   width: 12rem;
   padding: 10px 10px;
 }
 
-.NotificationDropDown {
+.FriendRequest {
   position: relative;
 }
-.NotificationDropDown__total-notifications {
+.FriendRequest__total-notifications {
   position: absolute;
   left: 70%;
   top: 2px;
   font-size: 13px;
 }
-.NotificationDropDown__friend-requests-header {
+.FriendRequest__friend-requests-header {
   font-size: 20px;
 }
 
-.NotificationDropDown__friend-requests-list {
+.FriendRequest__friend-requests-list {
   list-style: none;
 }

@@ -1,0 +1,15 @@
+.MessageRequest {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.MessageRequest__friend-name {
+  text-align: center;
+}
+
+.MessageRequest__lower-section {
+  display: flex;
+  justify-content: space-between;
+}

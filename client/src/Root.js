@@ -8,12 +8,13 @@ import * as types from "store/types";
 import chatgroup from "redux-middlewares/sockets/chatgroup";
 import sendrequest from "redux-middlewares/sockets/sendrequest";
 import globalroom from "redux-middlewares/sockets/globalroom";
-import { fetchUser } from "store/actions/profile/profile";
+import { fetchUser, getLastMessages } from "store/actions/profile/profile";
 import privatemessage from "redux-middlewares/sockets/privatemessage";
 
 //Important actions which are repeatedly needed in reducer
 const actions = {
-  fetchUser
+  fetchUser,
+  getLastMessages
 };
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -29,7 +30,7 @@ export default ({ children, initialState = {} }) => {
             chatgroup(socket, types),
             sendrequest(socket, types, actions),
             globalroom(socket, types),
-            privatemessage(socket, types)
+            privatemessage(socket, types, actions)
           )
         )
       )}

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import DropDown from "components/utils/DropDown/DropDown";
-import FriendRequest from "components/utils/ApplicationHeader/NotificationDropDown/FriendRequest/FriendRequest";
+import FriendRequest from "components/utils/ApplicationHeader/FriendRequestDropDown/FriendRequest/FriendRequest";
 import { connect } from "react-redux";
 
-class NotificationDropDown extends Component {
+class FriendRequestDropDown extends Component {
   renderFriendRequest = () => {
     if (this.props.profile && this.props.profile.totalRequest === 0) {
       return "There is no request to show";
@@ -25,16 +25,16 @@ class NotificationDropDown extends Component {
       totalRequest = props.profile.totalRequest;
     }
     return (
-      <div className="NotificationDropDown">
-        <span className="NotificationDropDown__total-notifications">
+      <div className="FriendRequest">
+        <span className="FriendRequest__total-notifications">
           {totalRequest}
         </span>
         <DropDown displayText={<i className="fas fa-bell notification-icon" />}>
-          <div className="NotificationDropDown__dropdown">
-            <div className="NotificationDropDown__friend-requests-header">
+          <div className="FriendRequest__dropdown">
+            <div className="FriendRequest__friend-requests-header">
               Friend Request
             </div>
-            <ul className="NotificationDropDown__friend-requests-list">
+            <ul className="FriendRequest__friend-requests-list">
               {this.renderFriendRequest()}
             </ul>
           </div>
@@ -47,4 +47,4 @@ class NotificationDropDown extends Component {
 const mapStateToProps = state => ({
   profile: state.profile
 });
-export default connect(mapStateToProps)(NotificationDropDown);
+export default connect(mapStateToProps)(FriendRequestDropDown);

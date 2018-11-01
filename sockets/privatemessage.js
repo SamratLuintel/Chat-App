@@ -11,6 +11,9 @@ module.exports = io => {
         text: message.text,
         from: message.sender.fullname
       });
+
+      //Updates the message in the notification
+      io.emit("message display");
     });
   });
 };

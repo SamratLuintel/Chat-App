@@ -1,7 +1,8 @@
 import {
   UPDATE_PROFILE_LOGGEDIN,
   UPDATE_PROFILE_LOGGEDOUT,
-  UPDATE_ONLINE_FRIENDS
+  UPDATE_ONLINE_FRIENDS,
+  UPDATE_LAST_PRIVATE_MESSAGES
 } from "store/types";
 
 const initialState = null;
@@ -20,8 +21,6 @@ const returnFriendRequests = requests => {
 //returns all the online friends
 const returnOnlineFriends = (users, friends) => {
   let arr = [];
-  console.log("users from return online friends", users);
-  console.log("friends from return online friends", friends);
   for (let i = 0; i < friends.length; i++) {
     for (let k = 0; k < users.length; k++) {
       if (friends[i].friendName === users[k].name) {
@@ -29,7 +28,6 @@ const returnOnlineFriends = (users, friends) => {
       }
     }
   }
-  console.log("array from return online friends", arr);
   return arr;
 };
 
@@ -42,12 +40,18 @@ export default (state = initialState, action) => {
         totalRequest: action.payload.totalRequest,
         requests: returnFriendRequests(action.payload.requests),
         friends: action.payload.friendsList,
-        image: action.payload.userImage
+        image: action.payload.userImage,
+        lastMessages: action.payload.lastMessages
       };
     case UPDATE_ONLINE_FRIENDS:
       return {
         ...state,
         onlineFriends: returnOnlineFriends(action.payload, state.friends)
+      };
+    case UPDATE_LAST_PRIVATE_MESSAGES:
+      return {
+        ...state,
+        lastMessages: action.payload
       };
     case UPDATE_PROFILE_LOGGEDOUT:
       return {

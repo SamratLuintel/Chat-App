@@ -1,10 +1,15 @@
-const chatgroup = (socket, types) => {
+const chatgroup = (socket, types, actions) => {
   return store => {
     socket.on("new message", message => {
       store.dispatch({
         type: types.UPDATE_PRIVATE_CHAT_MESSAGE,
         payload: message
       });
+    });
+
+    socket.on("message display", () => {
+      console.log("Message display in client side");
+      store.dispatch(actions.getLastMessages());
     });
     return next => action => {
       //Send the private message

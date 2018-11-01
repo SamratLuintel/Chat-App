@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import ProfileDropDown from "components/utils/ApplicationHeader/ProfileDropDown/ProfileDropDown";
-import NotificationDropDown from "components/utils/ApplicationHeader/NotificationDropDown/NotificationDropDown";
-
+import FriendRequestDropDown from "components/utils/ApplicationHeader/FriendRequestDropDown/FriendRequestDropDown";
+import MessagesDropDown from "components/utils/ApplicationHeader/MessagesDropDown/MessagesDropDown";
 import { withRouter } from "react-router-dom";
 
 class ApplicationHeader extends Component {
@@ -17,7 +17,8 @@ class ApplicationHeader extends Component {
           </Link>
         </div>
         <ul className="navbar">
-          <NotificationDropDown />
+          <FriendRequestDropDown />
+          <MessagesDropDown />
           <ProfileDropDown />
         </ul>
       </div>

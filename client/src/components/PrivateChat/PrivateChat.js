@@ -6,7 +6,10 @@ import ChatSection from "components/PrivateChat/ChatSection/ChatSection";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { joinPrivateChatRoom } from "store/actions/privatechat/privatechat";
+import {
+  joinPrivateChatRoom,
+  fetchPrivateMessages
+} from "store/actions/privatechat/privatechat";
 
 function swap(input, value_1, value_2) {
   const temp = input[value_1];
@@ -22,14 +25,16 @@ class PrivateChat extends Component {
     //room1 is the room the next user is listening
     room1: "",
     //room2 is the room we are listening
-    room2: ""
+    room2: "",
+    receiverName: ""
   };
   componentDidMount = () => {
     //paramOne will act as a room one for private chat
     const paramOne = this.props.match.params.name;
 
     const link = paramOne.split(".");
-
+    const receiverName = link[0];
+    this.setState({ receiverName });
     //mutates the position of data in link
     swap(link, 0, 1);
 
@@ -46,7 +51,8 @@ class PrivateChat extends Component {
       room2: paramTwo
     });
 
-    console.log("Componendt did mount of Private Chat is called");
+    //params.room1 refers to the receiver name
+    this.props.fetchPrivateMessages(receiverName);
     this.props.joinPrivateChatRoom(params);
   };
 
@@ -64,7 +70,10 @@ class PrivateChat extends Component {
               <OnlineFriends />
             </div>
             <div className="PrivateChat__middle">
-              <ChatSection room={this.state.room1} receiverName="Samata" />
+              <ChatSection
+                room={this.state.room1}
+                receiverName={this.state.receiverName}
+              />
             </div>
           </div>
         </div>
@@ -81,6 +90,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { joinPrivateChatRoom }
+    { joinPrivateChatRoom, fetchPrivateMessages }
   )(PrivateChat)
 );
