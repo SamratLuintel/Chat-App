@@ -28,7 +28,7 @@ app.use(cors());
 require("./models/users");
 require("./models/groups");
 require("./models/messages");
-
+require("./models/groupmessage");
 //require passport
 const passport = require("./services/passport");
 app.use(express.static("public"));

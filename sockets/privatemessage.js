@@ -9,7 +9,8 @@ module.exports = io => {
     socket.on("private message", message => {
       io.to(message.room).emit("new message", {
         text: message.text,
-        from: message.sender.fullname
+        from: message.sender.fullname,
+        id: message.id
       });
 
       //Updates the message in the notification

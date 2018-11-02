@@ -74,6 +74,7 @@ module.exports = router => {
         {
           $project: {
             _id: 0,
+            id: "$_id",
             text: "$message",
             from: "$senderName"
           }
@@ -106,11 +107,32 @@ module.exports = router => {
       newMessage.message = req.body.message;
       newMessage.userImage = req.user.userImage;
       newMessage.createdAt = new Date();
-      await newMessage.save();
-      res.status(200).send();
+      const message = await newMessage.save();
+      res.status(200).send({ id: message.id });
     } catch (err) {
       console.log(err);
       res.status(400).send(err);
+    }
+  });
+
+  router.post("/api/privatechat/message/read", async (req, res) => {
+    if (req.body.messageId) {
+      console.log("Set messsage as read on server is called");
+      try {
+        await Message.update(
+          {
+            _id: req.body.messageId
+          },
+          {
+            isRead: true
+          }
+        );
+        console.log("Message is set as read");
+        res.status(200).send();
+      } catch (err) {
+        console.log(err);
+        res.status(400).send();
+      }
     }
   });
 };

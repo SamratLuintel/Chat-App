@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { setMessageAsRead } from "store/actions/privatechat/privatechat";
 
 class MessageRequest extends Component {
   redirectToChatPage = () => {
@@ -11,10 +12,15 @@ class MessageRequest extends Component {
       window.location.reload();
     }
   };
+
+  onClick = async () => {
+    await this.props.setMessageAsRead(this.props.id);
+    this.redirectToChatPage();
+  };
   render() {
     const { props } = this;
     return (
-      <li className="MessageRequest" onClick={this.redirectToChatPage}>
+      <li className="MessageRequest" onClick={this.onClick}>
         <div className="MessageRequest__upper-section">
           <p className="MessageRequest__friend-name">{props.sender}</p>
         </div>
@@ -33,6 +39,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    {}
+    { setMessageAsRead }
   )(MessageRequest)
 );

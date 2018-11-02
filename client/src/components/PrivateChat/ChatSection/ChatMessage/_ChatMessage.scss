@@ -6,4 +6,6 @@
 
 .PrivateChat__ChatMessage__messages {
   list-style: none;
+  height: 300px;
+  overflow: scroll;
 }

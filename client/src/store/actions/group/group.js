@@ -42,3 +42,12 @@ export const updateGroupFilterText = text => async dispatch => {
     payload: text
   });
 };
+
+export const saveGroupMessage = (groupname, message) => async dispatch => {
+  console.log("Save Group message is caleld");
+  try {
+    await axios.post("/api/group/save-message", { groupname, message });
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -24,11 +24,13 @@ export const sendPrivateMessage = (message, sender, room) => async dispatch => {
   const receiver = data.room.split(".")[0];
   console.log("From private chat action", receiver);
   try {
-    await axios.post("/api/privatechat/save", {
+    const res = await axios.post("/api/privatechat/save", {
       sender: sender.fullname,
       receiver,
       message
     });
+    //sets the id of the data
+    data.id = res.data.id;
     dispatch({
       type: SEND_PRIVATE_MESSAGE,
       payload: data
@@ -49,5 +51,14 @@ export const fetchPrivateMessages = receiver => async dispatch => {
     });
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const setMessageAsRead = messageId => async dispatch => {
+  try {
+    console.log("Set message as read is called on clinet", messageId);
+    await axios.post("/api/privatechat/message/read", { messageId });
+  } catch (error) {
+    console.log(error);
   }
 };

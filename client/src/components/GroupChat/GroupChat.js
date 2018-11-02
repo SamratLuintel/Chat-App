@@ -7,14 +7,18 @@ import OnlineGroupMembers from "components/GroupChat/OnlineGroupMembers/OnlineGr
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { joinRoom, updateGroupName } from "store/actions/groupchat/groupchat";
+import {
+  joinRoom,
+  updateGroupName,
+  fetchGroupChatMessage
+} from "store/actions/groupchat/groupchat";
 import { joinRequest } from "store/actions/friend/friend";
 
 class GroupChat extends Component {
   state = {
     exist: false
   };
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const groupname = this.props.match.params.name;
 
     //Check if the group name is valid
@@ -29,6 +33,7 @@ class GroupChat extends Component {
 
     // Joins the room and stores the user information in server
     // to keep track of online users in particular group
+    await this.props.fetchGroupChatMessage(groupname);
     this.props.joinRoom(params);
 
     this.props.joinRequest(params.name);
@@ -76,6 +81,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { joinRoom, joinRequest, updateGroupName }
+    { joinRoom, joinRequest, updateGroupName, fetchGroupChatMessage }
   )(GroupChat)
 );
