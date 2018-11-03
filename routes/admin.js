@@ -6,34 +6,9 @@ const uploader = require("../services/cloudinaryUpload");
 
 module.exports = router => {
   router.post("/api/image-upload", uploader.single("image"), (req, res) => {
+    //req.file.public_id is set from uploader.single("image") middleware
     const public_id = req.file.public_id;
     res.status(200).send(public_id);
-    // const form = formidable.IncomingForm();
-
-    // form.on("image", async (field, file) => {
-    //   console.log("Inside form is called");
-    //   const images = [];
-    //   try {
-    //     const image = await uploader.upload(file);
-    //     console.log("Below this line is called");
-    //     images.push(image);
-    //   } catch (err) {
-    //     console.log(err);
-    //     res.status(401).send(err);
-    //   }
-    //   res.status(200).send(images);
-    // });
-
-    // form.on("error", err => {
-    //   console.log(err);
-    // });
-
-    // form.on("end", () => {
-    //   console.log("File upload is successful");
-    //   res.status(200).send({ message: "File is successfully uploaded" });
-    // });
-
-    // form.parse(req);
   });
 
   router.post("/api/dashboard", async (req, res) => {

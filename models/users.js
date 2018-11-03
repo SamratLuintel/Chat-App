@@ -29,7 +29,29 @@ const UserSchema = new Schema({
   ],
   totalRequest: {
     type: Number
-  }
+  },
+  gender: {
+    type: String,
+    default: ""
+  },
+  country: {
+    type: String,
+    default: ""
+  },
+  mantra: {
+    type: String,
+    default: ""
+  },
+  favGroup: [
+    {
+      groupname: { type: String }
+    }
+  ],
+  favPlayer: [
+    {
+      playername: { type: String }
+    }
+  ]
 });
 
 UserSchema.pre("save", function(next) {

@@ -61,6 +61,7 @@ export const logoutUser = history => async dispatch => {
   }
 };
 
+//Returns all the last messages of the chat
 export const getLastMessages = () => async dispatch => {
   console.log("Get last messages is called");
   try {

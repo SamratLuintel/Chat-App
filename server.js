@@ -57,6 +57,7 @@ require("./routes/admin")(app);
 require("./routes/group")(app);
 require("./routes/friend")(app);
 require("./routes/privatechat")(app);
+require("./routes/settings/profile")(app);
 
 app.use(validator());
 server.listen(5000, () => {

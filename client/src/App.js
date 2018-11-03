@@ -12,6 +12,7 @@ import { withRouter, Switch } from "react-router-dom";
 import PrivateRoute from "hoc/PrivateRoute";
 import PrivateChat from "components/PrivateChat/PrivateChat";
 import GroupChatErrorPage from "components/GroupChat/GroupChatErrorPage/GroupChatErrorPage";
+import MainProfile from "components/Settings/MainProfile/ManProfile";
 
 class App extends Component {
   state = {
@@ -62,6 +63,13 @@ class App extends Component {
         </Switch>
         <Switch>
           <PrivateRoute exact path="/chat/:name" component={PrivateChat} />
+        </Switch>
+        <Switch>
+          <PrivateRoute
+            exact
+            path="/settings/profile"
+            component={MainProfile}
+          />
         </Switch>
       </div>
     );

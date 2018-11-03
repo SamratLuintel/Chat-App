@@ -31,7 +31,7 @@ class ImageUpload extends Component {
   sendFormData = async formData => {
     try {
       const image = await axios.post("/api/image-upload", formData);
-
+      //calls the parent function on Dashboard
       this.props.onFileNameChange(image.data);
       this.setState({
         uploading: false
