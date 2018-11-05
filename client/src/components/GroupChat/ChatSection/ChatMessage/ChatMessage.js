@@ -5,7 +5,12 @@ import { connect } from "react-redux";
 class ChatMessage extends Component {
   renderMessages = () => {
     return this.props.messages.map((message, i) => (
-      <SingleGroupMessage name={message.from} message={message.text} key={i} />
+      <SingleGroupMessage
+        name={message.from}
+        message={message.text}
+        image={message.image}
+        key={i}
+      />
     ));
   };
   render() {

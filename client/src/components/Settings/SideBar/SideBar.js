@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 
 class SideBar extends Component {
   returnImageUrl = () => {
-    const imageRawUrl =
-      "https://res.cloudinary.com/samrat/image/upload/c_fill,g_face,h_100,w_106/v1540572400/";
     let imageUrl;
     //If the user has uploaded the new image in Edit Profile
     //It will preview that image
@@ -12,14 +10,8 @@ class SideBar extends Component {
       imageUrl = this.props.profile.localUserImage;
     } else {
       if (this.props.profile && this.props.profile.userImage) {
-        //If it includes chat-app then it means it is the image uploaded by user
-        //If it does not then it means it is the image fetched from facebook or google
         let fetchedImage = this.props.profile.userImage;
-        if (fetchedImage.includes("chat-app")) {
-          imageUrl = `${imageRawUrl}${fetchedImage}`;
-        } else {
-          imageUrl = fetchedImage;
-        }
+        imageUrl = fetchedImage;
       }
     }
     return imageUrl;

@@ -25,7 +25,9 @@ class MessageRequest extends Component {
           <p className="MessageRequest__friend-name">{props.sender}</p>
         </div>
         <div className="MessageRequest__lower-section">
-          <div className="MessageRequest__image-container">Image</div>
+          <div className="MessageRequest__image-container">
+            <img className="MessageRequest__image" src={props.image} alt="" />
+          </div>
           <div className="MessageRequest__message">{props.message}</div>
         </div>
       </li>

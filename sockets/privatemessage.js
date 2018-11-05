@@ -9,7 +9,7 @@ module.exports = io => {
     socket.on("private message", message => {
       io.to(message.room).emit("new message", {
         text: message.text,
-        from: message.sender.fullname,
+        sender: message.sender,
         id: message.id
       });
 

@@ -6,7 +6,7 @@ const SingleGroupMessage = props => {
       <span className="PrivateChat__SingleGroupMessage__image-container">
         <img
           className="PrivateChat__SingleGroupMessage__image"
-          src="http://placehold.jp/50x50.png"
+          src={props.image}
           alt=""
         />
       </span>

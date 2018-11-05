@@ -26,6 +26,7 @@ class MessagesDropDown extends Component {
             sender={sender}
             receiver={receiver}
             message={message.body.message}
+            image={message.body.userImage}
             id={message.body._id}
           />
         );

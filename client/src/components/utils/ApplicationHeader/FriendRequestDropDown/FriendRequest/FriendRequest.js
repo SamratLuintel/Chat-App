@@ -29,7 +29,9 @@ class FriendRequest extends Component {
           <p className="FriendRequest__friend-name">{props.sender}</p>
         </div>
         <div className="FriendRequest__lower-section">
-          <div className="FriendRequest__image-container">Image</div>
+          <div className="FriendRequest__image-container">
+            <img className="FriendRequest__image" src={props.image} alt="" />
+          </div>
           <div className="FriendRequest__button-container">
             <button
               className="FriendRequest__accept-btn"

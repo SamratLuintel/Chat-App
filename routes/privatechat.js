@@ -39,7 +39,6 @@ module.exports = router => {
           }
         }
       ]);
-
       res.status(200).send(messages);
     } catch (err) {
       console.log(err);
@@ -62,7 +61,7 @@ module.exports = router => {
       //Data comes in the format ReceiverName1.SenderName
       const user = req.params.name;
 
-      const messages = await Message.aggregate([
+      const aggregatedMessage = await Message.aggregate([
         {
           $match: {
             $or: [
@@ -76,11 +75,14 @@ module.exports = router => {
             _id: 0,
             id: "$_id",
             text: "$message",
-            from: "$senderName"
+            sender: "$sender"
           }
         }
       ]);
 
+      const messages = await Message.populate(aggregatedMessage, {
+        path: "sender"
+      });
       res.status(200).send(messages);
     } catch (err) {
       console.log(err);

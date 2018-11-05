@@ -2,12 +2,6 @@ import React, { Component } from "react";
 import { css } from "react-emotion";
 import { connect } from "react-redux";
 import { ClipLoader } from "react-spinners";
-import {
-  saveUserImage,
-  saveUserProfile,
-  updateLocalUserImage
-} from "store/actions/profile/editprofile";
-import profileValidation from "components/Settings/MainProfile/ProfileSignup/profileValidation";
 
 const override = css`
   display: block;
@@ -15,26 +9,8 @@ const override = css`
   border-color: red;
 `;
 
-class ProfileSignUp extends Component {
-  state = {
-    imageUploaded: false,
-    imageUploading: false,
-    errors: {},
-    saving: false,
-    saved: false,
-    editable: false,
-
-    //main form data goes below here
-    username: "",
-    fullname: "",
-    country: "",
-    gender: "",
-    description: "",
-    //This is never updated even though user selects new image
-    //it is changed during submission
-    //see the code on saveProfile
-    userImage: ""
-  };
+class EditInterest extends Component {
+  state = {};
   setGender = e => {
     this.setState({ gender: e.target.value });
   };
@@ -59,45 +35,6 @@ class ProfileSignUp extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  saveProfile = async () => {
-    if (this.state.imageUploading)
-      return console.log("You cant submit a form while image is uploading");
-    const stateCopy = { ...this.state };
-
-    const data = {
-      username: stateCopy.username,
-      fullname: stateCopy.fullname,
-      country: stateCopy.country,
-      gender: stateCopy.gender,
-      description: stateCopy.description,
-      userImage: stateCopy.userImage
-    };
-    //profile Validation
-    let { errors, isValid } = profileValidation(data);
-
-    if (isValid) {
-      this.setState({ saving: true });
-      //If user does not want to submit the image we respect their right
-      //hence isValid passes even though the image is empty
-      let imageId = null;
-      if (this.state.imageUploaded && this.state.userImage) {
-        imageId = await this.props.saveUserImage(this.state.userImage);
-      }
-
-      //If new image is fetched. userImage of cloned state is changed.
-      //userImage of original state is never changed due to way this code is set up
-      const rawImageUrl =
-        "https://res.cloudinary.com/samrat/image/upload/c_fill,g_face,h_100,w_106/v1540572400/";
-      if (imageId) data.userImage = `${rawImageUrl}${imageId}`;
-
-      await this.props.saveUserProfile(data);
-      this.setState({ saving: false });
-    } else {
-      this.setState({ errors });
-      return console.log("Errors from Profile Sign up", errors);
-    }
-  };
-
   static getDerivedStateFromProps = (nextProps, prevState) => {
     //After the data is fetched once from the server
     //editable is set to true and this function never runs
@@ -107,15 +44,6 @@ class ProfileSignUp extends Component {
       nextProps.profile.loggedIn &&
       !prevState.editable
     ) {
-      return {
-        username: nextProps.profile.username,
-        fullname: nextProps.profile.fullname,
-        gender: nextProps.profile.gender,
-        description: nextProps.profile.description,
-        userImage: nextProps.profile.userImage,
-        country: nextProps.profile.country,
-        editable: true
-      };
     }
   };
   render() {
@@ -132,11 +60,11 @@ class ProfileSignUp extends Component {
       );
     }
     return (
-      <div className="ProfileSignUp">
-        <h2 className="ProfileSignUp__header">Personal Information</h2>
+      <div className="EditInterest">
+        <h2 className="EditInterest__header">Personal Information</h2>
         <input
           type="text"
-          className="ProfileSignUp__username"
+          className="EditInterest__username"
           placeholder="Username"
           name="username"
           value={this.state.username}
@@ -145,7 +73,7 @@ class ProfileSignUp extends Component {
         {this.state.errors.username}
         <input
           type="text"
-          className="ProfileSignUp__fullname"
+          className="EditInterest__fullname"
           placeholder="Fullname"
           name="fullname"
           value={this.state.fullname}
@@ -154,7 +82,7 @@ class ProfileSignUp extends Component {
         {this.state.errors.fullname}
         <input
           type="text"
-          className="ProfileSignUp__location"
+          className="EditInterest__location"
           placeholder="City,State,Country"
           name="country"
           value={this.state.country}
@@ -162,7 +90,7 @@ class ProfileSignUp extends Component {
         />
         {this.state.errors.country}
         <div
-          className="ProfileSignUp__gender"
+          className="EditInterest__gender"
           value={this.state.gender}
           onChange={this.setGender}
         >
@@ -183,7 +111,7 @@ class ProfileSignUp extends Component {
           Female
         </div>
         {this.state.errors.gender}
-        <div className="ProfileSignUp__description">
+        <div className="EditInterest__description">
           <p>Description</p>
           <textarea
             id=""
@@ -194,7 +122,7 @@ class ProfileSignUp extends Component {
           />
         </div>
         {this.state.errors.description}
-        <div className="ProfileSignUp__support-club">
+        <div className="EditInterest__support-club">
           <span>Club You Support</span>
           <select name="" id="">
             <option default>Groups You Liked</option>
@@ -204,14 +132,14 @@ class ProfileSignUp extends Component {
         </div>
 
         <div
-          className="ProfileSignUp__ProfilePhoto"
+          className="EditInterest__ProfilePhoto"
           onChange={this.setUserImage}
         >
           <p>Add Profile Photo </p>
           <input type="file" />
           {imageUploading}
         </div>
-        <div className="ProfileSignUp__save-btn" onClick={this.saveProfile}>
+        <div className="EditInterest__save-btn" onClick={this.saveProfile}>
           Save Profile
         </div>
         {this.state.saving && (
@@ -233,5 +161,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { saveUserImage, saveUserProfile, updateLocalUserImage }
-)(ProfileSignUp);
+  {}
+)(EditInterest);
