@@ -38,7 +38,7 @@ const UserSchema = new Schema({
     type: String,
     default: ""
   },
-  mantra: {
+  description: {
     type: String,
     default: ""
   },

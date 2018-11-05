@@ -2,7 +2,8 @@ import {
   UPDATE_PROFILE_LOGGEDIN,
   UPDATE_PROFILE_LOGGEDOUT,
   UPDATE_ONLINE_FRIENDS,
-  UPDATE_LAST_PRIVATE_MESSAGES
+  UPDATE_LAST_PRIVATE_MESSAGES,
+  UPDATE_LOCAL_USER_IMAGE
 } from "store/types";
 
 const initialState = null;
@@ -37,11 +38,24 @@ export default (state = initialState, action) => {
       return {
         loggedIn: true,
         fullname: action.payload.fullname,
+        username: action.payload.username,
         totalRequest: action.payload.totalRequest,
         requests: returnFriendRequests(action.payload.requests),
         friends: action.payload.friendsList,
-        image: action.payload.userImage,
-        lastMessages: action.payload.lastMessages
+        userImage: action.payload.userImage,
+        lastMessages: action.payload.lastMessages,
+        gender: action.payload.gender,
+        country: action.payload.country,
+        description: action.payload.description,
+
+        //If user uploads a image in Edit Profile Settings it's value is updated
+        //It is used for displaying the preview of updated image
+        localUserImage: ""
+      };
+    case UPDATE_LOCAL_USER_IMAGE:
+      return {
+        ...state,
+        localUserImage: action.payload
       };
     case UPDATE_ONLINE_FRIENDS:
       return {

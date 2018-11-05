@@ -34,7 +34,13 @@ class MessagesDropDown extends Component {
   };
 
   totalUnreadMessages = messages => {
-    return messages.filter(message => message.body.isRead === false);
+    //returns those messages which are not send by us
+    //and which are not read
+    return messages.filter(
+      message =>
+        message.body.isRead === false &&
+        message.body.senderName !== this.props.profile.username
+    );
   };
   render() {
     const { props } = this;

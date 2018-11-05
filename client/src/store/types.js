@@ -2,6 +2,7 @@ export const UPDATE_GROUP = "update_group";
 
 export const UPDATE_PROFILE_LOGGEDIN = "update_profile_loggedin";
 export const UPDATE_PROFILE_LOGGEDOUT = "update_profile_loggedout";
+export const UPDATE_LOCAL_USER_IMAGE = "update_local_user_image";
 
 export const UPDATE_GROUPCHAT_MESSAGE = "update_groupchat_message";
 export const UPDATE_GROUPNAME = "update_groupname";
