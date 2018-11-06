@@ -1,4 +1,4 @@
-import { Login } from "components/Login/Login";
+import { Login } from "components/Landing/Join/Login/Login";
 import { shallow } from "enzyme";
 import React from "react";
 import { loginFormSubmit } from "store/actions/profile/profile";

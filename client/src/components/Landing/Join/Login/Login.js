@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
-import formFields from "components/Login/formFields";
-import LoginField from "components/Login/LoginField/LoginField";
+import formFields from "components/Landing/Join/Login/formFields";
+import LoginField from "components/Landing/Join/Login/LoginField/LoginField";
 import _ from "lodash";
 import { loginFormSubmit } from "store/actions/profile/profile";
 import { SubmissionError } from "redux-form";
+import LoginWith from "components/Landing/Join/LoginWith/LoginWith";
 
 export class Login extends Component {
   renderFields() {
@@ -25,14 +26,20 @@ export class Login extends Component {
   render() {
     const { handleSubmit, history } = this.props;
     return (
-      <div>
+      <div className="Login">
         <form
+          className="Login__form"
           onSubmit={handleSubmit(values =>
             loginFormSubmit(values, history, SubmissionError)
           )}
         >
           {this.renderFields()}
-          <button type="submit">Send the Survey</button>
+          <button className="Login__form__submit-btn" type="submit">
+            Login
+          </button>
+          <div className="Login__LoginWith__container">
+            <LoginWith />
+          </div>
         </form>
       </div>
     );

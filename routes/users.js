@@ -108,7 +108,7 @@ module.exports = router => {
     passport.authenticate("google"),
     (req, res) => {
       console.log("Google callback route is called");
-      res.redirect("/");
+      res.redirect("/home");
     }
   );
 

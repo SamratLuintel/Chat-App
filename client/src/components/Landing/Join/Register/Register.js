@@ -1,18 +1,18 @@
 import React, { Component } from "react";
+import formFields from "components/Landing/Join/Register/formFields";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
-import formFields from "components/SignUp/formFields";
-import SignUpField from "components/SignUp/SignUpField/SignUpField";
-import _ from "lodash";
 import { signUpFormSubmit } from "store/actions/profile/profile";
+import _ from "lodash";
 import { SubmissionError } from "redux-form";
-
-export class SignUp extends Component {
+import RegisterField from "components/Landing/Join/Register/RegisterField/RegisterField";
+import LoginWith from "components/Landing/Join/LoginWith/LoginWith";
+class Register extends Component {
   renderFields() {
     return _.map(formFields, ({ label, name }) => {
       return (
         <Field
-          component={SignUpField}
+          component={RegisterField}
           type="text"
           key={label}
           label={label}
@@ -21,20 +21,23 @@ export class SignUp extends Component {
       );
     });
   }
-
   render() {
     const { handleSubmit, history } = this.props;
     return (
-      <div>
-        <a href="/api/auth/facebook">Sign Up Facebook</a>
-        <a href="/api/auth/google">Sign Up Google</a>
+      <div className="Register">
         <form
+          className="Register__form"
           onSubmit={handleSubmit(values =>
             signUpFormSubmit(values, history, SubmissionError)
           )}
         >
           {this.renderFields()}
-          <button type="Submit">Send the Survey</button>
+          <button className="Register__form__submit-btn" type="Submit">
+            Register
+          </button>
+          <div className="Register__LoginWith__container">
+            <LoginWith />
+          </div>
         </form>
       </div>
     );
@@ -46,5 +49,5 @@ export default connect(
 )(
   reduxForm({
     form: "signupform"
-  })(SignUp)
+  })(Register)
 );
