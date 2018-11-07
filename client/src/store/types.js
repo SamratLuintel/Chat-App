@@ -11,6 +11,7 @@ export const UPDATE_GROUPCHAT_ONLINE_MEMBERS =
 export const UPDATE_ONLINE_FRIENDS = "update_online_friends";
 export const UPDATE_GROUP_FILTER_COUNTRY = "update_group_filter_country";
 export const UPDATE_GROUP_FILTER_TEXT = "update_group_filter_text";
+export const UPDATE_PROFILE_FRIENDS = "update_profile_friends";
 
 export const SEND_GROUP_MESSAGE = "send_group_message";
 export const JOIN_ROOM = "join_room";

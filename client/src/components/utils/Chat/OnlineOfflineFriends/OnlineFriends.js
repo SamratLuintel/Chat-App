@@ -8,7 +8,7 @@ class OnlineFriends extends Component {
       return this.props.profile.onlineFriends.map(friend => {
         return (
           <OnlineFriend
-            name={friend.name}
+            name={friend.fullname}
             username={this.props.profile.fullname}
           />
         );

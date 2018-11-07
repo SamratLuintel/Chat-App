@@ -117,7 +117,9 @@ module.exports = router => {
       try {
         const user = await User.findOne({
           username: req.user.username
-        }).populate("requests.userId");
+        })
+          .populate("requests.userId")
+          .populate("friendsList.friendId");
         return res.status(200).send(user);
       } catch (err) {
         console.log(err);

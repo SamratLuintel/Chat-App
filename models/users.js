@@ -24,7 +24,17 @@ const UserSchema = new Schema({
   friendsList: [
     {
       friendId: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
-      friendName: { type: String }
+
+      //Notifies the user whether they have read the message called
+      //friend request is accepted
+      readBy: [
+        {
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: "users"
+          }
+        }
+      ]
     }
   ],
   totalRequest: {

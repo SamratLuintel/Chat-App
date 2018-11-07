@@ -1,12 +1,15 @@
 import {
   JOIN_REQUEST,
   FRIEND_REQUEST,
-  FRIEND_REQUEST_RESPONDED
+  FRIEND_REQUEST_RESPONDED,
+  UPDATE_PROFILE_LOGGEDIN,
+  UPDATE_PROFILE_FRIENDS
 } from "store/types";
 import axios from "axios";
 import { fetchUser } from "store/actions/profile/profile";
 
 export const joinRequest = sender => dispatch => {
+  console.log("Friend join Request is being called");
   //dispatched action is called in sendrequest socket middleware
   dispatch({
     type: JOIN_REQUEST,
@@ -55,4 +58,13 @@ export const rejectFriendRequest = data => async dispatch => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const acceptFriendRequestRead = id => async dispatch => {
+  try {
+    console.log("Accept friend request read is called", id);
+    const res = await axios.post("/api/friend-request/read", { id });
+    console.log("acceotFrinedRequestRead", res.data);
+    dispatch(fetchUser());
+  } catch (error) {}
 };

@@ -154,4 +154,26 @@ module.exports = router => {
       }
     }
   });
+
+  //set friend request notification as read
+  router.post("/api/friend-request/read", async (req, res) => {
+    console.log("Friend request read is called");
+    const friendId = req.body.id;
+    console.log(friendId);
+    try {
+      const response = await User.findOneAndUpdate(
+        {
+          _id: req.user._id,
+          "friendsList.friendId": { $eq: friendId }
+        },
+        { $push: { "friendsList.$.readBy": { user: req.user.id } } },
+        {
+          new: true
+        }
+      );
+      res.status(200).send(response);
+    } catch (err) {
+      console.log(err);
+    }
+  });
 };

@@ -14,6 +14,10 @@ const sendrequest = (socket, types, actions) => {
       console.log("refetchUser us called");
       store.dispatch(actions.fetchUser());
     });
+
+    socket.on("friendRequestResponded", () => {
+      store.dispatch(actions.fetchUser());
+    });
     return next => action => {
       //joinRequest
       if (action.type === types.JOIN_REQUEST) {

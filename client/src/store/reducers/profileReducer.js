@@ -3,7 +3,8 @@ import {
   UPDATE_PROFILE_LOGGEDOUT,
   UPDATE_ONLINE_FRIENDS,
   UPDATE_LAST_PRIVATE_MESSAGES,
-  UPDATE_LOCAL_USER_IMAGE
+  UPDATE_LOCAL_USER_IMAGE,
+  UPDATE_PROFILE_FRIENDS
 } from "store/types";
 
 const initialState = null;
@@ -22,10 +23,11 @@ const returnFriendRequests = requests => {
 //returns all the online friends
 const returnOnlineFriends = (users, friends) => {
   let arr = [];
+  console.log("Return all online friends is called", users);
   for (let i = 0; i < friends.length; i++) {
     for (let k = 0; k < users.length; k++) {
-      if (friends[i].friendName === users[k].name) {
-        arr.push(users[k]);
+      if (friends[i].friendId.fullname === users[k].name) {
+        arr.push(friends[i].friendId);
       }
     }
   }
@@ -47,7 +49,7 @@ export default (state = initialState, action) => {
         gender: action.payload.gender,
         country: action.payload.country,
         description: action.payload.description,
-
+        id: action.payload._id,
         //If user uploads a image in Edit Profile Settings it's value is updated
         //It is used for displaying the preview of updated image
         localUserImage: ""
@@ -70,6 +72,11 @@ export default (state = initialState, action) => {
     case UPDATE_PROFILE_LOGGEDOUT:
       return {
         loggedIn: false
+      };
+    case UPDATE_PROFILE_FRIENDS:
+      return {
+        ...state,
+        friends: action.payload.friends
       };
     default:
       return state;

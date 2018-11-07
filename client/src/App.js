@@ -32,7 +32,7 @@ class App extends Component {
 
   joinGlobalRoom = () => {
     const fullname = this.props.profile.fullname;
-    const image = this.props.profile.image;
+    const image = this.props.profile.userImage;
     this.props.joinGlobalRoom({
       fullname,
       image
