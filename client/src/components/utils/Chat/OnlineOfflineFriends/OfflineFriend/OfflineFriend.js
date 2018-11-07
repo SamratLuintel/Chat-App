@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
-class OnlineFriend extends Component {
+class OfflineFriend extends Component {
   redirectToPrivateChat = () => {
     //props.name refers to the online friend
     //props.fullname refers to active user name
@@ -22,11 +22,11 @@ class OnlineFriend extends Component {
       >
         <div className="ChatUser__author-thumb">
           <img className="ChatUser__image" src={props.image} alt="" />
-          <span className="icon-status icon-status--online" />
+          <span className="icon-status icon-status--away" />
         </div>
       </li>
     );
   }
 }
 
-export default withRouter(OnlineFriend);
+export default withRouter(OfflineFriend);

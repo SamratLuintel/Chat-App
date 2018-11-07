@@ -36,29 +36,6 @@ class FriendRequestAccepted extends Component {
   }
 }
 
-// <div className="FriendRequestAccepted__upper-section">
-// <p className="FriendRequestAccepted__friend-name">{props.sender}</p>
-// </div>
-// <div className="FriendRequestAccepted__lower-section">
-// <div className="FriendRequestAccepted__image-container">
-//   <img className="FriendRequestAccepted__image" src={props.image} alt="" />
-// </div>
-// <div className="FriendRequestAccepted__button-container">
-//   <button
-//     className="FriendRequestAccepted__accept-btn"
-//     onClick={this.onRequestAccept}
-//   >
-//     Accept
-//   </button>
-//   <button
-//     onClick={this.onRequestReject}
-//     className="FriendRequestAccepted__reject-btn"
-//   >
-//     Reject
-//   </button>
-// </div>
-// </div>
-
 export default connect(
   null,
   { acceptFriendRequestRead }

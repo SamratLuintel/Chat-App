@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
 import UserProfile from "components/utils/Chat/UserProfile/UserProfile";
-import OnlineFriends from "components/utils/Chat/OnlineFriends/OnlineFriends";
+import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import ChatSection from "components/GroupChat/ChatSection/ChatSection";
 import OnlineGroupMembers from "components/GroupChat/OnlineGroupMembers/OnlineGroupMembers";
 import { connect } from "react-redux";
@@ -57,7 +57,7 @@ class GroupChat extends Component {
           <div className="GroupChat__body">
             <div className="GroupChat__left">
               <UserProfile fullname={props.profile.fullname} />
-              <OnlineFriends />
+              <OnlineOfflineFriends />
             </div>
             <div className="GroupChat__middle">
               <ChatSection groupname={this.props.groupname} />

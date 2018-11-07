@@ -5,7 +5,7 @@ import Filter from "components/Home/Filter/Filter";
 import ChatGroups from "./ChatGroups/ChatGroups";
 import { connect } from "react-redux";
 import { fetchGroups } from "store/actions/group/group";
-
+import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 class Home extends Component {
   componentDidMount = () => {
     this.props.fetchGroups();
@@ -15,6 +15,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <ApplicationHeader />
+        <OnlineOfflineFriends />
         <GroupSearch />
         <div className="Home__body">
           <Filter />

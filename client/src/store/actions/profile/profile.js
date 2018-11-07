@@ -32,6 +32,7 @@ export const fetchUser = () => async dispatch => {
     const user = await userRes;
     const messages = await messagesRes;
     const response = { ...user.data, lastMessages: [...messages.data] };
+    console.log("Refetch user is successfully called");
     dispatch({
       type: UPDATE_PROFILE_LOGGEDIN,
       payload: response

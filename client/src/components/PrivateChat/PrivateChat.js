@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
 import UserProfile from "components/utils/Chat/UserProfile/UserProfile";
-import OnlineFriends from "components/utils/Chat/OnlineFriends/OnlineFriends";
+import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import ChatSection from "components/PrivateChat/ChatSection/ChatSection";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -67,7 +67,7 @@ class PrivateChat extends Component {
           <div className="PrivateChat__body">
             <div className="PrivateChat__left">
               <UserProfile fullname={props.profile.fullname} />
-              <OnlineFriends />
+              <OnlineOfflineFriends />
             </div>
             <div className="PrivateChat__middle">
               <ChatSection
