@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DropDown from "components/utils/DropDown/DropDown";
 import MessageRequest from "components/utils/ApplicationHeader/MessagesDropDown/MessageRequest/MessageRequest";
 import { connect } from "react-redux";
+import Icon from "components/utils/Icon/Icon";
 
 class MessagesDropDown extends Component {
   renderMessages = () => {
@@ -55,10 +56,16 @@ class MessagesDropDown extends Component {
         <span className="MessagesDropDown__total-notifications">
           {unreadMessages}
         </span>
-        <DropDown displayText={<i class="fas fa-globe globe-icon" />}>
+        <DropDown
+          location="middle"
+          displayText={
+            <Icon name="chat---messages-icon" color="#FFFFFF" size={25} />
+          }
+        >
           <div className="MessagesDropDown__dropdown">
-            <div className="MessagesDropDown__friend-requests-header">
-              Messages Request
+            <div className="MessagesDropDown__block-container">
+              <h6 className="MessagesDropDown__block-title">Chat/Messages</h6>
+              <p className="MessagesDropDown__block-btn">PlaceHolder</p>
             </div>
             <ul className="MessagesDropDown__friend-requests-list">
               {this.renderMessages()}

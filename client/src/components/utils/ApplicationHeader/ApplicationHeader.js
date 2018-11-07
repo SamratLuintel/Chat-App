@@ -5,22 +5,28 @@ import ProfileDropDown from "components/utils/ApplicationHeader/ProfileDropDown/
 import FriendRequestDropDown from "components/utils/ApplicationHeader/FriendRequestDropDown/FriendRequestDropDown";
 import MessagesDropDown from "components/utils/ApplicationHeader/MessagesDropDown/MessagesDropDown";
 import { withRouter } from "react-router-dom";
+import logo from "assets/images/logo.png";
+import SearchFriend from "components/utils/ApplicationHeader/SearchFriend/SearchFriend";
 
 class ApplicationHeader extends Component {
   render() {
     return (
-      <div className="Header Header--dark">
+      <div className="Header">
         <div className="Header__brand">
           {" "}
-          <Link to="/home" className="Header__brand-text">
-            Chat App
+          <Link to="/home" className="Header__brand-img-container">
+            <img className="Header__brand-img" src={logo} alt="" />
           </Link>
         </div>
-        <ul className="navbar">
+        <div className="Header__title-container">
+          <h6 className="Header__title">Profile Page</h6>
+        </div>
+        <SearchFriend />
+        <div className="Header__control-block">
           <FriendRequestDropDown />
           <MessagesDropDown />
           <ProfileDropDown />
-        </ul>
+        </div>
       </div>
     );
   }

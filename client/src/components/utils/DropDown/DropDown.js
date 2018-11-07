@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import classnames from "classnames";
 class DropDown extends Component {
   state = {
     displayMenu: false
@@ -28,11 +28,21 @@ class DropDown extends Component {
   render() {
     const { props } = this;
     let dropdownRender = null;
+    let dropdownClassNames = classnames({
+      "DropDown__items-container": true,
+      "DropDown__triangle-right DropDown__items-container--right":
+        props.location === "right",
+      "DropDown__triangle-middle DropDown__items-container--middle":
+        props.location === "middle"
+    });
+
+    //Main items of drop down
     if (this.state.displayMenu) {
       dropdownRender = (
-        <div className="DropDown__items-container">{props.children}</div>
+        <div className={dropdownClassNames}>{props.children}</div>
       );
     }
+
     return (
       <div className="DropDown" ref={el => (this.wrapperRef = el)}>
         <div
@@ -40,7 +50,7 @@ class DropDown extends Component {
           className="DropDown__button-container"
         >
           <div className="DropDown__button-container__text">
-            {props.displayText} {"  "} <i class="fas fa-chevron-down" />
+            {props.displayText} {"  "}
           </div>
         </div>
         {dropdownRender}

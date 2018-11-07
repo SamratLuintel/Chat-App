@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DropDown from "components/utils/DropDown/DropDown";
 import FriendRequest from "components/utils/ApplicationHeader/FriendRequestDropDown/FriendRequest/FriendRequest";
 import { connect } from "react-redux";
+import Icon from "components/utils/Icon/Icon";
 
 class FriendRequestDropDown extends Component {
   renderFriendRequest = () => {
@@ -18,23 +19,33 @@ class FriendRequestDropDown extends Component {
       ));
     }
   };
+
+  componentDidMount = () => {};
   render() {
     const { props } = this;
     let totalRequest = null;
     if (props.profile) {
-      totalRequest = props.profile.totalRequest;
+      totalRequest = props.profile.requests.length;
     }
     return (
-      <div className="FriendRequest">
-        <span className="FriendRequest__total-notifications">
+      <div className="FriendRequestDropDown">
+        <span className="FriendRequestDropDown__total-notifications">
           {totalRequest}
         </span>
-        <DropDown displayText={<i className="fas fa-bell notification-icon" />}>
+        <DropDown
+          location="middle"
+          displayText={
+            <Icon name="happy-face-icon" color="#FFFFFF" size={20} />
+          }
+        >
           <div className="FriendRequest__dropdown">
-            <div className="FriendRequest__friend-requests-header">
-              Friend Request
+            <div className="FriendRequestDropDown__block-container">
+              <h6 className="FriendRequestDropDown__block-title">
+                FRIEND REQUESTS
+              </h6>
+              <p className="FriendRequestDropDown__block-btn">PlaceHolder</p>
             </div>
-            <ul className="FriendRequest__friend-requests-list">
+            <ul className="FriendRequestDropDown__friend-requests-list">
               {this.renderFriendRequest()}
             </ul>
           </div>
