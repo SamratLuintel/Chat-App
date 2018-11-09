@@ -1,24 +1,39 @@
 import React, { Component, Fragment } from "react";
-
+import { withRouter } from "react-router-dom";
 class SearchFriend extends Component {
+  state = {
+    searchText: ""
+  };
+
+  onSearchTextChange = e => {
+    this.setState({ searchText: e.target.value });
+  };
+
+  onFindPeopleClick = () => {
+    if (this.state.searchText !== "") {
+      this.props.history.push(`/findpeople/${this.state.searchText}`);
+    }
+  };
   render() {
     return (
       <Fragment>
         <div className="SearchFriend">
-          <form className="SearchFriend__search-bar">
+          <div className="SearchFriend__search-bar">
             <input
               type="text"
               placeholder="Search here for people or pages"
+              value={this.state.searchText}
+              onChange={this.onSearchTextChange}
               className="SearchFriend__search-input"
             />
-          </form>
+          </div>
         </div>
-        <div className="FindFriend">
-          <p>Find Friends</p>
+        <div onClick={this.onFindPeopleClick} className="FindFriend">
+          <p>Find People</p>
         </div>
       </Fragment>
     );
   }
 }
 
-export default SearchFriend;
+export default withRouter(SearchFriend);

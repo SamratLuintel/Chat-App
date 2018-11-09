@@ -11,6 +11,8 @@ import PrivateRoute from "hoc/PrivateRoute";
 import PrivateChat from "components/PrivateChat/PrivateChat";
 import GroupChatErrorPage from "components/GroupChat/GroupChatErrorPage/GroupChatErrorPage";
 import MainProfile from "components/Settings/MainProfile/ManProfile";
+import FindPeople from "components/FindPeople/FindPeople";
+import ScrollToTopRoute from "hoc/ScrollToTopRoute";
 
 class App extends Component {
   state = {
@@ -39,6 +41,9 @@ class App extends Component {
     });
     this.setState({ roomJoined: true });
   };
+
+  //Private Route contains the option of RouteKey
+  //If we set it to true component will rerender on query params change
   render() {
     return (
       <div>
@@ -59,6 +64,14 @@ class App extends Component {
         </Switch>
         <Switch>
           <PrivateRoute exact path="/chat/:name" component={PrivateChat} />
+        </Switch>
+        <Switch>
+          <PrivateRoute
+            exact
+            path="/findpeople/:searchText"
+            component={FindPeople}
+            RouteKey={true}
+          />
         </Switch>
         <Switch>
           <PrivateRoute
