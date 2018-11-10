@@ -32,6 +32,7 @@ class FriendRequestDropDown extends Component {
 
   showUnreadFriendAcceptedMessage = () => {
     if (this.props.profile && this.props.profile.friends) {
+      console.log("From friend request drop down", this.props.profile.friends);
       const friends = this.props.profile.friends;
       const profileId = this.props.profile.id;
       //Inside the friends there is an property called readBy
@@ -59,7 +60,9 @@ class FriendRequestDropDown extends Component {
     ) {
       return <p>There is nothing to show</p>;
     }
-    return [this.renderBecomeFriends(), this.renderFriendRequest()];
+    if (this.props.profile && this.props.profile.friends) {
+      return [this.renderBecomeFriends(), this.renderFriendRequest()];
+    }
   };
   componentDidMount = () => {};
   render() {

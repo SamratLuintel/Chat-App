@@ -20,4 +20,15 @@ module.exports = router => {
       console.log(err);
     }
   });
+
+  router.get("/api/getpeople/:id", async (req, res) => {
+    try {
+      const id = req.params.id;
+      const user = await User.findById(id);
+      res.status(200).send(user);
+    } catch (error) {
+      console.log("from people.js", error);
+      res.status(400).send(error);
+    }
+  });
 };

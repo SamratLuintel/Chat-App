@@ -12,7 +12,7 @@ import PrivateChat from "components/PrivateChat/PrivateChat";
 import GroupChatErrorPage from "components/GroupChat/GroupChatErrorPage/GroupChatErrorPage";
 import MainProfile from "components/Settings/MainProfile/ManProfile";
 import FindPeople from "components/FindPeople/FindPeople";
-import ScrollToTopRoute from "hoc/ScrollToTopRoute";
+import ProfilePage from "components/ProfilePage/ProfilePage";
 
 class App extends Component {
   state = {
@@ -72,6 +72,9 @@ class App extends Component {
             component={FindPeople}
             RouteKey={true}
           />
+        </Switch>
+        <Switch>
+          <Route exact path="/profilepage/:id" component={ProfilePage} />
         </Switch>
         <Switch>
           <PrivateRoute
