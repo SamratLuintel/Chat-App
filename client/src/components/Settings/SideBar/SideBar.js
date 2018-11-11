@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PersonalInfo from "components/utils/Profile/PersonalInfo/PersonalInfo";
 
 class SideBar extends Component {
   returnImageUrl = () => {
@@ -18,38 +19,49 @@ class SideBar extends Component {
   };
   render() {
     const imageUrl = this.returnImageUrl();
+    const { props } = this;
     return (
-      <div className="ProfileSettings__SideBar">
-        <div className="ProfileSettings__SideBar__upper-section">
-          <div className="ProfileSettings__SideBar__image-container">
-            <img
-              src={imageUrl}
-              alt=""
-              className="ProfileSettings__SideBar__image"
-            />
+      <div className="SideBar">
+        <div className="SideBar__content">
+          <div className="SideBar__avatar">
+            <div className="SideBar__author-thumb">
+              <img src={imageUrl} className="SideBar__author-image" alt="" />
+            </div>
+            <div className="SideBar__author-content">
+              <p className="SideBar__author-name">{props.profile.fullname}</p>
+              <p className="SideBar__author-country">
+                {" "}
+                {props.profile.country || "No country provided"}{" "}
+              </p>
+            </div>
           </div>
-          <p className="ProfileSettings__SideBar__fullname">Samrat Luintel</p>
-          <p className="ProfileSettings__SideBar__username">username</p>
+          <div className="SideBar__info-container">
+            <div className="SideBar__info">
+              <h6 className="SideBar__info__content">
+                {props.profile.friends.length}
+              </h6>
+              <div className="SideBar__info__title">Friends</div>
+            </div>
+            <div className="SideBar__info">
+              <h6 className="SideBar__info__content">0</h6>
+              <div className="SideBar__info__title">Photos</div>
+            </div>
+            <div className="SideBar__info">
+              <h6 className="SideBar__info__content">0</h6>
+              <div className="SideBar__info__title">Videos</div>
+            </div>
+          </div>
+          <div className="SideBar__control">Preview Profile</div>
         </div>
-        <div className="ProfileSettings__SideBar__usermenu">
-          <div className="ProfileSettings__SideBar__useraction">
-            <span className="ProfileSettings__SideBar__useraction__icon">
-              <i class="fas fa-home" />
-            </span>
-            Overview
-          </div>
-          <div className="ProfileSettings__SideBar__useraction">
-            <span className="ProfileSettings__SideBar__useraction__icon">
-              <i class="fas fa-user" />
-            </span>
-            Profile
-          </div>
-          <div className="ProfileSettings__SideBar__useraction">
-            <span className="ProfileSettings__SideBar__useraction__icon">
-              <i class="fas fa-check" />
-            </span>
-            Interests
-          </div>
+        <div className="SideBar__bottom">
+          <PersonalInfo
+            fullname={props.profile.fullname}
+            username={props.profile.username}
+            gender={props.profile.gender}
+            description={props.profile.description}
+            country={props.profile.country}
+            email={props.profile.email}
+          />
         </div>
       </div>
     );

@@ -49,6 +49,7 @@ export default (state = initialState, action) => {
         gender: action.payload.gender,
         country: action.payload.country,
         description: action.payload.description,
+        email: action.payload.email,
         id: action.payload._id,
         //If user uploads a image in Edit Profile Settings it's value is updated
         //It is used for displaying the preview of updated image

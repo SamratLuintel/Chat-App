@@ -7,7 +7,9 @@ import {
   saveUserProfile,
   updateLocalUserImage
 } from "store/actions/profile/editprofile";
+
 import profileValidation from "components/Settings/MainProfile/ProfileSignup/profileValidation";
+import { fetchUser } from "store/actions/profile/profile";
 
 const override = css`
   display: block;
@@ -35,6 +37,7 @@ class ProfileSignUp extends Component {
     //see the code on saveProfile
     userImage: ""
   };
+
   setGender = e => {
     this.setState({ gender: e.target.value });
   };
@@ -60,6 +63,7 @@ class ProfileSignUp extends Component {
   };
 
   saveProfile = async () => {
+    //If image is being uploaded the user can't save the profile
     if (this.state.imageUploading)
       return console.log("You cant submit a form while image is uploading");
     const stateCopy = { ...this.state };
@@ -76,7 +80,9 @@ class ProfileSignUp extends Component {
     let { errors, isValid } = profileValidation(data);
 
     if (isValid) {
-      this.setState({ saving: true });
+      //Starts the progress message on parent item
+      this.props.profileSaving();
+
       //If user does not want to submit the image we respect their right
       //hence isValid passes even though the image is empty
       let imageId = null;
@@ -91,7 +97,8 @@ class ProfileSignUp extends Component {
       if (imageId) data.userImage = `${rawImageUrl}${imageId}`;
 
       await this.props.saveUserProfile(data);
-      this.setState({ saving: false });
+      this.props.profileSaved();
+      this.props.fetchUser();
     } else {
       this.setState({ errors });
       return console.log("Errors from Profile Sign up", errors);
@@ -118,6 +125,15 @@ class ProfileSignUp extends Component {
       };
     }
   };
+
+  onUploadProfilePhoto = () => {
+    this.imageUploadBtn.click();
+  };
+
+  resetSavingMessage = () => {
+    this.setState({ saving: false, saved: false });
+  };
+
   render() {
     let imageUploading = null;
     if (this.state.imageUploading) {
@@ -133,96 +149,119 @@ class ProfileSignUp extends Component {
     }
     return (
       <div className="ProfileSignUp">
-        <h2 className="ProfileSignUp__header">Personal Information</h2>
-        <input
-          type="text"
-          className="ProfileSignUp__username"
-          placeholder="Username"
-          name="username"
-          value={this.state.username}
-          onChange={this.onInputChange}
-        />
-        {this.state.errors.username}
-        <input
-          type="text"
-          className="ProfileSignUp__fullname"
-          placeholder="Fullname"
-          name="fullname"
-          value={this.state.fullname}
-          onChange={this.onInputChange}
-        />
-        {this.state.errors.fullname}
-        <input
-          type="text"
-          className="ProfileSignUp__location"
-          placeholder="City,State,Country"
-          name="country"
-          value={this.state.country}
-          onChange={this.onInputChange}
-        />
-        {this.state.errors.country}
-        <div
-          className="ProfileSignUp__gender"
-          value={this.state.gender}
-          onChange={this.setGender}
-        >
-          <span>Gender</span>
-          <input
-            type="radio"
-            value="MALE"
-            name="gender"
-            checked={this.state.gender === "MALE"}
-          />{" "}
-          Male
-          <input
-            type="radio"
-            value="FEMALE"
-            name="gender"
-            checked={this.state.gender === "FEMALE"}
-          />{" "}
-          Female
+        <div className="ProfileSignUp__block-title-container">
+          <h6 className="ProfileSignUp__block-title">Personal Information</h6>
         </div>
-        {this.state.errors.gender}
-        <div className="ProfileSignUp__description">
-          <p>Description</p>
-          <textarea
-            id=""
-            rows="10"
-            name="description"
-            value={this.state.description}
-            onChange={this.onInputChange}
-          />
-        </div>
-        {this.state.errors.description}
-        <div className="ProfileSignUp__support-club">
-          <span>Club You Support</span>
-          <select name="" id="">
-            <option default>Groups You Liked</option>
-            <option value="">Samrat</option>
-            <option value="">Samata</option>
-          </select>
-        </div>
+        <div className="ProfileSignUp__content">
+          <div className="ProfileSignUp__form-group">
+            <label className="ProfileSignUp__form-group__label">Username</label>
+            <input
+              type="text"
+              className="ProfileSignUp__form-group__input ProfileSignUp__username"
+              name="username"
+              value={this.state.username}
+              onChange={this.onInputChange}
+            />
+          </div>
 
-        <div
-          className="ProfileSignUp__ProfilePhoto"
-          onChange={this.setUserImage}
-        >
-          <p>Add Profile Photo </p>
-          <input type="file" />
-          {imageUploading}
+          {this.state.errors.username}
+          <div className="ProfileSignUp__form-group">
+            <label className="ProfileSignUp__form-group__label">Fullname</label>
+            <input
+              type="text"
+              className="ProfileSignUp__form-group__input ProfileSignUp__fullname"
+              name="fullname"
+              value={this.state.fullname}
+              onChange={this.onInputChange}
+            />
+          </div>
+          {this.state.errors.fullname}
+          <div className="ProfileSignUp__form-group">
+            <label className="ProfileSignUp__form-group__label">
+              City,State or Country
+            </label>
+            <input
+              type="text"
+              className="ProfileSignUp__form-group__input ProfileSignUp__country"
+              name="country"
+              placeholder="Please Provide a country name"
+              value={this.state.country}
+              onChange={this.onInputChange}
+            />
+          </div>
+          {this.state.errors.country}
+          <div
+            className="ProfileSignUp__form-group__input ProfileSignUp__gender"
+            value={this.state.gender}
+            onChange={this.setGender}
+          >
+            <span>Gender</span>
+            <div className="ProfileSignUp__gender__checkbox">
+              <input
+                type="radio"
+                value="MALE"
+                name="gender"
+                checked={this.state.gender === "MALE"}
+              />{" "}
+              Male
+            </div>
+            <div className="ProfileSignUp__gender__checkbox">
+              <input
+                type="radio"
+                value="FEMALE"
+                name="gender"
+                checked={this.state.gender === "FEMALE"}
+              />{" "}
+              Female
+            </div>
+          </div>
+          {this.state.errors.gender}
+          <div className="ProfileSignUp__form-group ProfileSignUp__description">
+            <label className="ProfileSignUp__form-group__label">
+              Description
+            </label>
+            <textarea
+              id=""
+              rows="6"
+              name="description"
+              value={this.state.description}
+              onChange={this.onInputChange}
+              className="ProfileSignUp__form-group__input ProfileSignUp__form-group__input--no-resize"
+            />
+          </div>
+          {this.state.errors.description}
+
+          <div
+            className="ProfileSignUp__ProfilePhoto"
+            onChange={this.setUserImage}
+          >
+            <input
+              type="file"
+              className="ProfileSignUp__image-upload-hidden-btn"
+              ref={btn => (this.imageUploadBtn = btn)}
+            />
+            <div
+              className="ProfileSignUp__image-upload-btn"
+              onClick={this.onUploadProfilePhoto}
+            >
+              UPLOAD PROFILE PHOTO <i class="fas fa-upload" />
+            </div>
+            {/* This is a loader */}
+            {imageUploading}
+          </div>
+          <div className="ProfileSignUp__save-btn" onClick={this.saveProfile}>
+            Save Profile
+          </div>
+          {this.state.saving && (
+            <ClipLoader
+              className={override}
+              sizeUnit={"px"}
+              size={15}
+              color={"#123abc"}
+              loading={this.state.uploading}
+            />
+          )}
         </div>
-        <div className="ProfileSignUp__save-btn" onClick={this.saveProfile}>
-          Save Profile
-        </div>
-        {this.state.saving && (
-          <ClipLoader
-            className={override}
-            sizeUnit={"px"}
-            size={15}
-            color={"#123abc"}
-            loading={this.state.uploading}
-          />
-        )}
       </div>
     );
   }
@@ -233,5 +272,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { saveUserImage, saveUserProfile, updateLocalUserImage }
+  { saveUserImage, saveUserProfile, updateLocalUserImage, fetchUser }
 )(ProfileSignUp);

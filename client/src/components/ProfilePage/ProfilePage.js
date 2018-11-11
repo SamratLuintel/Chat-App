@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UIBlock from "components/ProfilePage/UIBlock/UIBlock";
-import PersonalInfo from "components/ProfilePage/PersonalInfo/PersonalInfo";
+import PersonalInfo from "components/utils/Profile/PersonalInfo/PersonalInfo";
 import { css } from "react-emotion";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";

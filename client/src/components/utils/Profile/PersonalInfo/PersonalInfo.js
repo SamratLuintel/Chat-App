@@ -13,7 +13,8 @@ const PersonalInfo = props => {
               About Me:
             </span>
             <span className="PersonalInfo__single-content__text">
-              {props.description}
+              {props.description ||
+                "This user prefers to keep the mystery in the air"}
             </span>
           </li>
           <li className="PersonalInfo__single-content">
@@ -35,13 +36,13 @@ const PersonalInfo = props => {
           <li className="PersonalInfo__single-content">
             <span className="PersonalInfo__single-content__title">Gender</span>
             <span className="PersonalInfo__single-content__text">
-              {props.gender}
+              {props.gender || "No information given"}
             </span>
           </li>
           <li className="PersonalInfo__single-content">
             <span className="PersonalInfo__single-content__title">Country</span>
             <span className="PersonalInfo__single-content__text">
-              {props.country}
+              {props.country || "No information given"}
             </span>
           </li>
           <li className="PersonalInfo__single-content">
