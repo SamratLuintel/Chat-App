@@ -1,14 +1,8 @@
-@import "GroupSearch/GroupSearch";
-@import "Filter/Filter";
 @import "ChatGroups/ChatGroups";
+@import "ManageGroups/ManageGroups";
+@import "HomeActionBar/HomeActionBar";
 
 .Home {
   background-color: $primary-grey;
-  height: 100vh;
-}
-
-.Home__body {
-  width: 1300px;
-  margin: 0 auto;
-  display: flex;
+  min-height: 100vh;
 }

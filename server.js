@@ -55,6 +55,7 @@ require("./sockets/privatemessage")(io);
 require("./routes/users")(app);
 require("./routes/admin")(app);
 require("./routes/group")(app);
+require("./routes/groupchat")(app);
 require("./routes/friend")(app);
 require("./routes/people")(app);
 require("./routes/privatechat")(app);

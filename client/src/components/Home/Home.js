@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
-import GroupSearch from "components/Home/GroupSearch/GroupSearch";
-import Filter from "components/Home/Filter/Filter";
 import ChatGroups from "./ChatGroups/ChatGroups";
 import { connect } from "react-redux";
 import { fetchGroups } from "store/actions/group/group";
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
+import ManageGroups from "components/Home/ManageGroups/ManageGroups";
+import LeftMenu from "components/utils/LeftMenu/LeftMenu";
+import HomeActionBar from "components/Home/HomeActionBar/HomeActionBar";
+
 class Home extends Component {
   componentDidMount = () => {
     this.props.fetchGroups();
@@ -15,10 +17,15 @@ class Home extends Component {
     return (
       <div className="Home">
         <ApplicationHeader />
+        <LeftMenu />
         <OnlineOfflineFriends />
-        <GroupSearch />
+
+        {/*Main Content starts here */}
+        <ManageGroups />
+        <div className="container">
+          <HomeActionBar />
+        </div>
         <div className="Home__body">
-          <Filter />
           <ChatGroups />
         </div>
       </div>

@@ -24,8 +24,9 @@ class GroupSearch extends Component {
           onChange={this.onInputChange}
           placeholder="Enter Your Group Name"
         />
+
         <span onClick={this.onSearchClick} className="GroupSearch__search-btn">
-          Search
+          <i class="fas fa-search" />
         </span>
       </div>
     );

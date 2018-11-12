@@ -20,25 +20,39 @@ export class ChatGroup extends Component {
     const { props } = this;
     return (
       <div className="ChatGroup">
-        <img
-          className="ChatGroup__image"
-          onClick={this.onImageClick}
-          src={props.image}
-          alt=""
-        />
-        <h4 className="ChatGroup__name">
-          Name:
-          {props.name}
-        </h4>
-        <p className="ChatGroup__country">
-          Country:
-          {props.country}
-        </p>
-        <p className="ChatGroup__favourites">
-          Favourites:
-          {props.favourites}
-        </p>
-        <button onClick={this.onAddToFavouriteClick}>Add to Favourite</button>
+        <div className="ChatGroup__avatar">
+          <img
+            className="ChatGroup__avatar__image"
+            onClick={this.onImageClick}
+            src={props.image}
+            alt=""
+          />
+          <div className="ChatGroup__author-content">
+            <h5 className="ChatGroup__author-content__name">{props.name}</h5>
+            <p className="ChatGroup__author-content__country">
+              {props.country}
+            </p>
+            <p className="ChatGroup__favourites">
+              Favourites:
+              {props.favourites}
+            </p>
+          </div>
+        </div>
+        <div className="ChatGroup__enter-group">Enter Group</div>
+        <div className="ChatGroup__control-block">
+          <div
+            className="ChatGroup__control-block__btn"
+            onClick={this.onAddToFavouriteClick}
+          >
+            <i class="far fa-star" />
+          </div>
+          <div
+            className="ChatGroup__control-block__btn"
+            onClick={this.onAddToFavouriteClick}
+          >
+            <i class="far fa-edit" />
+          </div>
+        </div>
       </div>
     );
   }

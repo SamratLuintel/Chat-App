@@ -11,9 +11,11 @@ const chatgroup = (socket, types) => {
 
     //Updates the message of message section
     socket.on("newMessage", data => {
+      console.log("New message from socket connection is fetched", data);
       const newMessage = {
         text: data.text,
-        from: data.from
+        from: data.from,
+        image: data.image
       };
       store.dispatch({
         type: types.UPDATE_GROUPCHAT_MESSAGE,

@@ -13,6 +13,7 @@ export const sendGroupMessage = (message, groupname, sender) => dispatch => {
     sender
   };
 
+  //calls the function in socket middleware
   dispatch({
     type: SEND_GROUP_MESSAGE,
     payload: data
@@ -37,6 +38,7 @@ export const fetchGroupChatMessage = groupname => async dispatch => {
   try {
     console.log("Fetch group chat message is called");
     const res = await axios.get(`/api/group/messages/${groupname}`);
+    console.log("fetch group chat message is completed", res.data);
     const groupmessages = res.data.map(message => ({
       from: message.sender.fullname,
       text: message.body,

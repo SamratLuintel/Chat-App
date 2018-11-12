@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ChatGroup from "components/Home/ChatGroups/ChatGroup/ChatGroup";
 import { connect } from "react-redux";
+import CreateChatGroup from "components/Home/ChatGroups/CreateChatGroup/CreateChatGroup";
 
 export class ChatGroups extends Component {
   filterByCountry = groups => {
@@ -21,8 +22,7 @@ export class ChatGroups extends Component {
   renderChatGroups = () => {
     let render = null;
     //cloudinary image link with setting
-    const rawImageLink =
-      "https://res.cloudinary.com/samrat/image/upload/c_fill,g_face,h_100,w_106/v1540572400/";
+
     if (this.props.groups) {
       //Filters the group list by country
       const filteredGroups = this.filterByCountry(this.props.groups);
@@ -31,21 +31,34 @@ export class ChatGroups extends Component {
       }
       render = filteredGroups.map((group, i) => {
         return (
-          <ChatGroup
-            name={group.name}
-            country={group.country}
-            image={`${rawImageLink}${group.image}`}
-            id={group._id}
-            key={group._id}
-            favourites={group.favourites.length}
-          />
+          <div className="col-md-3">
+            <ChatGroup
+              name={group.name}
+              country={group.country}
+              image={group.image}
+              id={group._id}
+              key={group._id}
+              favourites={group.favourites.length}
+            />
+          </div>
         );
       });
     }
     return render;
   };
   render() {
-    return <div className="ChatGroups">{this.renderChatGroups()}</div>;
+    return (
+      <div className="ChatGroups">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-3">
+              <CreateChatGroup />
+            </div>
+            {this.renderChatGroups()}
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
