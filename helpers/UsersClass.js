@@ -3,10 +3,11 @@ class Users {
     this.users = [];
   }
 
-  AddUserData(id, name, room) {
+  AddUserData(id, name, image, room) {
     const user = {
       id,
       name,
+      image,
       room
     };
     this.users.push(user);
@@ -31,7 +32,7 @@ class Users {
   GetUsersList(room) {
     const users = this.users.filter(user => user.room === room);
     const namesArray = users.map(user => {
-      return { name: user.name };
+      return { name: user.name, image: user.image };
     });
     return namesArray;
   }

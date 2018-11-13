@@ -26,16 +26,18 @@ class SendMessage extends Component {
   render() {
     return (
       <div className="SendMessage">
-        <form onSubmit={this.onFormSubmit}>
+        <form onSubmit={this.onFormSubmit} className="SendMessage__form">
           <textarea
             name="message"
             className="SendMessage__message"
-            cols="30"
-            rows="10"
+            rows="1"
+            placeholder="Type your message"
             onChange={this.onTextChange}
             value={this.state.message}
           />
-          <button type="submit">Send</button>
+          <button type="submit" className="SendMessage__send-btn">
+            <i class="fas fa-paper-plane" />
+          </button>
         </form>
       </div>
     );

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
-import UserProfile from "components/utils/Chat/UserProfile/UserProfile";
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import ChatSection from "components/GroupChat/ChatSection/ChatSection";
 import OnlineGroupMembers from "components/GroupChat/OnlineGroupMembers/OnlineGroupMembers";
+import LeftMenu from "components/utils/LeftMenu/LeftMenu";
+
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -28,7 +29,8 @@ class GroupChat extends Component {
     this.props.updateGroupName(groupname);
     const params = {
       room: groupname,
-      name: this.props.profile.fullname
+      name: this.props.profile.fullname,
+      image: this.props.profile.userImage
     };
 
     // Joins the room and stores the user information in server
@@ -52,18 +54,21 @@ class GroupChat extends Component {
     let render = null;
     if (this.state.exist) {
       render = (
-        <div className="GroupChat">
+        <div>
           <ApplicationHeader />
-          <div className="GroupChat__body">
-            <div className="GroupChat__left">
-              <UserProfile fullname={props.profile.fullname} />
-              <OnlineOfflineFriends />
-            </div>
-            <div className="GroupChat__middle">
-              <ChatSection groupname={this.props.groupname} />
-            </div>
-            <div className="GroupChat__right">
-              <OnlineGroupMembers />
+          <OnlineOfflineFriends />
+          <LeftMenu />
+          <div className="GroupChat">
+            <div className="GroupChat__bg" />
+            <div className="container">
+              <div className="row">
+                <div className="col">
+                  <div className="GroupChat__body">
+                    <OnlineGroupMembers />
+                    <ChatSection groupname={this.props.groupname} />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

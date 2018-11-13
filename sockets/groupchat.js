@@ -7,13 +7,9 @@ module.exports = io => {
     console.log("User connected");
 
     socket.on("join", (params, callback) => {
-      const data = {
-        room: params.room,
-        name: params.name
-      };
       socket.join(params.room);
 
-      users.AddUserData(socket.id, params.name, params.room);
+      users.AddUserData(socket.id, params.name, params.image, params.room);
 
       // online members in a particular group
       io.to(params.room).emit(

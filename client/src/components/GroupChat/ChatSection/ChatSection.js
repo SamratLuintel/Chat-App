@@ -7,7 +7,11 @@ class ChatSection extends Component {
     const { props } = this;
     return (
       <div className="ChatSection">
-        <h2 className="ChatSection__header">{props.groupname}</h2>
+        <div className="ChatSection__header-container">
+          <p className="ChatSection__header-container__title">
+            {props.groupname}
+          </p>
+        </div>
         <ChatMessage />
         <SendMessage groupname={props.groupname} />
       </div>

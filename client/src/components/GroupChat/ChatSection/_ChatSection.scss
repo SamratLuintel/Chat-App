@@ -3,5 +3,26 @@
 
 .ChatSection {
   background-color: white;
-  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0%;
+  max-width: 100%;
+  font-family: Roboto;
+}
+
+.ChatSection__header-container {
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  min-height: 64px;
+  height: 64px;
+  padding: 0 16px;
+  width: 100%;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.ChatSection__header-container__title {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 16px;
+  font-weight: 500;
 }

@@ -4,7 +4,7 @@ import { addGroupToFavourite } from "store/actions/group/group";
 import { connect } from "react-redux";
 
 export class ChatGroup extends Component {
-  onImageClick = () => {
+  onEnterGroup = () => {
     const name = this.props.name;
     this.props.history.push(`/group/${name}`);
   };
@@ -21,12 +21,7 @@ export class ChatGroup extends Component {
     return (
       <div className="ChatGroup">
         <div className="ChatGroup__avatar">
-          <img
-            className="ChatGroup__avatar__image"
-            onClick={this.onImageClick}
-            src={props.image}
-            alt=""
-          />
+          <img className="ChatGroup__avatar__image" src={props.image} alt="" />
           <div className="ChatGroup__author-content">
             <h5 className="ChatGroup__author-content__name">{props.name}</h5>
             <p className="ChatGroup__author-content__country">
@@ -38,7 +33,9 @@ export class ChatGroup extends Component {
             </p>
           </div>
         </div>
-        <div className="ChatGroup__enter-group">Enter Group</div>
+        <div className="ChatGroup__enter-group" onClick={this.onEnterGroup}>
+          Enter Group
+        </div>
         <div className="ChatGroup__control-block">
           <div
             className="ChatGroup__control-block__btn"

@@ -3,25 +3,68 @@ import SingleGroupMessage from "components/GroupChat/ChatSection/ChatMessage/Sin
 import { connect } from "react-redux";
 
 class ChatMessage extends Component {
+  state = {
+    scrolled: false
+  };
   renderMessages = () => {
+    const userProfileName = this.props.profile.fullname;
     return this.props.messages.map((message, i) => (
+      //message.from is the fullname of the user
+
       <SingleGroupMessage
         name={message.from}
         message={message.text}
         image={message.image}
+        ownMessage={message.from === userProfileName}
         key={i}
       />
     ));
   };
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "center"
+    });
+  };
+
+  componentDidUpdate() {
+    //After the message is received from the server scroll to that message
+    if (this.props.messages.length > 0 && !this.state.scrolled) {
+      this.scrollToBottom();
+      this.setState({ scrolled: true });
+    }
+    const clientHeight = this.messageContainer.clientHeight;
+    const scrollHeight = this.messageContainer.scrollHeight;
+    const scrollTop = this.messageContainer.scrollTop;
+    //120 is the sum of previous message height + current message height
+    if (clientHeight + scrollTop + 120 >= scrollHeight) {
+      this.scrollToBottom();
+    }
+  }
   render() {
     return (
-      <div className="ChatMessage">
-        <ul className="ChatMessage__messages">{this.renderMessages()}</ul>
+      <div
+        className="ChatMessage"
+        ref={el => {
+          this.messageContainer = el;
+        }}
+      >
+        <ul className="ChatMessage__messages">
+          {this.renderMessages()}
+          <div
+            style={{ float: "left", clear: "both" }}
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          />
+        </ul>
       </div>
     );
   }
 }
 const mapStateToProps = state => ({
+  profile: state.profile,
   messages: state.groupchat.messages
 });
 export default connect(mapStateToProps)(ChatMessage);

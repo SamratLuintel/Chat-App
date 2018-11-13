@@ -2,8 +2,13 @@
 
 .ChatMessage {
   height: 300px;
+  box-sizing: border-box;
+  padding: 16px 10px 40px 40px;
+  flex-grow: 1;
+  overflow: scroll;
 }
 
 .ChatMessage__messages {
   list-style: none;
+  position: relative;
 }
