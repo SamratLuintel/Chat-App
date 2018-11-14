@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
-import UserProfile from "components/utils/Chat/UserProfile/UserProfile";
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import ChatSection from "components/PrivateChat/ChatSection/ChatSection";
+import LeftMenu from "components/utils/LeftMenu/LeftMenu";
+
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 import {
   joinPrivateChatRoom,
   fetchPrivateMessages
@@ -62,18 +62,23 @@ class PrivateChat extends Component {
     let render = null;
     if (this.state.exist) {
       render = (
-        <div className="PrivateChat">
+        <div>
+          <OnlineOfflineFriends />
           <ApplicationHeader />
-          <div className="PrivateChat__body">
-            <div className="PrivateChat__left">
-              <UserProfile fullname={props.profile.fullname} />
-              <OnlineOfflineFriends />
-            </div>
-            <div className="PrivateChat__middle">
-              <ChatSection
-                room={this.state.room1}
-                receiverName={this.state.receiverName}
-              />
+          <LeftMenu />
+          <div className="PrivateChat">
+            <div className="PrivateChat__bg" />
+            <div className="container">
+              <div className="row">
+                <div className="col">
+                  <div className="PrivateChat__body">
+                    <ChatSection
+                      room={this.state.room1}
+                      receiverName={this.state.receiverName}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

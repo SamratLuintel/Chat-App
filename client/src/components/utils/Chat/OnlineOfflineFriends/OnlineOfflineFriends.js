@@ -24,6 +24,7 @@ class OnlineFriends extends Component {
           return (
             <OnlineFriend
               image={friendId.userImage}
+              name={friendId.fullname}
               username={this.props.profile.fullname}
             />
           );
@@ -31,6 +32,7 @@ class OnlineFriends extends Component {
           return (
             <OfflineFriend
               image={friendId.userImage}
+              name={friendId.fullname}
               username={this.props.profile.fullname}
             />
           );

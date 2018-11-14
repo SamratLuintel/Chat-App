@@ -24,16 +24,20 @@ class SendMessage extends Component {
   render() {
     return (
       <div className="PrivateChat__SendMessage">
-        <form onSubmit={this.onFormSubmit}>
+        <form
+          onSubmit={this.onFormSubmit}
+          className="PrivateChat__SendMessage__form"
+        >
           <textarea
             name="message"
             className="PrivateChat__SendMessage__message"
-            cols="30"
-            rows="10"
+            rows="1"
             onChange={this.onTextChange}
             value={this.state.message}
           />
-          <button type="submit">Send</button>
+          <button type="submit" className="PrivateChat__SendMessage__send-btn">
+            <i class="fas fa-paper-plane" />
+          </button>
         </form>
       </div>
     );

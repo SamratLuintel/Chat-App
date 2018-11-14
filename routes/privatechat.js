@@ -79,7 +79,6 @@ module.exports = router => {
           }
         }
       ]);
-
       const messages = await Message.populate(aggregatedMessage, {
         path: "sender"
       });
