@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import Landing from "components/Landing/Landing";
-import Dashboard from "components/admin/Dashboard/Dashboard";
+import CreateGroupChat from "components/CreateGroupChat/CreateGroupChat";
 import Home from "components/Home/Home";
 import GroupChat from "components/GroupChat/GroupChat";
 import { connect } from "react-redux";
@@ -48,7 +48,7 @@ class App extends Component {
     return (
       <div>
         <Route exact path="/" component={Landing} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <Route exact path="/create-chat-group" component={CreateGroupChat} />
         <Switch>
           <PrivateRoute exact path="/home" component={Home} />
         </Switch>

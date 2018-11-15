@@ -16,21 +16,26 @@ class ImageUpload extends Component {
   };
 
   onChange = e => {
-    const files = Array.from(e.target.files);
+    // const files = Array.from(e.target.files);
 
-    e.target.textContent = files;
-    this.setState({ uploading: true });
-    const formData = new FormData();
-    files.forEach((file, i) => {
-      //name it image for the sake of backend
-      formData.append("image", file);
-    });
-    this.sendFormData(formData);
+    // e.target.textContent = files;
+    // this.setState({ uploading: true });
+    // const formData = new FormData();
+    // files.forEach((file, i) => {
+    //   //name it image for the sake of backend
+    //   formData.append("image", file);
+    // });
+    // this.sendFormData(formData);
+
+    this.props.groupImageChange(e.target.files[0]);
   };
 
   sendFormData = async formData => {
     try {
-      const image = await axios.post("/api/image-upload", formData);
+      const image = await axios.post(
+        "/api/create-chat-group/image-upload",
+        formData
+      );
       //calls the parent function on Dashboard
       this.props.onFileNameChange(image.data);
       this.setState({

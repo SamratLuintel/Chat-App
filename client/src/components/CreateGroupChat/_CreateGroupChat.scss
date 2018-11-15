@@ -1,0 +1,13 @@
+@import "ImageUpload/ImageUpload";
+@import "GroupChatForm/GroupChatForm";
+@import "GroupChatPreview/GroupChatPreview";
+
+.CreateGroupChat {
+  background-color: $primary-grey;
+  min-height: 100vh;
+  font-family: Roboto;
+}
+
+.CreateGroupChat__body {
+  margin-top: 20px;
+}

@@ -3,6 +3,9 @@ const Group = mongoose.model("groups");
 const User = mongoose.model("users");
 const GroupMessage = mongoose.model("groupmessages");
 const _ = require("lodash");
+const formidable = require("formidable");
+const cloudinary = require("cloudinary");
+const uploader = require("../services/cloudinaryUpload");
 
 module.exports = router => {
   //Return a particular group
@@ -63,6 +66,40 @@ module.exports = router => {
     } catch (err) {
       console.log(err);
       res.status(400).send(err);
+    }
+  });
+
+  router.post(
+    "/api/create-chat-group/image-upload",
+    uploader.single("image"),
+    (req, res) => {
+      //req.file.public_id is set from uploader.single("image") middleware
+      const public_id = req.file.public_id;
+      res.status(200).send(public_id);
+    }
+  );
+
+  router.post("/api/create-chat-group", async (req, res) => {
+    console.log("On create chat group on server is caleld");
+
+    const group = await Group.findOne({ name: req.body.name });
+    if (group) {
+      return res
+        .status(400)
+        .send({ message: "Group with provided name already exist" });
+    }
+    const newGroup = new Group({
+      name: req.body.name,
+      country: req.body.country,
+      image: req.body.image
+    });
+    console.log(newGroup);
+    try {
+      await newGroup.save();
+      res.status(200).send({ message: "Image is successfully created" });
+    } catch (error) {
+      console.log("This errors is from admin.js file");
+      console.log(error);
     }
   });
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import ImageUpload from "components/admin/Dashboard/ImageUpload/ImageUpload";
+import ImageUpload from "components/CreateChatGroup/ImageUpload/ImageUpload";
 import { shallow } from "enzyme";
 import axios from "axios";
 import moxios from "moxios";

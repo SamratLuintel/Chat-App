@@ -1,10 +1,10 @@
 import React from "react";
-import Dashboard from "components/admin/Dashboard/Dashboard";
+import CreateGroupChat from "components/CreateGroupChat/CreateGroupChat";
 import { shallow, render } from "enzyme";
 import axios from "axios";
 import moxios from "moxios";
 
-describe("The Dashboard component", () => {
+describe("The Create Chat Group component", () => {
   beforeEach(function() {
     moxios.install(axios);
   });
@@ -13,13 +13,13 @@ describe("The Dashboard component", () => {
     moxios.uninstall(axios);
   });
   it("should not regress", () => {
-    const wrapper = render(<Dashboard />);
+    const wrapper = render(<CreateGroupChat />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it("should set group if valid input", () => {
     const value = "Samrat";
-    const wrapper = shallow(<Dashboard />);
+    const wrapper = shallow(<CreateGroupChat />);
     wrapper
       .find("input")
       .at(0)
@@ -31,7 +31,7 @@ describe("The Dashboard component", () => {
 
   it("should set country if valid input", () => {
     const value = "Nepal";
-    const wrapper = shallow(<Dashboard />);
+    const wrapper = shallow(<CreateGroupChat />);
     wrapper
       .find("input")
       .at(1)
@@ -41,7 +41,7 @@ describe("The Dashboard component", () => {
     expect(wrapper.state("country")).toBe(value);
   });
 
-  it("should set error state when dashboard api returns error", async () => {
+  it("should set error state when createChatGroup api returns error", async () => {
     const errorMsg = "Group already exist";
     moxios.stubRequest("/api/dashboard", {
       status: 400,
@@ -56,7 +56,7 @@ describe("The Dashboard component", () => {
         country: ""
       }
     };
-    const wrapper = shallow(<Dashboard />);
+    const wrapper = shallow(<CreateGroupChat />);
     await wrapper.instance().onFormSubmit(event);
     expect(wrapper.state("error")).toBe(errorMsg);
   });
