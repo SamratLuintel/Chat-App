@@ -59,9 +59,16 @@ class ImageUpload extends Component {
         />
       );
     }
+    //GroupChatForm__error-message class in in GroupChatForm.scss file
     return (
       <Fragment>
         <UploadButton onChange={this.onChange} />
+        {this.props.groupImageError && (
+          <p className="GroupChatForm__error-message">
+            {this.props.groupImageError}
+          </p>
+        )}
+
         {loading}
       </Fragment>
     );

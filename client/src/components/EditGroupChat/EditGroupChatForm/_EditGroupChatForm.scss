@@ -75,3 +75,8 @@
 .EditGroupChatForm__create-btn-container__button--danger {
   background-color: $danger;
 }
+
+.EditGroupChatForm__error-message {
+  padding: 5px 10px;
+  color: $danger;
+}

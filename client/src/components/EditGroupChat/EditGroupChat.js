@@ -21,27 +21,49 @@ class EditGroupChat extends Component {
     fetchError: "",
     groupname: "",
     country: "",
+    //error set when the user does not submit any country
+    countryError: "",
     groupImageUrl: "",
+    //error set when the user does not submit any image
+    groupImageError: "",
     image: "",
     imageChanged: false,
+
     saving: false,
-    saved: "",
+    saved: false,
+
+    deleting: false,
+    deleted: false,
     error: ""
   };
 
   onCountryChange = country => {
+    //reset the error message
+    if (this.state.countryError) this.setState({ countryError: "" });
     this.setState({
       country
     });
   };
 
   onGroupImageChange = groupImage => {
+    //reset the error message
+    if (this.state.groupImageError) this.setState({ groupImageError: "" });
     const groupImageUrl = URL.createObjectURL(groupImage);
     this.setState({ groupImage, groupImageUrl, imageChanged: true });
   };
 
   onEditChatGroup = async e => {
     console.log("On edit chat group is called");
+    //check if the user has not provided a country
+    if (!this.state.country)
+      return this.setState({
+        countryError: "You need to provide a country name"
+      });
+
+    if (!this.state.groupImage)
+      return this.setState({
+        groupImageError: "You need to provide a group image"
+      });
     try {
       const id = this.props.match.params.id;
       this.setState({ saving: true });
@@ -68,6 +90,17 @@ class EditGroupChat extends Component {
     }
   };
 
+  onDeleteChatGroup = async () => {
+    try {
+      this.setState({ deleting: true });
+      const id = this.props.match.params.id;
+      await axios.post(`/api/delete-chat-group/${id}`);
+      this.setState({ deleting: false, deleted: true });
+      this.props.history.push("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   saveUserImage = async () => {
     console.log("Save Group image is called");
     const formData = new FormData();
@@ -78,6 +111,10 @@ class EditGroupChat extends Component {
       return res.data;
     } catch (err) {
       console.log(err);
+      this.setState({
+        error:
+          "Oops some error occured while trying to save. Please try again later"
+      });
     }
   };
 
@@ -117,12 +154,38 @@ class EditGroupChat extends Component {
     return progress;
   };
 
+  resetSavingMessage = () => {
+    //Though user can never click on cross button as they are redirected
+    //but still .....
+    this.setState({ saving: false, saved: false });
+  };
+  groupDeletingProgress = () => {
+    let progress;
+    if (this.state.deleting || this.state.deleted) {
+      progress = (
+        <ProgressMessage
+          message="Your group is being deleted"
+          finishedMessage="Your group is successfully deleted"
+          finished={this.state.deleted}
+          onCrossed={this.resetDeletingMessage}
+        />
+      );
+    }
+    return progress;
+  };
+
+  resetDeletingMessage = () => {
+    //Though user can never click on cross button as they are redirected
+    //but still .....
+    this.setState({ deleting: false, deleted: false });
+  };
+
   componentDidMount = () => {
     this.fetchGroup();
   };
 
   render() {
-    //If some problem has occured while fetching the group display them
+    //If some problem has occured while fetching the group, display them
     if (this.state.fetchError) {
       return (
         <div className="EditGroupChat__middle">
@@ -155,6 +218,7 @@ class EditGroupChat extends Component {
         <div className="CreateGroupChat__body">
           <div className="container">
             {this.groupSavingProgress()}
+            {this.groupDeletingProgress()}
             <div className="row">
               <div className="col-md-4">
                 <EditGroupChatPreview
@@ -165,10 +229,14 @@ class EditGroupChat extends Component {
               </div>
               <div className="col-md-8">
                 <EditGroupChatForm
+                  editChatGroup={this.onEditChatGroup}
+                  deleteChatGroup={this.onDeleteChatGroup}
                   countryChange={this.onCountryChange}
                   groupImageChange={this.onGroupImageChange}
-                  editChatGroup={this.onEditChatGroup}
                   groupname={this.state.groupname}
+                  groupnameError={this.state.groupnameError}
+                  countryError={this.state.countryError}
+                  groupImageError={this.state.groupImageError}
                   country={this.state.country}
                   error={this.state.error}
                 />

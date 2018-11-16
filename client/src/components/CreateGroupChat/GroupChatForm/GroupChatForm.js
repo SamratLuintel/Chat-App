@@ -32,8 +32,12 @@ class GroupChatForm extends Component {
               value={this.props.groupname}
               onChange={this.onGroupNameChange}
             />
+            {this.props.groupnameError && (
+              <p className="GroupChatForm__error-message">
+                {this.props.groupnameError}
+              </p>
+            )}
           </div>
-          {this.props.error}
 
           <div className="GroupChatForm__form-group">
             <label className="GroupChatForm__form-group__label">Country</label>
@@ -44,10 +48,18 @@ class GroupChatForm extends Component {
               value={this.props.country}
               onChange={this.onCountryChange}
             />
+            {this.props.countryError && (
+              <p className="GroupChatForm__error-message">
+                {this.props.countryError}
+              </p>
+            )}
           </div>
         </div>
 
-        <ImageUpload groupImageChange={this.props.groupImageChange} />
+        <ImageUpload
+          groupImageError={this.props.groupImageError}
+          groupImageChange={this.props.groupImageChange}
+        />
         <div className="GroupChatForm__create-btn-container">
           <div
             className="GroupChatForm__create-btn-container__button"

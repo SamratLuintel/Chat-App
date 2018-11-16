@@ -20,6 +20,12 @@ class EditGroupChatForm extends Component {
         </div>
         <div className="EditGroupChatForm__content">
           <div className="EditGroupChatForm__form-group">
+            {/*Error related to saving a form */}
+            {this.props.error && (
+              <p className="EditGroupChatForm__error-message">
+                {this.props.error}
+              </p>
+            )}
             <label className="EditGroupChatForm__form-group__label">
               Group Name
             </label>
@@ -31,8 +37,11 @@ class EditGroupChatForm extends Component {
               disabled={true}
             />
           </div>
-          {this.props.error}
-
+          {this.props.groupnameError && (
+            <p className="EditGroupChatForm__error-message">
+              {this.props.groupnameError}
+            </p>
+          )}
           <div className="EditGroupChatForm__form-group">
             <label className="EditGroupChatForm__form-group__label">
               Country
@@ -44,6 +53,11 @@ class EditGroupChatForm extends Component {
               value={this.props.country}
               onChange={this.onCountryChange}
             />
+            {this.props.countryError && (
+              <p className="EditGroupChatForm__error-message">
+                {this.props.countryError}
+              </p>
+            )}
           </div>
         </div>
 
@@ -55,7 +69,10 @@ class EditGroupChatForm extends Component {
           >
             Save Changes
           </div>
-          <div className="EditGroupChatForm__create-btn-container__button EditGroupChatForm__create-btn-container__button--danger">
+          <div
+            className="EditGroupChatForm__create-btn-container__button EditGroupChatForm__create-btn-container__button--danger"
+            onClick={this.props.deleteChatGroup}
+          >
             Delete Chat Group
           </div>
         </div>

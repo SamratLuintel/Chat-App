@@ -141,4 +141,22 @@ module.exports = router => {
       return res.status(400).send(err);
     }
   });
+
+  router.post("/api/delete-chat-group/:id", async (req, res) => {
+    try {
+      //checking if the group is the one actually created by the user
+      const group = await Group.findById(req.params.id);
+      if (!group.createdBy.equals(req.user.id)) {
+        return res
+          .status(400)
+          .send({ msg: "This is not the group you created" });
+      }
+
+      await group.remove();
+      res.status(200).send({ msg: "The group is successfully deleted" });
+    } catch (error) {
+      console.log(error);
+      res.status(400).send(error);
+    }
+  });
 };

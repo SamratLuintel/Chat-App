@@ -10,30 +10,40 @@ import axios from "axios";
 
 class CreateGroupChat extends Component {
   state = {
-    groupImage: "",
     //This url is used for live preview
     groupImageUrl: "",
 
+    groupImage: "",
+    //error set when the user does not submit any image
+    groupImageError: "",
     groupname: "",
+    //error set when the user does not submit any name
+    groupnameError: "",
     country: "",
+    //error set when the user does not submit any country
+    countryError: "",
     error: "",
     saving: false,
     saved: false
   };
 
   onGroupNameChange = groupname => {
+    //reset the error message
+    if (this.state.groupnameError) this.setState({ groupnameError: "" });
     this.setState({
       groupname
     });
   };
 
   onCountryChange = country => {
+    if (this.state.countryError) this.setState({ countryError: "" });
     this.setState({
       country
     });
   };
 
   onGroupImageChange = groupImage => {
+    if (this.state.groupImageError) this.setState({ groupImageError: "" });
     const groupImageUrl = URL.createObjectURL(groupImage);
     this.setState({ groupImage, groupImageUrl });
   };
@@ -70,8 +80,26 @@ class CreateGroupChat extends Component {
 
   onCreateChatGroup = async e => {
     console.log("On create chat group is called");
+
+    //check if the user has not provided a group name
+    if (!this.state.groupname)
+      return this.setState({
+        groupnameError: "You need to provide the group name"
+      });
+
+    //check if the user has not provided a country
+    if (!this.state.country)
+      return this.setState({
+        countryError: "You need to provide a country name"
+      });
+
+    if (!this.state.groupImage)
+      return this.setState({
+        groupImageError: "You need to provide a group image"
+      });
     try {
       this.setState({ saving: true });
+      //save the user image in the server
       const imageId = await this.saveUserImage();
       const rawImageUrl =
         "https://res.cloudinary.com/samrat/image/upload/c_fill,g_face,h_120,w_120/v1540572400/";
@@ -86,7 +114,11 @@ class CreateGroupChat extends Component {
       this.props.history.push("/home");
     } catch (error) {
       console.log(error.response.data.message);
-      this.setState({ error: error.response.data.message });
+      this.setState({
+        groupnameError: error.response.data.message,
+        saving: false,
+        saved: false
+      });
     }
   };
 
@@ -114,8 +146,10 @@ class CreateGroupChat extends Component {
                   groupImageChange={this.onGroupImageChange}
                   createChatGroup={this.onCreateChatGroup}
                   groupname={this.state.groupname}
+                  groupnameError={this.state.groupnameError}
+                  countryError={this.state.countryError}
+                  groupImageError={this.state.groupImageError}
                   country={this.state.country}
-                  error={this.state.error}
                 />
               </div>
             </div>
