@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import Landing from "components/Landing/Landing";
 import CreateGroupChat from "components/CreateGroupChat/CreateGroupChat";
+import EditGroupChat from "components/EditGroupChat/EditGroupChat";
 import Home from "components/Home/Home";
 import GroupChat from "components/GroupChat/GroupChat";
 import { connect } from "react-redux";
@@ -81,6 +82,13 @@ class App extends Component {
             exact
             path="/settings/profile"
             component={MainProfile}
+          />
+        </Switch>
+        <Switch>
+          <PrivateRoute
+            exact
+            path="/edit-chat-group/:id"
+            component={EditGroupChat}
           />
         </Switch>
       </div>

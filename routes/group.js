@@ -70,7 +70,7 @@ module.exports = router => {
   });
 
   router.post(
-    "/api/create-chat-group/image-upload",
+    "/api/chat-group/image-upload",
     uploader.single("image"),
     (req, res) => {
       //req.file.public_id is set from uploader.single("image") middleware
@@ -91,7 +91,8 @@ module.exports = router => {
     const newGroup = new Group({
       name: req.body.name,
       country: req.body.country,
-      image: req.body.image
+      image: req.body.image,
+      createdBy: req.user.id
     });
     console.log(newGroup);
     try {
@@ -100,6 +101,44 @@ module.exports = router => {
     } catch (error) {
       console.log("This errors is from admin.js file");
       console.log(error);
+    }
+  });
+
+  router.get("/api/get-chat-group/:id", async (req, res) => {
+    try {
+      //checking if the group is the one actually created by the user
+      const group = await Group.findById(req.params.id);
+      if (!group.createdBy.equals(req.user.id)) {
+        return res
+          .status(400)
+          .send({ msg: "This is not the group you created" });
+      }
+
+      if (group) {
+        return res.status(200).send(group);
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(400).send(err);
+    }
+  });
+
+  router.post("/api/edit-chat-group/:id", async (req, res) => {
+    try {
+      //checking if the group is the one actually created by the user
+      const group = await Group.findById(req.params.id);
+      if (!group.createdBy.equals(req.user.id)) {
+        return res
+          .status(400)
+          .send({ msg: "This is not the group you created" });
+      }
+      group.country = req.body.country;
+      group.image = req.body.image;
+      await group.save();
+      return res.status(200).send({ msg: "The group is successfully saved" });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send(err);
     }
   });
 };

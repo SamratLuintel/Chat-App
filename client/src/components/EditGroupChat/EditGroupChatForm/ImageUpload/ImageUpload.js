@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { css } from "react-emotion";
 import { ClipLoader } from "react-spinners";
-import UploadButton from "./UploadButton/UploadButton";
+import UploadButton from "components/EditGroupChat/EditGroupChatForm/ImageUpload/UploadButton/UploadButton";
 import axios from "axios";
 
 const override = css`

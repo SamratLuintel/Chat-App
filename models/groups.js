@@ -18,7 +18,11 @@ const groupSchema = mongoose.Schema({
       username: { type: String },
       email: { type: String }
     }
-  ]
+  ],
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users"
+  }
 });
 
 mongoose.model("groups", groupSchema);

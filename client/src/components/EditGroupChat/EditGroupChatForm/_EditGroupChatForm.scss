@@ -1,12 +1,12 @@
 @import "ImageUpload/ImageUpload";
 
-.GroupChatForm__body {
+.EditGroupChatForm__body {
   border-radius: 5px;
   background-color: #fff;
   border: 1px solid #e6ecf5;
   margin-bottom: 15px;
 }
-.GroupChatForm__ui-block {
+.EditGroupChatForm__ui-block {
   padding: 23px 25px 18px;
   line-height: 1;
   border-bottom: 1px solid #e6ecf5;
@@ -16,7 +16,7 @@
   border-radius: 5px 5px 0 0;
 }
 
-.GroupChatForm__ui-block__title {
+.EditGroupChatForm__ui-block__title {
   display: table-cell;
   vertical-align: middle;
   font-family: inherit;
@@ -25,16 +25,16 @@
   color: #515365;
   font-size: 0.875rem;
 }
-.GroupChatForm__content {
+.EditGroupChatForm__content {
   padding: 10px 10px;
 }
 
-.GroupChatForm__form-group {
+.EditGroupChatForm__form-group {
   margin-bottom: 1.4rem;
   position: relative;
 }
 
-.GroupChatForm__form-group__label {
+.EditGroupChatForm__form-group__label {
   position: absolute;
   pointer-events: none;
   transition: 0.3s ease all;
@@ -45,7 +45,7 @@
   color: #888da8;
 }
 
-.GroupChatForm__form-group__input {
+.EditGroupChatForm__form-group__input {
   padding: 1.5rem 1.1rem 0.5rem;
   padding-left: 30px;
   line-height: 1.75;
@@ -58,16 +58,20 @@
   transition: all 0.15s, ease-in-out;
 }
 
-.GroupChatForm__create-btn-container {
+.EditGroupChatForm__create-btn-container {
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: flex-end;
   padding-right: 10px;
   padding-bottom: 10px;
 }
 
-.GroupChatForm__create-btn-container__button {
+.EditGroupChatForm__create-btn-container__button {
   padding: 10px 10px;
   background-color: $primary-blue;
   color: #fff;
   cursor: pointer;
+  margin-left: 10px;
+}
+.EditGroupChatForm__create-btn-container__button--danger {
+  background-color: $danger;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ImageUpload from "components/CreateGroupChat/ImageUpload/ImageUpload";
+import ImageUpload from "components/CreateGroupChat/GroupChatForm/ImageUpload/ImageUpload";
 class GroupChatForm extends Component {
   onGroupNameChange = e => {
     this.props.groupNameChange(e.target.value);

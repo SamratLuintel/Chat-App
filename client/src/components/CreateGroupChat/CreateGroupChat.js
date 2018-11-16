@@ -43,10 +43,7 @@ class CreateGroupChat extends Component {
     const formData = new FormData();
     formData.append("image", this.state.groupImage);
     try {
-      const res = await axios.post(
-        "/api/create-chat-group/image-upload",
-        formData
-      );
+      const res = await axios.post("/api/chat-group/image-upload", formData);
       //Returns the id of image saved in server
       return res.data;
     } catch (err) {}
@@ -77,7 +74,7 @@ class CreateGroupChat extends Component {
       this.setState({ saving: true });
       const imageId = await this.saveUserImage();
       const rawImageUrl =
-        "https://res.cloudinary.com/samrat/image/upload/c_fill,g_face,h_100,w_106/v1540572400/";
+        "https://res.cloudinary.com/samrat/image/upload/c_fill,g_face,h_120,w_120/v1540572400/";
       const fullImageUrl = `${rawImageUrl}${imageId}`;
 
       await axios.post("/api/create-chat-group", {
@@ -116,6 +113,8 @@ class CreateGroupChat extends Component {
                   countryChange={this.onCountryChange}
                   groupImageChange={this.onGroupImageChange}
                   createChatGroup={this.onCreateChatGroup}
+                  groupname={this.state.groupname}
+                  country={this.state.country}
                   error={this.state.error}
                 />
               </div>
