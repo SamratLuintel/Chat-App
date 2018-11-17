@@ -10,6 +10,7 @@ import {
   joinPrivateChatRoom,
   fetchPrivateMessages
 } from "store/actions/privatechat/privatechat";
+import { updatePageName } from "store/actions/page/page";
 
 function swap(input, value_1, value_2) {
   const temp = input[value_1];
@@ -29,6 +30,7 @@ class PrivateChat extends Component {
     receiverName: ""
   };
   componentDidMount = () => {
+    this.props.updatePageName("Private Chat");
     //paramOne will act as a room one for private chat
     const paramOne = this.props.match.params.name;
 
@@ -95,6 +97,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { joinPrivateChatRoom, fetchPrivateMessages }
+    { joinPrivateChatRoom, fetchPrivateMessages, updatePageName }
   )(PrivateChat)
 );

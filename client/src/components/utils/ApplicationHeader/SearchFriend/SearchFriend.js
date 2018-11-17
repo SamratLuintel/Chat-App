@@ -14,6 +14,13 @@ class SearchFriend extends Component {
       this.props.history.push(`/findpeople/${this.state.searchText}`);
     }
   };
+
+  _handleKeyPress = e => {
+    console.log("key press os called");
+    if (e.key === "Enter") {
+      this.onFindPeopleClick();
+    }
+  };
   render() {
     return (
       <Fragment>
@@ -24,6 +31,7 @@ class SearchFriend extends Component {
               placeholder="Search here for people or pages"
               value={this.state.searchText}
               onChange={this.onSearchTextChange}
+              onKeyPress={this._handleKeyPress}
               className="SearchFriend__search-input"
             />
           </div>

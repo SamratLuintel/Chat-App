@@ -14,12 +14,14 @@ import {
   fetchGroupChatMessage
 } from "store/actions/groupchat/groupchat";
 import { joinRequest } from "store/actions/friend/friend";
+import { updatePageName } from "store/actions/page/page";
 
 class GroupChat extends Component {
   state = {
     exist: false
   };
   componentDidMount = async () => {
+    this.props.updatePageName("Group Chat");
     const groupname = this.props.match.params.name;
 
     //Check if the group name is valid
@@ -86,6 +88,12 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { joinRoom, joinRequest, updateGroupName, fetchGroupChatMessage }
+    {
+      joinRoom,
+      joinRequest,
+      updateGroupName,
+      fetchGroupChatMessage,
+      updatePageName
+    }
   )(GroupChat)
 );

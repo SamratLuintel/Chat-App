@@ -5,5 +5,20 @@
   left: 0;
   background-color: #fff;
   bottom: 0px;
-  z-index: 999;
+  z-index: 99;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.LeftMenu__lists__list-item {
+  padding: 20px 10px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  i {
+    font-size: 22px !important;
+    color: #9a9fbf;
+  }
 }

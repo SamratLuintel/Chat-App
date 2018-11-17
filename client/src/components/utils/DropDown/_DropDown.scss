@@ -34,7 +34,15 @@
   top: 45px;
   right: -165px;
   width: 380px;
-  padding:0 0 70px;
+  padding: 0 0 70px;
+  @media (max-width: $navbar-to-mobile-width) {
+    position: fixed;
+    width: 95vw;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 130px;
+  }
 }
 
 .DropDown__triangle-right {
@@ -61,6 +69,11 @@
     border-right: 7px solid transparent;
     border-left: 7px solid transparent;
     border-bottom: 7px solid #fff;
+
+    //In the small screen it is automatically converted to left
+    @media (max-width: $navbar-to-mobile-width) {
+      display: none;
+    }
   }
 }
 

@@ -6,6 +6,10 @@ import { css } from "react-emotion";
 import { ClipLoader } from "react-spinners";
 import { connect } from "react-redux";
 import ProgressMessage from "components/utils/ProgressMessage/ProgressMessage";
+import { updatePageName } from "store/actions/page/page";
+import LeftMenu from "components/utils/LeftMenu/LeftMenu";
+import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
+
 const override = css`
   display: block;
   margin: 0 auto;
@@ -16,6 +20,10 @@ class MainProfile extends Component {
   state = {
     saving: false,
     saved: false
+  };
+
+  componentDidMount = () => {
+    this.props.updatePageName("Edit Profile");
   };
 
   profileSavingProgress = () => {
@@ -61,7 +69,9 @@ class MainProfile extends Component {
     }
     return (
       <Fragment>
+        <ApplicationSideNav />
         <ApplicationHeader />
+        <LeftMenu />
         <div className="MainProfile">
           <div className="container">
             {this.profileSavingProgress()}
@@ -88,4 +98,7 @@ class MainProfile extends Component {
 const mapStateToProps = state => ({
   profile: state.profile
 });
-export default connect(mapStateToProps)(MainProfile);
+export default connect(
+  mapStateToProps,
+  { updatePageName }
+)(MainProfile);

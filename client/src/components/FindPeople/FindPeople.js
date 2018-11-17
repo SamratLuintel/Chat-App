@@ -5,6 +5,8 @@ import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHea
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import PeopleItem from "components/FindPeople/PeopleItem/PeopleItem";
 import axios from "axios";
+import { updatePageName } from "store/actions/page/page";
+import { connect } from "react-redux";
 
 const override = css`
   display: block;
@@ -21,6 +23,7 @@ class FindPeople extends Component {
   };
 
   componentDidMount = async () => {
+    this.props.updatePageName("Find Friends");
     try {
       const searchText = this.props.match.params.searchText;
       const res = await axios.get(`/api/findpeople/${searchText}`);
@@ -76,4 +79,7 @@ class FindPeople extends Component {
   }
 }
 
-export default FindPeople;
+export default connect(
+  null,
+  { updatePageName }
+)(FindPeople);

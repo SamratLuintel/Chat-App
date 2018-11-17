@@ -15,7 +15,7 @@ class EditGroupChatForm extends Component {
       <div className="EditGroupChatForm__body">
         <div className="EditGroupChatForm__ui-block">
           <h6 className="EditGroupChatForm__ui-block__title">
-            Create A Chat Group
+            Edit A Chat Group
           </h6>
         </div>
         <div className="EditGroupChatForm__content">

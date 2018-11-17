@@ -1,24 +1,34 @@
 .SearchFriend {
   min-height: $header-height;
-  width: 500px;
+  width: 250px;
   background-color: #494c62;
   float: left;
   position: relative;
-  &:before {
-    font-family: "Font Awesome\ 5 Free";
-    content: "\f002";
-    position: absolute;
-    font-size: 25px;
-    font-weight: 900;
-    top: 27%;
-    right: 15px;
-    color: #9a9fbf;
+
+  @media (max-width: $navbar-to-mobile-width) {
+    width: 100%;
+  }
+  @include for-desktop-up {
+    width: 500px;
   }
 }
 
+.SearchFriend:before {
+  font-family: "Font Awesome\ 5 Free";
+  content: "\f002";
+  position: absolute;
+  font-size: 17px;
+  font-weight: 900;
+  top: 37%;
+  right: 11px;
+  color: #9a9fbf;
+}
 .SearchFriend__search-bar {
   height: $header-height;
   display: inline-block;
+  @media (max-width: $navbar-to-mobile-width) {
+    width: 80%;
+  }
 }
 .SearchFriend__search-input {
   width: 229.859px;
@@ -28,6 +38,10 @@
   color: #9a9fbf;
   padding: 13px 15px;
   background-color: transparent;
+
+  @media (max-width: $navbar-to-mobile-width) {
+    width: 100%;
+  }
 }
 
 .FindFriend {
@@ -42,5 +56,9 @@
   transition: all 0.3s ease;
   &:hover {
     color: $primary-orange;
+  }
+
+  @media (max-width: 950px) {
+    display: none;
   }
 }

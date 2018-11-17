@@ -10,6 +10,14 @@ class ProfileDropDown extends Component {
     const history = this.props.history;
     this.props.logoutUser(history);
   };
+
+  onCreateChatGroup = () => {
+    this.props.history.push("/create-chat-group");
+  };
+
+  onClickProfileSettings = () => {
+    this.props.history.push("/settings/profile");
+  };
   render() {
     const { props } = this;
     let name = "";
@@ -37,11 +45,17 @@ class ProfileDropDown extends Component {
             <h6 className="ProfileDropDown__block-title">Your Profile</h6>
           </div>
           <ul className="ProfileDropDown__account-settings">
-            <li className="ProfileDropDown__account-settings__link">
+            <li
+              className="ProfileDropDown__account-settings__link"
+              onClick={this.onClickProfileSettings}
+            >
               <Icon name="menu-icon" color="#515365" size={19} />
               <span>Profile Settings</span>
             </li>
-            <li className="ProfileDropDown__account-settings__link">
+            <li
+              className="ProfileDropDown__account-settings__link"
+              onClick={this.onCreateChatGroup}
+            >
               <Icon name="star-icon" color="#515365" size={19} />
               <span>Create Chat Group</span>
             </li>

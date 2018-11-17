@@ -6,15 +6,27 @@ import Icon from "components/utils/Icon/Icon";
 
 class MessagesDropDown extends Component {
   renderMessages = () => {
-    if (this.props.profile && this.props.profile.lastMessages === 0) {
+    if (this.props.profile && this.props.profile.lastMessages.length === 0) {
       //returns all the last messages which are not read
 
-      return <p>There are not any message to show </p>;
+      return (
+        <p className="MessagesDropDown__no-message">
+          {" "}
+          There are no messages to show{" "}
+        </p>
+      );
     }
     if (this.props.profile && this.props.profile.lastMessages) {
       const unreadMessages = this.totalUnreadMessages(
         this.props.profile.lastMessages
       );
+      if (unreadMessages.length === 0) {
+        return (
+          <p className="MessagesDropDown__no-message">
+            There are no messages to show{" "}
+          </p>
+        );
+      }
 
       //sender can be either  senderName or receiverName
       //Just data is aggregated that way from mongoDB
@@ -53,13 +65,16 @@ class MessagesDropDown extends Component {
     }
     return (
       <div className="MessagesDropDown">
-        <span className="MessagesDropDown__total-notifications">
-          {unreadMessages}
-        </span>
+        {unreadMessages !== 0 && (
+          <span className="MessagesDropDown__total-notifications">
+            {unreadMessages}
+          </span>
+        )}
+
         <DropDown
           location="middle"
           displayText={
-            <Icon name="chat---messages-icon" color="#FFFFFF" size={25} />
+            <Icon name="chat---messages-icon" color="#FFFFFF" size={27} />
           }
         >
           <div className="MessagesDropDown__dropdown">

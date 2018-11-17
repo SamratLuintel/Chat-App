@@ -8,6 +8,8 @@ import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import LeftMenu from "components/utils/LeftMenu/LeftMenu";
 import ProgressMessage from "components/utils/ProgressMessage/ProgressMessage";
+import { updatePageName } from "store/actions/page/page";
+import { connect } from "react-redux";
 
 const override = css`
   display: block;
@@ -60,7 +62,7 @@ class EditGroupChat extends Component {
         countryError: "You need to provide a country name"
       });
 
-    if (!this.state.groupImage)
+    if (!this.state.groupImageUrl)
       return this.setState({
         groupImageError: "You need to provide a group image"
       });
@@ -181,6 +183,7 @@ class EditGroupChat extends Component {
   };
 
   componentDidMount = () => {
+    this.props.updatePageName("Edit Group");
     this.fetchGroup();
   };
 
@@ -248,4 +251,7 @@ class EditGroupChat extends Component {
     );
   }
 }
-export default EditGroupChat;
+export default connect(
+  null,
+  { updatePageName }
+)(EditGroupChat);

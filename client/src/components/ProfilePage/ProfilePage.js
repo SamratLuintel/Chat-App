@@ -6,6 +6,8 @@ import { ClipLoader } from "react-spinners";
 import axios from "axios";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
+import { connect } from "react-redux";
+import { updatePageName } from "store/actions/page/page";
 
 const override = css`
   display: block;
@@ -56,6 +58,7 @@ class ProfilePage extends Component {
   };
 
   componentDidMount = () => {
+    this.props.updatePageName("Profile Page");
     this.fetchPeople();
   };
 
@@ -110,4 +113,7 @@ class ProfilePage extends Component {
     );
   }
 }
-export default ProfilePage;
+export default connect(
+  null,
+  { updatePageName }
+)(ProfilePage);

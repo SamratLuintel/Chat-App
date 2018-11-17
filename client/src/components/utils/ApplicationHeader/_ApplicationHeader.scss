@@ -2,14 +2,12 @@ $header-height: 70px;
 $navitem-paddingX: 20px;
 $navitem-paddingY: 15px;
 
+//This is the width ate which navbar will split into two;
+
 @import "ProfileDropDown/ProfileDropDown";
 @import "FriendRequestDropDown/FriendRequestDropDown";
 @import "MessagesDropDown/MessagesDropDown";
 @import "SearchFriend/SearchFriend";
-//When the user is not logged in the navbar will be of white color
-// When the user is logged in the navbar will be of dark color
-// So I have make use of --loggedIn and --loggedOut for changing their behaviour.
-// The hover color will be different for two kind of navbar
 
 .Header {
   width: 100%;
@@ -18,15 +16,34 @@ $navitem-paddingY: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   background-color: $primary-dark;
   font-family: Roboto;
-  position: relative;
-}
 
+  position: fixed;
+  z-index: 999;
+
+  @media (max-width: $navbar-to-mobile-width) {
+    height: 2 * $header-height;
+    position: relative;
+  }
+}
+//Since header is set to position fixed, we need another transparent object to occupy that space
+.Header__placeholder {
+  width: 100%;
+  height: $header-height;
+
+  @media (max-width: $navbar-to-mobile-width) {
+    display: none;
+  }
+}
 .Header__brand {
   height: 70px;
   width: 70px;
   background-color: $primary-orange;
   padding: 15px 20px;
   float: left;
+
+  @media (max-width: 730px) {
+    display: none;
+  }
 }
 
 .Header__brand-img-container {
@@ -47,6 +64,12 @@ $navitem-paddingY: 15px;
   text-transform: uppercase;
   float: left;
   height: 100%;
+
+  display: none;
+
+  @include for-tablet-landscape-up {
+    display: inline-block;
+  }
 }
 
 .Header__title {
@@ -55,30 +78,25 @@ $navitem-paddingY: 15px;
   font-weight: 700;
   color: #fff;
 }
-// .navbar {
-//   list-style: none;
-//   display: none;
-
-//   @include for-tablet-landscape-up {
-//     display: flex;
-//   }
-// }
-
-// .navbar__navitem {
-//   padding: $navitem-paddingY $navitem-paddingX;
-//   color: $navitem-color;
-//   display: inline-block;
-//   vertical-align: top;
-//   text-decoration: none;
-//   transition: 0.5s;
-// }
-
+.Header__main-action {
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: $navbar-to-mobile-width) {
+    flex-direction: column;
+  }
+}
 .Header__control-block {
   float: right;
   height: $header-height;
   display: flex;
   align-items: center;
+
+  @media (max-width: $navbar-to-mobile-width) {
+    justify-content: space-between;
+    float: none;
+  }
 }
+
 .signin {
   text-decoration: none;
   border: 1px solid rgba(66, 66, 66, 0.2);
@@ -86,4 +104,10 @@ $navitem-paddingY: 15px;
   border-radius: 18px;
   white-space: nowrap;
   vertical-align: top;
+}
+
+.Header__control-block__empty {
+  @media (max-width: $navbar-to-mobile-width) {
+    padding: 15px 20px;
+  }
 }

@@ -58,13 +58,16 @@ class FriendRequestDropDown extends Component {
       this.props.profile.requests.length === 0 &&
       this.showUnreadFriendAcceptedMessage().length === 0
     ) {
-      return <p>There is nothing to show</p>;
+      return (
+        <p className="FriendRequestDropDown__no-friend-message">
+          You dont have any friend requests
+        </p>
+      );
     }
     if (this.props.profile && this.props.profile.friends) {
       return [this.renderBecomeFriends(), this.renderFriendRequest()];
     }
   };
-  componentDidMount = () => {};
   render() {
     const { props } = this;
     let totalRequest = null;
@@ -75,9 +78,12 @@ class FriendRequestDropDown extends Component {
     }
     return (
       <div className="FriendRequestDropDown">
-        <span className="FriendRequestDropDown__total-notifications">
-          {totalRequest}
-        </span>
+        {totalRequest !== 0 && (
+          <span className="FriendRequestDropDown__total-notifications">
+            {totalRequest}
+          </span>
+        )}
+
         <DropDown
           location="middle"
           displayText={

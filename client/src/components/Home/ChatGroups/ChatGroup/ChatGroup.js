@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { addGroupToFavourite } from "store/actions/group/group";
 import { connect } from "react-redux";
+import classnames from "classnames";
 
 export class ChatGroup extends Component {
   onEnterGroup = () => {
@@ -16,8 +17,20 @@ export class ChatGroup extends Component {
     };
     this.props.addGroupToFavourite(data);
   };
+
+  onEditClick = () => {
+    if (this.props.editable) {
+      const id = this.props.id;
+      this.props.history.push(`/edit-chat-group/${id}`);
+    }
+  };
   render() {
     const { props } = this;
+    const editbuttonClasses = classnames({
+      "ChatGroup__control-block__btn": true,
+      "ChatGroup__control-block__btn--disabled": !this.props.editable
+    });
+
     return (
       <div className="ChatGroup">
         <div className="ChatGroup__avatar">
@@ -43,10 +56,7 @@ export class ChatGroup extends Component {
           >
             <i class="far fa-star" />
           </div>
-          <div
-            className="ChatGroup__control-block__btn"
-            onClick={this.onAddToFavouriteClick}
-          >
+          <div className={editbuttonClasses} onClick={this.onEditClick}>
             <i class="far fa-edit" />
           </div>
         </div>

@@ -4,6 +4,7 @@ import groupReducer from "store/reducers/groupReducer";
 import profileReducer from "store/reducers/profileReducer";
 import groupchatReducer from "store/reducers/groupchatReducer";
 import privatechatReducer from "store/reducers/privatechatReducer";
+import pageReducer from "store/reducers/pageReducer";
 
 export default combineReducers({
   form: formReducer,
@@ -11,5 +12,6 @@ export default combineReducers({
   //Contains the list of chat groups
   group: groupReducer,
   groupchat: groupchatReducer,
-  privatechat: privatechatReducer
+  privatechat: privatechatReducer,
+  page: pageReducer
 });

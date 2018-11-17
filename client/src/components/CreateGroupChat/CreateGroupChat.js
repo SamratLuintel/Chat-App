@@ -7,6 +7,8 @@ import GroupChatPreview from "components/CreateGroupChat/GroupChatPreview/GroupC
 import { withRouter } from "react-router-dom";
 import ProgressMessage from "components/utils/ProgressMessage/ProgressMessage";
 import axios from "axios";
+import { connect } from "react-redux";
+import { updatePageName } from "store/actions/page/page";
 
 class CreateGroupChat extends Component {
   state = {
@@ -122,6 +124,10 @@ class CreateGroupChat extends Component {
     }
   };
 
+  componentDidMount = () => {
+    this.props.updatePageName("Create Group");
+  };
+
   render() {
     return (
       <div className="CreateGroupChat">
@@ -160,4 +166,9 @@ class CreateGroupChat extends Component {
   }
 }
 
-export default withRouter(CreateGroupChat);
+export default withRouter(
+  connect(
+    null,
+    { updatePageName }
+  )(CreateGroupChat)
+);

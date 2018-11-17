@@ -7,15 +7,19 @@ import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/Onl
 import ManageGroups from "components/Home/ManageGroups/ManageGroups";
 import LeftMenu from "components/utils/LeftMenu/LeftMenu";
 import HomeActionBar from "components/Home/HomeActionBar/HomeActionBar";
+import { updatePageName } from "store/actions/page/page";
+import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
 
 class Home extends Component {
   componentDidMount = () => {
+    this.props.updatePageName("Home");
     this.props.fetchGroups();
   };
 
   render() {
     return (
       <div className="Home">
+        <ApplicationSideNav />
         <ApplicationHeader />
         <LeftMenu />
         <OnlineOfflineFriends />
@@ -34,5 +38,5 @@ class Home extends Component {
 }
 export default connect(
   null,
-  { fetchGroups }
+  { fetchGroups, updatePageName }
 )(Home);

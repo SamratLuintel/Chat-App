@@ -3,6 +3,10 @@
   margin-left: 10px;
   margin-right: 50px;
   font-family: Roboto;
+
+  @media (max-width: 814px) {
+    margin-right: 15px;
+  }
 }
 .ProfileDropDown__image {
   border-radius: 100%;
