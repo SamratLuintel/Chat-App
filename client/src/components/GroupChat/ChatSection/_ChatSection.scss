@@ -8,6 +8,11 @@
   flex: 1 0 0%;
   max-width: 100%;
   font-family: Roboto;
+
+  @media (max-width: $sidenav-disappear-width) {
+    height: calc(100vh - 140px);
+    margin-bottom: 20px;
+  }
 }
 
 .ChatSection__header-container {

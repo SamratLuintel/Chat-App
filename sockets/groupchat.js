@@ -9,9 +9,16 @@ module.exports = io => {
     socket.on("join", (params, callback) => {
       socket.join(params.room);
 
-      users.AddUserData(socket.id, params.name, params.image, params.room);
+      users.AddUserData(
+        socket.id,
+        params.userId,
+        params.name,
+        params.image,
+        params.room
+      );
 
       // online members in a particular group
+      console.log("From group chat server", users.GetUsersList(params.room));
       io.to(params.room).emit(
         "groupUsersList",
         users.GetUsersList(params.room)

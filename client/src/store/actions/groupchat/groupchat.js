@@ -42,7 +42,8 @@ export const fetchGroupChatMessage = groupname => async dispatch => {
     const groupmessages = res.data.map(message => ({
       from: message.sender.fullname,
       text: message.body,
-      image: message.sender.userImage
+      image: message.sender.userImage,
+      id: message.sender._id
     }));
     dispatch({
       type: FETCH_GROUP_CHAT_MESSAGES,

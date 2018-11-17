@@ -3,9 +3,12 @@ class Users {
     this.users = [];
   }
 
-  AddUserData(id, name, image, room) {
+  //id refers to socketId
+  //userId refers to the id of the user save in database
+  AddUserData(id, userId, name, image, room) {
     const user = {
       id,
+      userId,
       name,
       image,
       room
@@ -32,7 +35,7 @@ class Users {
   GetUsersList(room) {
     const users = this.users.filter(user => user.room === room);
     const namesArray = users.map(user => {
-      return { name: user.name, image: user.image };
+      return { name: user.name, image: user.image, id: user.userId };
     });
     return namesArray;
   }

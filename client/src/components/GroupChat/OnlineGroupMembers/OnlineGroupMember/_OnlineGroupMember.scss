@@ -8,6 +8,7 @@
   text-align: left;
   font-weight: 400;
   display: flex;
+  cursor: pointer;
 }
 
 .OnlineGroupMember__avatar-wrapper {
@@ -46,7 +47,7 @@
   text-overflow: ellipsis;
   font-weight: 400;
   text-align: left;
-  cursor: pointer;
+
   user-select: none;
 }
 

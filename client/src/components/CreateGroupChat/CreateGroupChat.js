@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
+import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
 import LeftMenu from "components/utils/LeftMenu/LeftMenu";
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import GroupChatForm from "components/CreateGroupChat/GroupChatForm/GroupChatForm";
@@ -131,6 +132,7 @@ class CreateGroupChat extends Component {
   render() {
     return (
       <div className="CreateGroupChat">
+        <ApplicationSideNav />
         <ApplicationHeader />
         <LeftMenu />
         <OnlineOfflineFriends />

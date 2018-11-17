@@ -4,10 +4,16 @@ import { updateGroupFilterCountry } from "store/actions/group/group";
 import Select from "react-select";
 
 export class Filter extends Component {
+  state = {
+    //This is used for changing the value of select
+    selectedOption: null
+  };
+
   renderOptions = () => {
     const defaultOption = { value: "", label: "Filter By Country" };
 
     let options = [];
+    const filterCountry = this.props.filterCountry;
     if (this.props.countries) {
       options.push(defaultOption);
       this.props.countries.map((country, index) => {
@@ -22,7 +28,11 @@ export class Filter extends Component {
     return (
       <Select
         options={options}
-        value={defaultOption}
+        value={
+          this.state.selectedOption === null
+            ? defaultOption
+            : this.state.selectedOption
+        }
         onChange={this.onSelectChange}
       />
     );
@@ -30,6 +40,7 @@ export class Filter extends Component {
 
   onSelectChange = selectedOption => {
     console.log("select change is called", selectedOption.value);
+    this.setState({ selectedOption });
     this.props.updateGroupFilterCountry(selectedOption.value);
   };
 
@@ -39,7 +50,8 @@ export class Filter extends Component {
 }
 
 const mapStateToProps = state => ({
-  countries: state.group.countries
+  countries: state.group.countries,
+  filterCountry: state.group.filter.country
 });
 
 export default connect(

@@ -32,9 +32,11 @@ class GroupChat extends Component {
     const params = {
       room: groupname,
       name: this.props.profile.fullname,
+      userId: this.props.profile.id,
       image: this.props.profile.userImage
     };
 
+    console.log("Component did mount of group chat", params);
     // Joins the room and stores the user information in server
     // to keep track of online users in particular group
     await this.props.fetchGroupChatMessage(groupname);
@@ -62,12 +64,14 @@ class GroupChat extends Component {
           <LeftMenu />
           <div className="GroupChat">
             <div className="GroupChat__bg" />
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <div className="GroupChat__body">
-                    <OnlineGroupMembers />
-                    <ChatSection groupname={this.props.groupname} />
+            <div className="GroupChat__body-wrapper">
+              <div className="container GroupChat__container">
+                <div className="row">
+                  <div className="col">
+                    <div className="GroupChat__body">
+                      <OnlineGroupMembers />
+                      <ChatSection groupname={this.props.groupname} />
+                    </div>
                   </div>
                 </div>
               </div>

@@ -32,7 +32,13 @@ class OnlineGroupMembers extends Component {
       );
     }
     return onlineMembers.map(friend => {
-      return <OnlineGroupMember name={friend.name} image={friend.image} />;
+      return (
+        <OnlineGroupMember
+          name={friend.name}
+          image={friend.image}
+          id={friend.id}
+        />
+      );
     });
   };
   render() {
