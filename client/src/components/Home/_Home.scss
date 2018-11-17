@@ -5,4 +5,15 @@
 .Home {
   background-color: $primary-grey;
   min-height: 100vh;
+
+  margin: 0 auto;
+}
+
+.Home__body {
+  width: 100%;
+  margin: 0 auto;
+
+  @include for-tablet-portrait-up {
+    width: calc(100% - 140px);
+  }
 }

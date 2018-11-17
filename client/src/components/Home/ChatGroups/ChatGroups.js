@@ -57,7 +57,7 @@ export class ChatGroups extends Component {
       <div className="ChatGroups">
         <div className="container">
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-3 ChatGroups__CreateChatGroup__section">
               <CreateChatGroup />
             </div>
             {this.renderChatGroups()}

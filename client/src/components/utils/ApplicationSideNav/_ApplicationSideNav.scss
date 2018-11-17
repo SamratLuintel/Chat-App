@@ -7,10 +7,11 @@
   width: 25px;
   height: 22px;
   top: 93px !important;
-  display: block;
+  display: none;
   z-index: 999;
-  @include for-tablet-landscape-up {
-    display: none;
+
+  @media (max-width: $navbar-to-mobile-width) {
+    display: block;
   }
 }
 

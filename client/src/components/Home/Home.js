@@ -26,11 +26,11 @@ class Home extends Component {
 
         {/*Main Content starts here */}
         <ManageGroups />
-        <div className="container">
-          <HomeActionBar />
-        </div>
         <div className="Home__body">
-          <ChatGroups />
+          <div className="container">
+            <HomeActionBar />
+            <ChatGroups />
+          </div>
         </div>
       </div>
     );

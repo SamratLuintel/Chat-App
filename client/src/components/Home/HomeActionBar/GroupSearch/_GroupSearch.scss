@@ -6,6 +6,11 @@
   padding-right: 10px;
 
   flex-grow: 3;
+
+  @media (max-width: $sidenav-disappear-width) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 .GroupSearch__input {
   width: 100%;

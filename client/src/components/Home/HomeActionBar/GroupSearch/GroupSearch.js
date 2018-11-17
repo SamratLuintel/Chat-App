@@ -14,6 +14,12 @@ class GroupSearch extends Component {
   onSearchClick = () => {
     this.props.updateGroupFilterText(this.state.searchValue);
   };
+
+  _handleKeyPress = e => {
+    if (e.key === "Enter") {
+      this.onSearchClick();
+    }
+  };
   render() {
     return (
       <div className="GroupSearch">
@@ -22,6 +28,7 @@ class GroupSearch extends Component {
           type="text"
           value={this.state.searchValue}
           onChange={this.onInputChange}
+          onKeyPress={this._handleKeyPress}
           placeholder="Enter Your Group Name"
         />
 

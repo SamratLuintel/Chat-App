@@ -16,6 +16,12 @@
   width: 100%;
   position: relative;
   border-radius: 5px 5px 0 0;
+
+  @media (max-width: $sidenav-disappear-width) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .HomeActionBar__ui-block__title {
@@ -31,4 +37,8 @@
 .HomeActionBar__ui-block__actions {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  @media (max-width: $sidenav-disappear-width) {
+    flex-direction: column;
+  }
 }

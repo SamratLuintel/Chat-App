@@ -7,6 +7,11 @@
   @media (max-width: 814px) {
     margin-right: 15px;
   }
+
+  @media (max-width: 400px) {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
 .ProfileDropDown__image {
   border-radius: 100%;
@@ -26,6 +31,10 @@
 .ProfileDropDown__chevron-icon {
   margin-left: 15px;
   font-size: 7px !important;
+
+  @media (max-width: 450px) {
+    margin-left: 7px;
+  }
 }
 
 .ProfileDropDown__name {

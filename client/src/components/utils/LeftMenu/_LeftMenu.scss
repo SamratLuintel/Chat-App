@@ -21,4 +21,10 @@
     font-size: 22px !important;
     color: #9a9fbf;
   }
+
+  &:hover {
+    i {
+      color: $primary-orange;
+    }
+  }
 }
