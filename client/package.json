@@ -46,6 +46,7 @@
     "react-router-dom": "^4.3.1",
     "react-select": "^2.1.1",
     "react-spinners": "^0.4.7",
+    "react-tooltip": "^3.9.0",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",

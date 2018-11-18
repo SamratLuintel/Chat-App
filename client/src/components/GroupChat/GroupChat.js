@@ -41,8 +41,6 @@ class GroupChat extends Component {
     // to keep track of online users in particular group
     await this.props.fetchGroupChatMessage(groupname);
     this.props.joinRoom(params);
-
-    this.props.joinRequest(params.name);
   };
 
   checkGroupExist = async groupname => {

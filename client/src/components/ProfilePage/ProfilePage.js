@@ -24,7 +24,8 @@ class ProfilePage extends Component {
     description: "",
     fullname: "",
     username: "",
-    email: ""
+    email: "",
+    userImage: ""
   };
 
   fetchPeople = async () => {
@@ -37,7 +38,8 @@ class ProfilePage extends Component {
         description,
         fullname,
         username,
-        email
+        email,
+        userImage
       } = res.data;
       this.setState({
         gender,
@@ -46,6 +48,7 @@ class ProfilePage extends Component {
         fullname,
         username,
         email,
+        userImage,
         fetched: true
       });
       console.log("User is fetched ", res.data);
@@ -87,7 +90,11 @@ class ProfilePage extends Component {
         <div className="container">
           <div className="row">
             <div className="col">
-              <UIBlock />
+              <UIBlock
+                friendName={this.state.username}
+                friendId={this.props.match.params.id}
+                friendImage={this.state.userImage}
+              />
             </div>
           </div>
           {/* User Personal Info */}

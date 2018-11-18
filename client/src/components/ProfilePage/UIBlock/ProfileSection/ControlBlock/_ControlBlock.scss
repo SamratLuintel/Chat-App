@@ -1,7 +1,13 @@
 .ProfileSection__control-block {
   position: absolute;
-  right: 38px;
+  right: 50%;
+  transform: translate(50%, 0%);
   top: -31px;
+
+  @include for-tablet-landscape-up {
+    right: 38px;
+    transform: translate(0%, 0%);
+  }
 }
 
 .ProfileSection__control-item {
@@ -28,4 +34,8 @@
 
 .ProfileSection__control-item--purple {
   background-color: $primary-purple;
+}
+
+.ProfileSection__control-item--disabled {
+  background-color: $disabled;
 }

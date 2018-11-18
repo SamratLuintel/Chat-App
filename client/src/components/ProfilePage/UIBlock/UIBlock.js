@@ -8,7 +8,11 @@ const UIBlock = props => {
       <div className="ProfilePage__top-header-thumb">
         <img className="ProfilePage__header-image" src={HeaderImage} alt="" />
       </div>
-      <ProfileSection />
+      <ProfileSection
+        friendName={props.friendName}
+        friendId={props.friendId}
+        friendImage={props.friendImage}
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { acceptFriendRequestRead } from "store/actions/friend/friend";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Icon from "components/utils/Icon/Icon";
 
@@ -10,6 +11,11 @@ class FriendRequestAccepted extends Component {
     //Id of the friend
     const id = this.props.id;
     this.props.acceptFriendRequestRead(id);
+  };
+
+  onViewProfileClick = () => {
+    const id = this.props.id;
+    this.props.history.push(`/profilepage/${id}`);
   };
   render() {
     const { props } = this;
@@ -26,7 +32,10 @@ class FriendRequestAccepted extends Component {
           />
         </div>
         <div className="FriendRequestAccepted__notification-event">
-          <p className="FriendRequestAccepted__message">
+          <p
+            className="FriendRequestAccepted__message"
+            onClick={this.onViewProfileClick}
+          >
             <strong>You</strong> and {props.friendName} are now friends with
             each other
           </p>
@@ -36,7 +45,9 @@ class FriendRequestAccepted extends Component {
   }
 }
 
-export default connect(
-  null,
-  { acceptFriendRequestRead }
-)(FriendRequestAccepted);
+export default withRouter(
+  connect(
+    null,
+    { acceptFriendRequestRead }
+  )(FriendRequestAccepted)
+);

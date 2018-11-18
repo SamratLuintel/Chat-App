@@ -5,11 +5,15 @@ import ControlBlock from "components/ProfilePage/UIBlock/ProfileSection/ControlB
 
 class ProfileSection extends Component {
   render() {
+    const { props } = this;
     return (
       <div className="ProfileSection">
-        <AuthorArea />
+        <AuthorArea
+          friendImage={props.friendImage}
+          friendName={props.friendName}
+        />
         <ProfileMenu />
-        <ControlBlock />
+        <ControlBlock friendName={props.friendName} friendId={props.friendId} />
       </div>
     );
   }

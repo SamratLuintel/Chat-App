@@ -30,7 +30,7 @@ const sendrequest = (socket, types, actions) => {
       //friend request
       if (action.type === types.FRIEND_REQUEST) {
         socket.emit("friendRequest", action.payload, () => {
-          console.log("Friend Request sent");
+          store.dispatch(actions.fetchUser());
         });
       }
 

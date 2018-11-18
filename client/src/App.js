@@ -14,6 +14,7 @@ import GroupChatErrorPage from "components/GroupChat/GroupChatErrorPage/GroupCha
 import MainProfile from "components/Settings/MainProfile/ManProfile";
 import FindPeople from "components/FindPeople/FindPeople";
 import ProfilePage from "components/ProfilePage/ProfilePage";
+import { joinRequest } from "store/actions/friend/friend";
 
 class App extends Component {
   state = {
@@ -30,6 +31,7 @@ class App extends Component {
       !this.state.roomJoined
     ) {
       this.joinGlobalRoom();
+      this.props.joinRequest(this.props.profile.username);
     }
   };
 
@@ -103,6 +105,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { fetchUser, joinGlobalRoom }
+    { fetchUser, joinGlobalRoom, joinRequest }
   )(App)
 );
