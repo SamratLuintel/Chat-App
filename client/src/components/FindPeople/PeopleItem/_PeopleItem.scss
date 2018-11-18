@@ -4,6 +4,10 @@
   border: 1px solid #e6ecf5;
   margin-bottom: 15px;
   font-family: Roboto;
+
+  @media (max-width: 1200px) {
+    margin-bottom: 85px;
+  }
 }
 
 .PeopleItem__content {

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { css } from "react-emotion";
 import { ClipLoader } from "react-spinners";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
+import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
+import LeftMenu from "components/utils/LeftMenu/LeftMenu";
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import PeopleItem from "components/FindPeople/PeopleItem/PeopleItem";
 import axios from "axios";
@@ -41,15 +43,22 @@ class FindPeople extends Component {
     console.log("Render People Items have benn called", this.state.peoples);
     if (this.state.peoples.length > 0) {
       return this.state.peoples.map(people => (
-        <div className="col-md-3">
+        <div className="col-md-3 col-sm-6">
           {" "}
           <PeopleItem
             name={people.fullname}
             image={people.userImage}
+            id={people._id}
             friends={people.friendsList.length}
           />{" "}
         </div>
       ));
+    } else {
+      return (
+        <p className="FindPeople__no-friend-message">
+          Your search did not match any results
+        </p>
+      );
     }
   };
 
@@ -68,11 +77,13 @@ class FindPeople extends Component {
 
     return (
       <div className="FindPeople">
+        <ApplicationSideNav />
+        <LeftMenu />
         <ApplicationHeader />
         <OnlineOfflineFriends />
         {this.state.loading && spinner}
         <div className="container FindPeople__contents">
-          <div className="row">{this.renderPeopleItems()}</div>
+          <div className="row FindPeople__row">{this.renderPeopleItems()}</div>
         </div>
       </div>
     );

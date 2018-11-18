@@ -15,3 +15,15 @@
 .FindPeople__contents {
   margin-top: 80px;
 }
+
+.FindPeople__no-friend-message {
+}
+
+.FindPeople__row {
+  @media (min-width: 576px) and (max-width: 1200px) {
+    .col-md-3 {
+      flex: 0 0 50% !important;
+      max-width: 50% !important;
+    }
+  }
+}

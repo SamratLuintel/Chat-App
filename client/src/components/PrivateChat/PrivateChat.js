@@ -29,6 +29,7 @@ class PrivateChat extends Component {
     room2: "",
     receiverName: ""
   };
+
   componentDidMount = () => {
     this.props.updatePageName("Private Chat");
     //paramOne will act as a room one for private chat

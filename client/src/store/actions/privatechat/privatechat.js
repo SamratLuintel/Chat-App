@@ -2,6 +2,7 @@ import {
   JOIN_PRIVATE_CHAT_ROOM,
   SEND_PRIVATE_MESSAGE,
   UPDATE_PRIVATE_CHAT_MESSAGE,
+  RESET_PRIVATE_CHAT_MESSAGES,
   FETCH_PRIVATE_CHAT_MESSAGE
 } from "../../types";
 import axios from "axios";
@@ -52,6 +53,12 @@ export const fetchPrivateMessages = receiver => async dispatch => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const resetPrivateMessages = () => dispatch => {
+  dispatch({
+    type: RESET_PRIVATE_CHAT_MESSAGES
+  });
 };
 
 export const setMessageAsRead = messageId => async dispatch => {

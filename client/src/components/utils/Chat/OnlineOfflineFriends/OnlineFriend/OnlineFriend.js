@@ -8,7 +8,6 @@ class OnlineFriend extends Component {
     const receiverName = this.props.name;
     const senderName = this.props.username;
     this.props.history.push(`/chat/${receiverName}.${senderName}`);
-    window.location.reload();
   };
 
   //.ChatUser__author-thumb is defined on parent

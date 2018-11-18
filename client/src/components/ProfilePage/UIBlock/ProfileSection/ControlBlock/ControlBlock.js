@@ -12,6 +12,11 @@ class ControlBlock extends Component {
     this.props.history.push(`/profile/${this.props.name}`);
   };
 
+  redirectToPrivateChat = () => {
+    const receiverName = this.props.friendName;
+    const senderName = this.props.profile.username;
+    this.props.history.push(`/chat/${receiverName}.${senderName}`);
+  };
   onSendRequest = () => {
     if (this.isAlreadyFriend()) {
       return console.log("They are already friends");
@@ -88,6 +93,7 @@ class ControlBlock extends Component {
 
             <div
               data-tip="Chat"
+              onClick={this.redirectToPrivateChat}
               className="ProfileSection__control-item ProfileSection__control-item--purple"
             >
               <Icon name="chat---messages-icon" size={20} color="#FFFFFF" />

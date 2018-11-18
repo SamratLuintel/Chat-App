@@ -27,7 +27,7 @@ export const UPDATE_PRIVATE_CHAT_MESSAGE = "update_private_chat_message";
 export const SAVE_PRIVATE_MESSAGE = "save_private_message";
 export const FETCH_PRIVATE_CHAT_MESSAGE = "fetch_private_chat_message";
 export const UPDATE_LAST_PRIVATE_MESSAGES = "update_last_private_messages";
-
+export const RESET_PRIVATE_CHAT_MESSAGES = "reset_private_chat_messages";
 export const FETCH_GROUP_CHAT_MESSAGES = "fetch_group_chat_messages";
 
 export const UPDATE_PAGE_NAME = "update_page_name";

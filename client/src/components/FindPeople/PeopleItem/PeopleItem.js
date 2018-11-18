@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class PeopleItem extends Component {
+  onClickViewProfile = () => {
+    const id = this.props.id;
+    this.props.history.push(`/profilepage/${id}`);
+  };
   render() {
     const { props } = this;
+    console.log("From People Item", props.id);
     return (
       <div className="PeopleItem">
         <div className="PeopleItem__content">
@@ -33,11 +39,16 @@ class PeopleItem extends Component {
               <div className="PeopleItem__info__title">Videos</div>
             </div>
           </div>
-          <div className="PeopleItem__control">View The Profile</div>
+          <div
+            onClick={this.onClickViewProfile}
+            className="PeopleItem__control"
+          >
+            View The Profile
+          </div>
         </div>
       </div>
     );
   }
 }
 
-export default PeopleItem;
+export default withRouter(PeopleItem);
