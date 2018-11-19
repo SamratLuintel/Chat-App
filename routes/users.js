@@ -9,9 +9,6 @@ const {
 } = require("../helpers/authValidation");
 
 module.exports = router => {
-  router.get("/", (req, res) => {
-    res.send("You are on home page");
-  });
   //@route POST /api/signup
   //@desc Signs up the user
   //@access Public
