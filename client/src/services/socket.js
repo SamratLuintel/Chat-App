@@ -1,6 +1,6 @@
 import socketIOClient from "socket.io-client";
-
-const endpoint = "localhost:5000";
+import keys from "keys/keys";
+const endpoint = keys.socketEndPoint;
 const socket = socketIOClient(endpoint);
 socket.on("connect", () => {
   console.log("Client is connected to server");
