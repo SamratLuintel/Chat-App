@@ -17,7 +17,7 @@ const keys = require("./config/keys");
 //import cloudinary
 require("./services/cloudinaryUpload");
 mongoose.connect(
-  "mongodb://localhost/chat-app",
+  keys.mongoURI,
   { useNewUrlParser: true },
   () => console.log("Connected to Mongo Server")
 );
