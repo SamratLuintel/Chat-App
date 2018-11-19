@@ -11,6 +11,7 @@ import {
   fetchPrivateMessages
 } from "store/actions/privatechat/privatechat";
 import { updatePageName } from "store/actions/page/page";
+import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
 
 function swap(input, value_1, value_2) {
   const temp = input[value_1];
@@ -66,8 +67,9 @@ class PrivateChat extends Component {
     if (this.state.exist) {
       render = (
         <div>
-          <OnlineOfflineFriends />
+          <ApplicationSideNav />
           <ApplicationHeader />
+          <OnlineOfflineFriends />
           <LeftMenu />
           <div className="PrivateChat">
             <div className="PrivateChat__bg" />

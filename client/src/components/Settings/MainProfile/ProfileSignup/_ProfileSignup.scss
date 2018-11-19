@@ -4,6 +4,11 @@
   padding-bottom: 60px;
   margin-left: 30px;
   font-family: Roboto;
+
+  @media (max-width: $sidenav-disappear-width) {
+    margin-left: 0px;
+    margin-top: 20px;
+  }
 }
 
 .ProfileSignUp__content {

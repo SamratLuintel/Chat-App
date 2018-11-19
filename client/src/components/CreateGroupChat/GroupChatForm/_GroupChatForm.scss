@@ -5,6 +5,10 @@
   background-color: #fff;
   border: 1px solid #e6ecf5;
   margin-bottom: 15px;
+
+  @media (max-width: $sidenav-disappear-width) {
+    margin-top: 15px;
+  }
 }
 .GroupChatForm__ui-block {
   padding: 23px 25px 18px;

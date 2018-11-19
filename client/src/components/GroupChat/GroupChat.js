@@ -11,10 +11,12 @@ import axios from "axios";
 import {
   joinRoom,
   updateGroupName,
-  fetchGroupChatMessage
+  fetchGroupChatMessage,
+  leaveRoom
 } from "store/actions/groupchat/groupchat";
 import { joinRequest } from "store/actions/friend/friend";
 import { updatePageName } from "store/actions/page/page";
+import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
 
 class GroupChat extends Component {
   state = {
@@ -51,12 +53,22 @@ class GroupChat extends Component {
       this.props.history.push("/group/error");
     }
   };
+
+  componentWillUnmount = () => {
+    const groupname = this.props.match.params.name;
+    const params = {
+      room: groupname,
+      name: this.props.profile.fullname
+    };
+    this.props.leaveRoom(params);
+  };
   render() {
     const { props } = this;
     let render = null;
     if (this.state.exist) {
       render = (
         <div>
+          <ApplicationSideNav />
           <ApplicationHeader />
           <OnlineOfflineFriends />
           <LeftMenu />
@@ -95,7 +107,8 @@ export default withRouter(
       joinRequest,
       updateGroupName,
       fetchGroupChatMessage,
-      updatePageName
+      updatePageName,
+      leaveRoom
     }
   )(GroupChat)
 );

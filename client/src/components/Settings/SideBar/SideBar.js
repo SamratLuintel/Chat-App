@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PersonalInfo from "components/utils/Profile/PersonalInfo/PersonalInfo";
-
+import { withRouter } from "react-router-dom";
 class SideBar extends Component {
   returnImageUrl = () => {
     let imageUrl;
@@ -16,6 +16,10 @@ class SideBar extends Component {
       }
     }
     return imageUrl;
+  };
+  redirectToProfile = () => {
+    const id = this.props.profile.id;
+    this.props.history.push(`/profilepage/${id}`);
   };
   render() {
     const imageUrl = this.returnImageUrl();
@@ -51,7 +55,9 @@ class SideBar extends Component {
               <div className="SideBar__info__title">Videos</div>
             </div>
           </div>
-          <div className="SideBar__control">Preview Profile</div>
+          <div className="SideBar__control" onClick={this.redirectToProfile}>
+            Preview Profile
+          </div>
         </div>
         <div className="SideBar__bottom">
           <PersonalInfo
@@ -71,4 +77,4 @@ class SideBar extends Component {
 const mapStateToProps = state => ({
   profile: state.profile
 });
-export default connect(mapStateToProps)(SideBar);
+export default withRouter(connect(mapStateToProps)(SideBar));

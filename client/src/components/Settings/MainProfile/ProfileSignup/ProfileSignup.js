@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { css } from "react-emotion";
 import { connect } from "react-redux";
 import { ClipLoader } from "react-spinners";
+
 import {
   saveUserImage,
   saveUserProfile,

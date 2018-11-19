@@ -4,6 +4,7 @@ import React, { Component } from "react";
 
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { logoutUser } from "store/actions/profile/profile";
 
 const styles = {
   bmBurgerBars: {
@@ -16,24 +17,61 @@ const styles = {
 };
 
 class ApplicationSideNav extends Component {
+  redirectToHome = () => {
+    this.props.history.push("/home");
+  };
+
+  redirectToSettings = () => {
+    this.props.history.push("/settings/profile");
+  };
+
+  onLogoutClick = () => {
+    const history = this.props.history;
+    this.props.logoutUser(history);
+  };
+
+  onCreateChatGroup = () => {
+    this.props.history.push("/create-chat-group");
+  };
   render() {
     return (
       <Menu styles={styles} className="ApplicationSideNav">
-        <a id="campaigns" className="bm-item-list" href="/campaigns">
-          Campaigns
-        </a>
-        <a id="templates" className="bm-item-list" href="/templates">
-          Templates
-        </a>
-        <a id="templates" className="bm-item-list">
+        <div
+          id="campaigns"
+          className="bm-item-list"
+          onClick={this.redirectToHome}
+        >
+          Home
+        </div>
+        <div
+          id="templates"
+          className="bm-item-list"
+          onClick={this.redirectToSettings}
+        >
+          Settings
+        </div>
+        <div
+          id="templates"
+          className="bm-item-list"
+          onClick={this.onCreateChatGroup}
+        >
+          Create Chat Group
+        </div>
+        <div
+          id="templates"
+          className="bm-item-list"
+          onClick={this.onLogoutClick}
+        >
           LogOut
-        </a>
+        </div>
       </Menu>
     );
   }
 }
 
-export default connect(
-  null,
-  {}
-)(withRouter(ApplicationSideNav));
+export default withRouter(
+  connect(
+    null,
+    { logoutUser }
+  )(withRouter(ApplicationSideNav))
+);

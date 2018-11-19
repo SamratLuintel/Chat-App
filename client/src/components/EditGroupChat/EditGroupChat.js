@@ -3,6 +3,7 @@ import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHea
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import EditGroupChatPreview from "components/EditGroupChat/EditGroupChatPreview/EditGroupChatPreview";
 import EditGroupChatForm from "components/EditGroupChat/EditGroupChatForm/EditGroupChatForm";
+import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
 import { css } from "react-emotion";
 import { ClipLoader } from "react-spinners";
 import axios from "axios";
@@ -214,11 +215,12 @@ class EditGroupChat extends Component {
       return spinner;
     }
     return (
-      <div className="CreateGroupChat">
+      <div className="EditGroupChat">
+        <ApplicationSideNav />
         <ApplicationHeader />
         <LeftMenu />
         <OnlineOfflineFriends />
-        <div className="CreateGroupChat__body">
+        <div className="EditGroupChat__body">
           <div className="container">
             {this.groupSavingProgress()}
             {this.groupDeletingProgress()}

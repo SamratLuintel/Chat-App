@@ -2,7 +2,8 @@ import {
   SEND_GROUP_MESSAGE,
   JOIN_ROOM,
   UPDATE_GROUPNAME,
-  FETCH_GROUP_CHAT_MESSAGES
+  FETCH_GROUP_CHAT_MESSAGES,
+  LEAVE_ROOM
 } from "store/types";
 import axios from "axios";
 
@@ -27,6 +28,12 @@ export const joinRoom = params => dispatch => {
   });
 };
 
+export const leaveRoom = params => dispatch => {
+  dispatch({
+    type: LEAVE_ROOM,
+    payload: params
+  });
+};
 export const updateGroupName = name => dispatch => {
   dispatch({
     type: UPDATE_GROUPNAME,

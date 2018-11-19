@@ -13,6 +13,14 @@
   top: 50%;
 }
 
+.ProfilePage__body {
+  max-width: calc(100% - 140px);
+  margin: 0 auto;
+  @media (max-width: $sidenav-disappear-width) {
+    max-width: 100%;
+  }
+}
+
 .ProfilePage__header-image {
   max-width: 100%;
   height: auto;

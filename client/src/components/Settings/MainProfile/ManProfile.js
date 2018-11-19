@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import SideBar from "components/Settings/SideBar/SideBar";
 import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHeader";
 import ProfileSignUp from "components/Settings/MainProfile/ProfileSignup/ProfileSignup";
+import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import { css } from "react-emotion";
 import { ClipLoader } from "react-spinners";
 import { connect } from "react-redux";
@@ -72,8 +73,10 @@ class MainProfile extends Component {
         <ApplicationSideNav />
         <ApplicationHeader />
         <LeftMenu />
+        <OnlineOfflineFriends />
+
         <div className="MainProfile">
-          <div className="container">
+          <div className="container MainProfile__container">
             {this.profileSavingProgress()}
             <div className="row">
               <div className="col-md-4">

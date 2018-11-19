@@ -37,7 +37,13 @@ module.exports = io => {
         image: data.sender.userImage
       });
     });
+    socket.on("leave", () => {
+      const user = users.RemoveUser(socket.id);
 
+      if (user) {
+        io.to(user.room).emit("groupUsersList", users.GetUsersList(user.room));
+      }
+    });
     socket.on("disconnect", () => {
       const user = users.RemoveUser(socket.id);
 

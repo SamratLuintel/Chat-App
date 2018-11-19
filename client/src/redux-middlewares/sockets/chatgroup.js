@@ -35,6 +35,12 @@ const chatgroup = (socket, types) => {
           console.log("User is connected to the server");
         });
       }
+
+      if (action.type === types.LEAVE_ROOM) {
+        socket.emit("leave", action.payload, () => {
+          console.log("User is disconnected from chat group");
+        });
+      }
       return next(action);
     };
   };

@@ -8,6 +8,8 @@ import ApplicationHeader from "components/utils/ApplicationHeader/ApplicationHea
 import OnlineOfflineFriends from "components/utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import { connect } from "react-redux";
 import { updatePageName } from "store/actions/page/page";
+import LeftMenu from "components/utils/LeftMenu/LeftMenu";
+import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
 
 const override = css`
   display: block;
@@ -85,33 +87,37 @@ class ProfilePage extends Component {
     }
     return (
       <div className="ProfilePage">
+        <ApplicationSideNav />
         <ApplicationHeader />
+        <LeftMenu />
         <OnlineOfflineFriends />
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <UIBlock
-                friendName={this.state.username}
-                friendId={this.props.match.params.id}
-                friendImage={this.state.userImage}
-              />
+        <div className="ProfilePage__body">
+          <div className="container">
+            <div className="row">
+              <div className="col">
+                <UIBlock
+                  friendName={this.state.username}
+                  friendId={this.props.match.params.id}
+                  friendImage={this.state.userImage}
+                />
+              </div>
             </div>
-          </div>
-          {/* User Personal Info */}
-          <div className="row ProfilePage__bottom-header-profile">
-            <div className="col-md-5">
-              <PersonalInfo
-                gender={this.state.gender}
-                country={this.state.country}
-                description={this.state.description}
-                fullname={this.state.fullname}
-                username={this.state.username}
-                email={this.state.email}
-              />
-            </div>
-            <div className="col-md-6">
-              <div className="ProfilePage__user-posts">
-                There are no posts to show
+            {/* User Personal Info */}
+            <div className="row ProfilePage__bottom-header-profile">
+              <div className="col-md-5">
+                <PersonalInfo
+                  gender={this.state.gender}
+                  country={this.state.country}
+                  description={this.state.description}
+                  fullname={this.state.fullname}
+                  username={this.state.username}
+                  email={this.state.email}
+                />
+              </div>
+              <div className="col-md-6">
+                <div className="ProfilePage__user-posts">
+                  There are no posts to show
+                </div>
               </div>
             </div>
           </div>

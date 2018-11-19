@@ -62,15 +62,15 @@ class EditGroupChatForm extends Component {
         </div>
 
         <ImageUpload groupImageChange={this.props.groupImageChange} />
-        <div className="EditGroupChatForm__create-btn-container">
+        <div className="EditGroupChatForm__edit-btn-container">
           <div
-            className="EditGroupChatForm__create-btn-container__button"
+            className="EditGroupChatForm__edit-btn-container__button"
             onClick={this.props.editChatGroup}
           >
             Save Changes
           </div>
           <div
-            className="EditGroupChatForm__create-btn-container__button EditGroupChatForm__create-btn-container__button--danger"
+            className="EditGroupChatForm__edit-btn-container__button EditGroupChatForm__edit-btn-container__button--danger"
             onClick={this.props.deleteChatGroup}
           >
             Delete Chat Group
