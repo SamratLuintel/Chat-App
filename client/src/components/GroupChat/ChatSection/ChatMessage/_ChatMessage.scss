@@ -6,9 +6,17 @@
   padding: 16px 10px 40px 40px;
   flex-grow: 1;
   overflow: scroll;
+
+  @media (max-width: $navbar-to-mobile-width) {
+    padding: 10px 10px;
+  }
 }
 
 .ChatMessage__messages {
   list-style: none;
   position: relative;
+}
+
+.ChatMessage__no-message {
+  color: $primary-dark;
 }

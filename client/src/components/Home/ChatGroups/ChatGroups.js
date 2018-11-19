@@ -36,7 +36,7 @@ export class ChatGroups extends Component {
         const editable = this.props.profile.id === group.createdBy;
         console.log("The group is editable", editable);
         return (
-          <div className="col-md-3">
+          <div className="col-md-3 col-sm-6">
             <ChatGroup
               name={group.name}
               country={group.country}
@@ -55,9 +55,9 @@ export class ChatGroups extends Component {
   render() {
     return (
       <div className="ChatGroups">
-        <div className="container">
+        <div className="container ChatGroups__container">
           <div className="row">
-            <div className="col-md-3 ChatGroups__CreateChatGroup__section">
+            <div className="col-md-3 col-sm-6 ChatGroups__CreateChatGroup__section">
               <CreateChatGroup />
             </div>
             {this.renderChatGroups()}

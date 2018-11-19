@@ -1,7 +1,7 @@
 @import "ProfileSignUp/ProfileSignUp";
 
 .MainProfile {
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   background-color: $primary-grey;
   padding-top: 40px;
 }

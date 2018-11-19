@@ -6,8 +6,7 @@ class SendMessage extends Component {
   state = {
     message: ""
   };
-  onFormSubmit = e => {
-    e.preventDefault();
+  onSendMessage = () => {
     if (this.state.message.trim().length > 0) {
       this.props.sendPrivateMessage(
         this.state.message,
@@ -18,27 +17,36 @@ class SendMessage extends Component {
     }
   };
 
+  _handleKeyPress = e => {
+    console.log("key press os called");
+    if (e.key === "Enter") {
+      this.onSendMessage();
+    }
+  };
   onTextChange = e => {
+    console.log("From send message", e.target.value);
     this.setState({ message: e.target.value });
   };
   render() {
     return (
       <div className="PrivateChat__SendMessage">
-        <form
-          onSubmit={this.onFormSubmit}
-          className="PrivateChat__SendMessage__form"
-        >
+        <div className="PrivateChat__SendMessage__form">
           <textarea
             name="message"
             className="PrivateChat__SendMessage__message"
             rows="1"
+            placeholder="Type your message"
             onChange={this.onTextChange}
+            onKeyPress={this._handleKeyPress}
             value={this.state.message}
           />
-          <button type="submit" className="PrivateChat__SendMessage__send-btn">
+          <button
+            onClick={this.onSendMessage}
+            className="PrivateChat__SendMessage__send-btn"
+          >
             <i class="fas fa-paper-plane" />
           </button>
-        </form>
+        </div>
       </div>
     );
   }

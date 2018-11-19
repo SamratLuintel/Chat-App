@@ -7,8 +7,7 @@ class SendMessage extends Component {
   state = {
     message: ""
   };
-  onFormSubmit = async e => {
-    e.preventDefault();
+  onSendMessage = async () => {
     //saves the group message in the database
     await this.props.saveGroupMessage(this.props.groupname, this.state.message);
     //send the group message to other online user
@@ -19,26 +18,35 @@ class SendMessage extends Component {
     );
     this.setState({ message: "" });
   };
-
+  _handleKeyPress = e => {
+    console.log("key press os called");
+    if (e.key === "Enter") {
+      this.onSendMessage();
+    }
+  };
   onTextChange = e => {
     this.setState({ message: e.target.value });
   };
   render() {
     return (
       <div className="SendMessage">
-        <form onSubmit={this.onFormSubmit} className="SendMessage__form">
+        <div className="SendMessage__form">
           <textarea
             name="message"
             className="SendMessage__message"
             rows="1"
             placeholder="Type your message"
             onChange={this.onTextChange}
+            onKeyPress={this._handleKeyPress}
             value={this.state.message}
           />
-          <button type="submit" className="SendMessage__send-btn">
+          <button
+            onClick={this.onSendMessage}
+            className="SendMessage__send-btn"
+          >
             <i class="fas fa-paper-plane" />
           </button>
-        </form>
+        </div>
       </div>
     );
   }

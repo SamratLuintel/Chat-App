@@ -8,6 +8,13 @@ class ChatMessage extends Component {
   };
   renderMessages = () => {
     const userProfileName = this.props.profile.fullname;
+    if (this.props.messages.length === 0) {
+      return (
+        <p className="ChatMessage__no-message">
+          Say Hi to start a conversation
+        </p>
+      );
+    }
     return this.props.messages.map((message, i) => (
       //message.from is the fullname of the user
 
@@ -23,8 +30,8 @@ class ChatMessage extends Component {
   scrollToBottom = () => {
     this.messagesEnd.scrollIntoView({
       behavior: "smooth",
-      block: "center",
-      inline: "center"
+      block: "nearest",
+      inline: "start"
     });
   };
 

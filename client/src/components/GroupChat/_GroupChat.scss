@@ -3,7 +3,7 @@
 
 .GroupChat {
   background-color: $primary-grey;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   position: relative;
 }
 

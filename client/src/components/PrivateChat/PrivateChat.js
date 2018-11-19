@@ -71,14 +71,16 @@ class PrivateChat extends Component {
           <LeftMenu />
           <div className="PrivateChat">
             <div className="PrivateChat__bg" />
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <div className="PrivateChat__body">
-                    <ChatSection
-                      room={this.state.room1}
-                      receiverName={this.state.receiverName}
-                    />
+            <div className="PrivateChat__body-wrapper">
+              <div className="container PrivateChat__container">
+                <div className="row">
+                  <div className="col">
+                    <div className="PrivateChat__body">
+                      <ChatSection
+                        room={this.state.room1}
+                        receiverName={this.state.receiverName}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

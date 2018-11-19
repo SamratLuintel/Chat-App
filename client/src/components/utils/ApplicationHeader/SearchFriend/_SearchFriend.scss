@@ -8,7 +8,8 @@
   @media (max-width: $navbar-to-mobile-width) {
     width: 100%;
   }
-  @include for-desktop-up {
+
+  @media (min-width: 1260px) {
     width: 500px;
   }
 }
@@ -58,7 +59,7 @@
     color: $primary-orange;
   }
 
-  @media (max-width: 950px) {
+  @media (max-width: 1020px) {
     display: none;
   }
 }

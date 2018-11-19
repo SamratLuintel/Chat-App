@@ -1,9 +1,8 @@
 @import "ChatSection/ChatSection";
 .PrivateChat {
   background-color: $primary-grey;
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   position: relative;
-  width: calc(100%-140px);
 }
 
 .PrivateChat__bg {
@@ -16,6 +15,14 @@
   background-color: $primary-blue;
 }
 
+.PrivateChat__body-wrapper {
+  width: calc(100% - 140px);
+  margin: 0 auto;
+  @media (max-width: $sidenav-disappear-width) {
+    width: 100%;
+  }
+}
+
 .PrivateChat__body {
   display: flex;
   position: relative;
@@ -23,5 +30,34 @@
   width: 100%;
   z-index: 10;
   padding-top: 60px;
-  height: 85vh;
+  min-height: 85vh;
+
+  @media (min-width: $sidenav-disappear-width) and( max-width: 950px) {
+    height: 75vh;
+  }
+
+  @media (max-width: $sidenav-disappear-width) {
+    flex-direction: column-reverse;
+    padding-top: 0px;
+  }
+}
+
+.PrivateChat__container {
+  @media (max-width: $sidenav-disappear-width) {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
+  .row {
+    @media (max-width: $sidenav-disappear-width) {
+      margin-right: 0px !important;
+      margin-left: 0px !important;
+    }
+  }
+  .col {
+    @media (max-width: $sidenav-disappear-width) {
+      padding-right: 0px !important;
+      padding-left: 0px !important;
+    }
+  }
 }
