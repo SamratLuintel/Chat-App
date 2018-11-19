@@ -61,7 +61,21 @@ require("./routes/people")(app);
 require("./routes/privatechat")(app);
 require("./routes/settings/profile")(app);
 
+if (process.env.NODE_ENV === "production") {
+  // Express will serve up production assets
+  // if not https redirect to https unless logging in using OAuth
+  app.use(express.static("client/build"));
+
+  const path = require("path");
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
 app.use(validator());
-server.listen(5000, () => {
+const port = process.env.PORT || 5000;
+
+server.listen(port, () => {
   console.log("Server is listening on the port 5000");
 });
