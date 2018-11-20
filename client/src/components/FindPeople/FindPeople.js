@@ -30,7 +30,7 @@ class FindPeople extends Component {
       const searchText = this.props.match.params.searchText;
       const res = await axios.get(`/api/findpeople/${searchText}`);
       console.log("From find people", res.data);
-      this.setState({ peoples: res.data, loading: false });
+      this.setState({ peoples: res.data, loading: false, fetched: true });
     } catch (err) {
       console.log(err);
       this.setState({
@@ -54,11 +54,14 @@ class FindPeople extends Component {
         </div>
       ));
     } else {
-      return (
-        <p className="FindPeople__no-friend-message">
-          Your search did not match any results
-        </p>
-      );
+      if (!this.state.loading && this.state.fetched) {
+        return (
+          <p className="FindPeople__no-friend-message">
+            Your search did not match any results
+          </p>
+        );
+      }
+      return null;
     }
   };
 
