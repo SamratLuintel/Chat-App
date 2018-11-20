@@ -3,6 +3,7 @@ import formFields from "components/Landing/Join/Register/formFields";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import { signUpFormSubmit } from "store/actions/profile/profile";
+import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import { SubmissionError } from "redux-form";
 import RegisterField from "components/Landing/Join/Register/RegisterField/RegisterField";
@@ -22,13 +23,13 @@ class Register extends Component {
     });
   }
   render() {
-    const { handleSubmit, history } = this.props;
+    const { handleSubmit, history, dispatch } = this.props;
     return (
       <div className="Register">
         <form
           className="Register__form"
           onSubmit={handleSubmit(values =>
-            signUpFormSubmit(values, history, SubmissionError)
+            signUpFormSubmit(values, history, dispatch, SubmissionError)
           )}
         >
           {this.renderFields()}
@@ -43,11 +44,13 @@ class Register extends Component {
     );
   }
 }
-export default connect(
-  null,
-  { signUpFormSubmit }
-)(
-  reduxForm({
-    form: "signupform"
-  })(Register)
+export default withRouter(
+  connect(
+    null,
+    { signUpFormSubmit }
+  )(
+    reduxForm({
+      form: "signupform"
+    })(Register)
+  )
 );

@@ -38,6 +38,7 @@ passport.use(
         newUser.fullname = req.body.username;
         newUser.email = req.body.email;
         newUser.password = req.body.password;
+        newUser.userImage = keys.defaultUserImage;
         const savedUser = await newUser.save();
         done(null, savedUser);
       } catch (err) {
@@ -47,6 +48,29 @@ passport.use(
   )
 );
 
+passport.use(
+  "local.login",
+  new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true
+    },
+    async (req, email, password, done) => {
+      try {
+        const user = await User.findOne({ email });
+        console.log("Passport login is called");
+        if (!user || !user.comparePassword(password)) {
+          return done(null, false);
+        }
+        console.log("authentication has passed");
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
 passport.use(
   new FacebookStrategy(
     {

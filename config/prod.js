@@ -10,5 +10,6 @@ module.exports = {
   cloudinaryName: process.env.CLOUDINARY_NAME,
   cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
   cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
-  mongoURI: process.env.MONGO_URI
+  mongoURI: process.env.MONGO_URI,
+  defaultUserImage: process.env.DEFAULT_USER_IMAGE
 };

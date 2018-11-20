@@ -6,6 +6,7 @@ import LoginField from "components/Landing/Join/Login/LoginField/LoginField";
 import _ from "lodash";
 import { loginFormSubmit } from "store/actions/profile/profile";
 import { SubmissionError } from "redux-form";
+import { withRouter } from "react-router-dom";
 import LoginWith from "components/Landing/Join/LoginWith/LoginWith";
 
 export class Login extends Component {
@@ -24,13 +25,13 @@ export class Login extends Component {
   }
 
   render() {
-    const { handleSubmit, history } = this.props;
+    const { handleSubmit, history, dispatch } = this.props;
     return (
       <div className="Login">
         <form
           className="Login__form"
           onSubmit={handleSubmit(values =>
-            loginFormSubmit(values, history, SubmissionError)
+            loginFormSubmit(values, history, dispatch, SubmissionError)
           )}
         >
           {this.renderFields()}
@@ -45,11 +46,13 @@ export class Login extends Component {
     );
   }
 }
-export default connect(
-  null,
-  { loginFormSubmit }
-)(
-  reduxForm({
-    form: "loginform"
-  })(Login)
+export default withRouter(
+  connect(
+    null,
+    { loginFormSubmit }
+  )(
+    reduxForm({
+      form: "loginform"
+    })(Login)
+  )
 );

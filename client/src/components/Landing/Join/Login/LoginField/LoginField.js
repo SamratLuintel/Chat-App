@@ -9,7 +9,7 @@ const LoginField = ({ input, label, meta: { error, touched } }) => {
         {...input}
         style={{ marginBottom: "5px" }}
       />
-      <div className="red-text" style={{ marginBottom: "20px" }}>
+      <div className="LoginField__red-text" style={{ marginBottom: "20px" }}>
         {touched && error}
       </div>
     </div>

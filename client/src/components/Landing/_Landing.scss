@@ -3,6 +3,8 @@
 .Landing {
   min-height: 100vh;
   background: url("./assets/images/main-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .Landing__body {
