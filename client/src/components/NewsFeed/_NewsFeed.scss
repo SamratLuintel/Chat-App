@@ -1,0 +1,7 @@
+@import "NewsFeedForm/NewsFeedForm";
+
+.NewsFeed {
+  background-color: $primary-grey;
+  min-height: calc(100vh - 70px);
+  position: relative;
+}

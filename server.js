@@ -30,6 +30,8 @@ require("./models/users");
 require("./models/groups");
 require("./models/messages");
 require("./models/groupmessage");
+require("./models/posts");
+
 //require passport
 const passport = require("./services/passport");
 app.use(express.static("public"));
@@ -75,8 +77,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use(validator());
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 server.listen(port, () => {
-  console.log("Server is listening on the port 5000");
+  console.log(`Server is listening on the port ${port}`);
 });

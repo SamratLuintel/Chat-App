@@ -15,6 +15,7 @@ import MainProfile from "components/Settings/MainProfile/ManProfile";
 import FindPeople from "components/FindPeople/FindPeople";
 import ProfilePage from "components/ProfilePage/ProfilePage";
 import { joinRequest } from "store/actions/friend/friend";
+import NewsFeed from "components/NewsFeed/NewsFeed";
 
 class App extends Component {
   state = {
@@ -52,6 +53,7 @@ class App extends Component {
       <div>
         <Route exact path="/" component={Landing} />
         <Route exact path="/create-chat-group" component={CreateGroupChat} />
+        <Route exact path="/newsfeed" component={NewsFeed} />
         <Switch>
           <PrivateRoute exact path="/home" component={Home} />
         </Switch>

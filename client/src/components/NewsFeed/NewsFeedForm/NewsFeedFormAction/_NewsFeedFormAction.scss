@@ -1,0 +1,26 @@
+.NewsFeedFormAction {
+  padding: 20px 25px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.NewsFeedFormAction__dropzone {
+  display: block;
+}
+
+.NewsFeedFormAction__image-upload-btn {
+  cursor: pointer;
+}
+
+.NewsFeedFormAction__post-btn {
+  background-color: #ff763a;
+  border-color: #ff763a;
+  padding: 0.8rem 2.1rem;
+  font-size: 0.688rem;
+  border-radius: 0.3rem;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
