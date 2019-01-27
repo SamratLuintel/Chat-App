@@ -4,6 +4,7 @@ import ApplicationSideNav from "../utils/ApplicationSideNav/ApplicationSideNav";
 import OnlineOfflineFriends from "../utils/Chat/OnlineOfflineFriends/OnlineOfflineFriends";
 import LeftMenu from "../utils/LeftMenu/LeftMenu";
 import NewsFeedForm from "./NewsFeedForm/NewsFeedForm";
+import PostCard from "../utils/PostCard/PostCard";
 
 class NewsFeed extends Component {
   render() {
@@ -18,6 +19,7 @@ class NewsFeed extends Component {
             <div className="row">
               <div className="col-12">
                 <NewsFeedForm />
+                <PostCard />
               </div>
             </div>
           </div>

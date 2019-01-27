@@ -3,7 +3,7 @@
 
 .NewsFeedForm {
   width: 100%;
-  max-width: 618px;
+  max-width: $newsfeed-card-max-width;
   margin: 0 auto;
   background-color: #fff;
   font-family: Roboto;

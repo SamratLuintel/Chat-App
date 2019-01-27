@@ -9,7 +9,7 @@ import keys from "config/keys";
 class NewsFeedForm extends Component {
   state = {
     focused: false,
-    post: "",
+    text: "",
     //keeps track of just images for now
     //later can be updaetd
     files: []
@@ -18,7 +18,7 @@ class NewsFeedForm extends Component {
   _onBlur = () => this.setState({ focused: false });
   _onFocus = () => this.setState({ focused: true });
 
-  onChangePost = e => this.setState({ post: e.target.value });
+  onChangePost = e => this.setState({ text: e.target.value });
 
   //Currently we accept only single file
   //but the user are free to enable multiple image option
@@ -41,10 +41,20 @@ class NewsFeedForm extends Component {
   postStatus = async () => {
     console.log("Post status have been called");
     let imagesId = [];
-    if (this.state.files.length !== 0) {
-      imagesId = await this.handleUploadImages(this.state.files);
+    try {
+      if (this.state.files.length !== 0) {
+        imagesId = await this.handleUploadImages(this.state.files);
+      }
+      const text = this.state.text;
+      const res = await axios.post("/api/posts", {
+        text,
+        images: imagesId
+      });
+      console.log("Post have been successfulyl created");
+    } catch (error) {
+      console.log(error);
+      if (error.response) console.log(error.response);
     }
-    const images = this.state.files;
   };
 
   handleUploadImages = async images => {
@@ -70,8 +80,10 @@ class NewsFeedForm extends Component {
     // We would use axios `.all()` method to perform concurrent image upload to cloudinary.
     try {
       await axios.all(uploads);
-      console.log("All images have been successfully updated");
-      console.log(imagesId);
+      console.log(
+        "Images have been successfully uploaded to cloudinary",
+        imagesId
+      );
       return imagesId;
     } catch (error) {
       console.log(error);
@@ -99,7 +111,7 @@ class NewsFeedForm extends Component {
             className={classnames({
               "NewsFeedForm__label-area": true,
               "NewsFeedForm__label-area--shrink":
-                this.state.focused || this.state.post !== ""
+                this.state.focused || this.state.text !== ""
             })}
           >
             Share what your are thinking here...
@@ -108,7 +120,7 @@ class NewsFeedForm extends Component {
             onFocus={this._onFocus}
             onBlur={this._onBlur}
             onChange={this.onChangePost}
-            value={this.state.post}
+            value={this.state.text}
             className={classnames({
               "NewsFeedForm__text-area": true,
               "NewsFeedForm__text-area--bottom-border":

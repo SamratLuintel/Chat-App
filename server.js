@@ -63,6 +63,7 @@ require("./routes/friend")(app);
 require("./routes/people")(app);
 require("./routes/privatechat")(app);
 require("./routes/settings/profile")(app);
+require("./routes/posts")(app);
 
 if (process.env.NODE_ENV === "production") {
   // Express will serve up production assets
