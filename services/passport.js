@@ -112,6 +112,7 @@ passport.use(
       clientSecret: keys.google.clientSecret,
       profileFields: ["email", "displayName", "photos"],
       callbackURL: "/api/auth/google/callback",
+      userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
       passReqToCallback: true,
       proxy: true
     },
@@ -125,8 +126,7 @@ passport.use(
         newUser.google = profile.id;
         newUser.fullname = profile.displayName;
         newUser.username = profile.displayName;
-        newUser.email = profile.emails[0].value;
-        newUser.userImage = profile._json.image.url;
+        newUser.userImage = profile._json.picture;
         const savedUser = await newUser.save();
         done(null, savedUser);
       } catch (err) {

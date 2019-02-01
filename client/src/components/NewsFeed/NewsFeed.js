@@ -5,6 +5,7 @@ import OnlineOfflineFriends from "../utils/Chat/OnlineOfflineFriends/OnlineOffli
 import LeftMenu from "../utils/LeftMenu/LeftMenu";
 import NewsFeedForm from "./NewsFeedForm/NewsFeedForm";
 import PostCard from "../utils/PostCard/PostCard";
+import InfiniteNewsFeed from "./InfiniteNewsFeed/InfiniteNewsFeed";
 
 class NewsFeed extends Component {
   render() {
@@ -19,7 +20,7 @@ class NewsFeed extends Component {
             <div className="row">
               <div className="col-12">
                 <NewsFeedForm />
-                <PostCard />
+                <InfiniteNewsFeed />
               </div>
             </div>
           </div>

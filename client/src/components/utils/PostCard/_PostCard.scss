@@ -107,6 +107,15 @@
   }
 }
 
+.PostCard__additional-info__like--already-liked {
+  span {
+    color: $primary-orange;
+  }
+  .olymp-heart-icon {
+    fill: $primary-orange !important;
+  }
+}
+
 .PostCard__additional-info__like:hover {
   span {
     color: $primary-orange;

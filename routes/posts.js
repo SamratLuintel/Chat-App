@@ -61,7 +61,7 @@ module.exports = router => {
   // @access Private
   router.delete("/api/posts/:id", async (req, res) => {
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await User.findOne({ user: req.user.id });
       const post = await Post.findById(req.params.id);
       //Check for post owner
       if (post.user.toString() !== req.user.id) {
@@ -79,7 +79,7 @@ module.exports = router => {
   // @access Private
   router.post("/api/posts/like/:id", async (req, res) => {
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await User.findOne({ user: req.user.id });
       const post = await Post.findById(req.params.id);
       //Check for post owner
       if (
@@ -95,7 +95,8 @@ module.exports = router => {
       post.likes.unshift({ user: req.user.id });
 
       const savedPost = await post.save();
-      res.json(savedPost);
+      const populatedPost = await Post.populate(savedPost, { path: "user" });
+      res.json(populatedPost);
     } catch (error) {
       res.status(404).json({ postnotfound: "No post found" });
     }
@@ -104,9 +105,9 @@ module.exports = router => {
   // @route POST api/posts/unlike/:id //Id is the post ID
   // @desc Unlike post
   // @access Private
-  router.post("/api/posts/like/:id", async (req, res) => {
+  router.post("/api/posts/unlike/:id", async (req, res) => {
     try {
-      const profile = await Profile.findOne({ user: req.user.id });
+      const profile = await User.findOne({ user: req.user.id });
       const post = await Post.findById(req.params.id);
       //Check for post owner
       if (
@@ -117,7 +118,7 @@ module.exports = router => {
       }
 
       //Get the remove index
-      const removeIndex = post
+      const removeIndex = post.likes
         .map(item => item.user.toString())
         .indexOf(req.user.id);
 
@@ -126,8 +127,10 @@ module.exports = router => {
 
       //Save the post
       const savedPost = await post.save();
-      res.json(savedPost);
+      const populatedPost = await Post.populate(savedPost, { path: "user" });
+      res.json(populatedPost);
     } catch (error) {
+      console.log(error);
       res.status(404).json({ postnotfound: "No post found" });
     }
   });
@@ -181,6 +184,26 @@ module.exports = router => {
       res.json(newPost);
     } catch (error) {
       res.status(404).json({ comment: "Comment not found" });
+    }
+  });
+
+  // @route POST api/posts/find-all/skip/limit
+  // @desc Fetch post (with Pagination)
+  // @access Private
+  router.get("/api/posts/find-all/:skip/:limit", async (req, res) => {
+    try {
+      const skipNumber = parseInt(req.params.skip);
+      const limitNumber = parseInt(req.params.limit);
+      console.log("Find all have been called", limitNumber);
+      const posts = await Post.find({})
+        .skip(skipNumber)
+        .limit(limitNumber)
+        .populate("user");
+
+      res.status(200).send(posts);
+    } catch (error) {
+      console.log(error);
+      res.status(400).send({ eroor: "Oops some error has occured" });
     }
   });
 };

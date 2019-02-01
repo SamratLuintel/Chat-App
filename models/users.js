@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
   username: { type: String },
   fullname: { type: String }, //{ type: String, unique: true, default: "" },
-  email: { type: String },
+  email: { type: String, sparse: true },
   password: { type: String, sparse: true },
   userImage: { type: String, default: "default.png" },
   facebook: { type: String, sparse: true },

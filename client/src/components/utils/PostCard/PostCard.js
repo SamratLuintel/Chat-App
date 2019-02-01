@@ -2,31 +2,67 @@ import React, { Component, Fragment } from "react";
 import Icon from "components/utils/Icon/Icon";
 import classnames from "classnames";
 import PostCardComments from "./PostCardComments/PostCardComments";
+import moment from "moment";
+import { connect } from "react-redux";
+import { addLike, removeLike } from "store/actions/posts/posts";
 
 class PostCard extends Component {
   state = {
     moreHovered: false,
-    commentOpen: false
+    commentOpen: false,
+    hasLiked: null
   };
 
   toggleComment = () =>
     this.setState(prevState => ({ commentOpen: !prevState.commentOpen }));
 
+  onLikeUnlikeClick = async () => {
+    if (!this.state.hasLiked) {
+      //id,index,likes
+      await this.props.addLike(this.props.id, this.props.index);
+    } else {
+      await this.props.removeLike(this.props.id, this.props.index);
+    }
+    this.setHasLiked();
+  };
+
+  componentDidMount = () => {
+    this.setHasLiked();
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (!prevProps.profile && this.props.profile && this.props.profile.loggedIn)
+      this.setHasLiked();
+  };
+
+  setHasLiked = () => {
+    if (!this.props.profile) return;
+    let hasLiked = false;
+    this.props.likes.map(like => {
+      if (like.user.toString() === this.props.profile.id) {
+        hasLiked = true;
+      }
+    });
+    this.setState({ hasLiked });
+  };
   render() {
+    const { props } = this;
     return (
       <Fragment>
         <div className="PostCard">
           <div className="PostCard__author-thumb">
             <img
-              src="https://randomuser.me/api/portraits/med/men/80.jpg"
+              src={props.user.userImage}
               alt=""
               className="PostCard__author-thumb__image"
             />
             <div className="PostCard__author-thumb__date-wrapper">
               <h6 className="PostCard__author-thumb__author-name">
-                James Spiegel
+                {props.user.username}
               </h6>
-              <div className="PostCard__author-thumb__date">19 hours ago</div>
+              <div className="PostCard__author-thumb__date">
+                {moment(props.date).fromNow()}
+              </div>
             </div>
             <div
               className="PostCard__author-thumb__more"
@@ -46,28 +82,30 @@ class PostCard extends Component {
               </ul>
             </div>
           </div>
-          <p className="PostCard__text">
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Sed ut perspiciatis unde omnis iste natus error
-            sit voluptatem accusantium doloremque.
-          </p>
+          <p className="PostCard__text">{props.text}</p>
           <div className="PostCard__additional-info">
-            <div className="PostCard__additional-info__like">
+            <div
+              onClick={this.onLikeUnlikeClick}
+              className={classnames({
+                "PostCard__additional-info__like": true,
+                "PostCard__additional-info__like--already-liked": this.state
+                  .hasLiked
+              })}
+            >
               <Icon name="heart-icon" color="#c0c4d8" size={19} />
-              <span>8</span>
+              <span>{props.likes.length}</span>
             </div>
             <div
               className="PostCard__additional-info__comments-shared"
               onClick={this.toggleComment}
             >
               <Icon name="speech-balloon-icon" color="#c0c4d8" size={19} />
-              <span>10</span>
+              <span>{props.comments}</span>
             </div>
           </div>
           <div className="PostCard__control-block">
             <div
+              onClick={this.onLikeClick}
               data-tip="Like photo"
               className="PostCard__control-block__single-block"
             >
@@ -86,9 +124,17 @@ class PostCard extends Component {
         <PostCardComments
           commentOpen={this.state.commentOpen}
           openComment={this.openComment}
+          comments={props.comments}
         />
       </Fragment>
     );
   }
 }
-export default PostCard;
+
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+export default connect(
+  mapStateToProps,
+  { addLike, removeLike }
+)(PostCard);

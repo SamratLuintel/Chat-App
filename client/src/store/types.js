@@ -32,3 +32,7 @@ export const FETCH_GROUP_CHAT_MESSAGES = "fetch_group_chat_messages";
 
 export const UPDATE_PAGE_NAME = "update_page_name";
 export const LEAVE_ROOM = "leave_room";
+
+export const UPDATE_POSTS_LISTS = "update_posts_lists";
+export const UPDATE_POSTS_SCROLLABLE = "set_posts_scrollable";
+export const UPDATE_SINGLE_POST = "update_single_post";
