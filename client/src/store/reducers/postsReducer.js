@@ -1,7 +1,9 @@
 import {
   UPDATE_POSTS_LISTS,
   UPDATE_POSTS_SCROLLABLE,
-  UPDATE_SINGLE_POST
+  UPDATE_SINGLE_POST,
+  PUT_SINGLE_POST_TO_TOP,
+  HIDE_POST
 } from "store/types";
 import update from "immutability-helper";
 
@@ -27,6 +29,14 @@ export default (state = initialState, { type, payload }) => {
         }
       });
 
+    case HIDE_POST:
+      return update(state, { list: { $splice: [[payload.index, 1]] } });
+
+    case PUT_SINGLE_POST_TO_TOP:
+      return {
+        ...state,
+        list: [payload, ...state.list]
+      };
     default:
       return state;
   }

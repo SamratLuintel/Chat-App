@@ -53,7 +53,10 @@ module.exports = router => {
     });
 
     const post = await newPost.save();
-    res.json(post);
+    const populatedPost = await Post.populate(post, {
+      path: "user comments.user"
+    });
+    res.json(populatedPost);
   });
 
   // @route DELETE api/posts
@@ -95,7 +98,9 @@ module.exports = router => {
       post.likes.unshift({ user: req.user.id });
 
       const savedPost = await post.save();
-      const populatedPost = await Post.populate(savedPost, { path: "user" });
+      const populatedPost = await Post.populate(savedPost, {
+        path: "user comments.user"
+      });
       res.json(populatedPost);
     } catch (error) {
       res.status(404).json({ postnotfound: "No post found" });
@@ -127,7 +132,9 @@ module.exports = router => {
 
       //Save the post
       const savedPost = await post.save();
-      const populatedPost = await Post.populate(savedPost, { path: "user" });
+      const populatedPost = await Post.populate(savedPost, {
+        path: "user comments.user"
+      });
       res.json(populatedPost);
     } catch (error) {
       console.log(error);
@@ -150,14 +157,16 @@ module.exports = router => {
       const post = await Post.findById(req.params.id);
       const newComment = {
         text: req.body.text,
-        name: req.user.name,
-        avatar: req.user.avatar,
         user: req.user.id
       };
       //Add to comment array
       post.comments.unshift(newComment);
       const commentedPost = await post.save();
-      res.json(commentedPost);
+      const populatedPost = await Post.populate(commentedPost, {
+        path: "user comments.user"
+      });
+      console.log(populatedPost);
+      res.json(populatedPost);
     } catch (error) {
       res.status(404).json({ postnotfound: "Not post found" });
     }
@@ -196,9 +205,11 @@ module.exports = router => {
       const limitNumber = parseInt(req.params.limit);
       console.log("Find all have been called", limitNumber);
       const posts = await Post.find({})
+        .sort({ date: -1 })
         .skip(skipNumber)
         .limit(limitNumber)
-        .populate("user");
+        .populate("user")
+        .populate("comments.user");
 
       res.status(200).send(posts);
     } catch (error) {

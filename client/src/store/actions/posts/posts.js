@@ -3,7 +3,9 @@ import {
   UPDATE_POSTS_SCROLLABLE,
   UPDATE_POSTS_LISTS,
   UPDATE_POSTS_LIKES,
-  UPDATE_SINGLE_POST
+  UPDATE_SINGLE_POST,
+  PUT_SINGLE_POST_TO_TOP,
+  HIDE_POST
 } from "store/types";
 
 export const fetchPost = (skip, limit) => async dispatch => {
@@ -57,4 +59,36 @@ export const removeLike = (id, index) => async dispatch => {
     console.log(error);
     if (error.response) console.log(error.response);
   }
+};
+
+// Add Comment
+export const addComment = (postId, index, commentText) => async dispatch => {
+  try {
+    const res = await axios.post(`/api/posts/comment/${postId}`, {
+      text: commentText
+    });
+    console.log("Comment have been successfully created", index, res.data);
+    dispatch({
+      type: UPDATE_SINGLE_POST,
+      payload: { index: index, post: res.data }
+    });
+  } catch (error) {
+    console.log(error);
+    if (error.response) console.log(error.response);
+  }
+};
+
+export const putPostToTop = post => dispatch => {
+  console.log("Put Post To Top have been called", post);
+  dispatch({
+    type: PUT_SINGLE_POST_TO_TOP,
+    payload: post
+  });
+};
+
+export const hidePost = index => async dispatch => {
+  dispatch({
+    type: HIDE_POST,
+    payload: { index }
+  });
 };

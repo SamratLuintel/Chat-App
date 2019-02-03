@@ -6,15 +6,12 @@ class NewsFeedImage extends Component {
     //Add multiple images if you want
     const { files } = this.props;
     if (files.length === 0) return "";
+    let divBackgroundStyle = {
+      backgroundImage: `url(${files[0].preview})`
+    };
     return (
       <div className="NewsFeedImage">
-        <div className="NewsFeedImage__inner">
-          <img
-            src={files[0].preview}
-            alt=""
-            className="NewsFeedImage__inner__image"
-          />
-        </div>
+        <div className="NewsFeedImage__image" style={divBackgroundStyle} />
       </div>
     );
   }

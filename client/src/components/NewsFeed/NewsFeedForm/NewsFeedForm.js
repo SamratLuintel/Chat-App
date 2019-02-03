@@ -5,6 +5,12 @@ import NewsFeedFormAction from "./NewsFeedFormAction/NewsFeedFormAction";
 import NewsFeedImage from "./NewsFeedImage/NewsFeedImage";
 import axios from "axios";
 import keys from "config/keys";
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
+import { putPostToTop } from "store/actions/posts/posts";
+import { connect } from "react-redux";
 
 class NewsFeedForm extends Component {
   state = {
@@ -35,7 +41,7 @@ class NewsFeedForm extends Component {
 
   componentWillUnmount() {
     // Make sure to revoke the data uris to avoid memory leaks
-    this.state.file.forEach(file => URL.revokeObjectURL(file.preview));
+    this.state.files.forEach(file => URL.revokeObjectURL(file.preview));
   }
 
   postStatus = async () => {
@@ -51,6 +57,14 @@ class NewsFeedForm extends Component {
         images: imagesId
       });
       console.log("Post have been successfulyl created");
+
+      NotificationManager.info("Post have been successfully created");
+      // Make sure to revoke the data uris to avoid memory leaks
+      this.state.files.forEach(file => URL.revokeObjectURL(file.preview));
+      // Update the post list on redux
+      this.props.putPostToTop(res.data);
+      // Reset
+      this.setState({ text: "", files: [] });
     } catch (error) {
       console.log(error);
       if (error.response) console.log(error.response);
@@ -93,6 +107,7 @@ class NewsFeedForm extends Component {
   render() {
     return (
       <div className="NewsFeedForm">
+        <NotificationContainer />
         <div className="NewsFeedForm__header">
           <div className="NewsFeedForm__header__nav-item">
             <Icon name="status-icon" color="#ff5e3a" size={17} />
@@ -141,4 +156,7 @@ class NewsFeedForm extends Component {
     );
   }
 }
-export default NewsFeedForm;
+export default connect(
+  null,
+  { putPostToTop }
+)(NewsFeedForm);

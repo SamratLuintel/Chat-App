@@ -3,6 +3,10 @@ import InfiniteScroll from "react-infinite-scroller";
 import PostCard from "components/utils/PostCard/PostCard";
 import { connect } from "react-redux";
 import { fetchPost } from "store/actions/posts/posts";
+import { ClipLoader } from "react-spinners";
+import { css } from "react-emotion";
+
+const override = css``;
 
 class InfiniteNewsFeed extends Component {
   state = {
@@ -54,11 +58,17 @@ class InfiniteNewsFeed extends Component {
           hasMore={this.props.posts.scrollable}
           loader={
             <div className="InfiniteNewsFeed__loading" key={0}>
-              Loading ...
+              <ClipLoader
+                className={override}
+                sizeUnit={"px"}
+                size={23}
+                color={"#00bcd1"}
+                loading={true}
+              />
             </div>
           }
         >
-          <div className="row">{this.renderPost()}</div>
+          {this.renderPost()}
         </InfiniteScroll>
       </div>
     );

@@ -4,6 +4,19 @@ import PostCardCommentForm from "./PostCardCommentForm/PostCardCommentForm";
 import classnames from "classnames";
 
 class PostCardComments extends Component {
+  renderPostCardComments = () => {
+    return this.props.comments.map(comment => {
+      return (
+        <PostCardCommentItem
+          image={comment.user.userImage}
+          name={comment.user.username}
+          text={comment.text}
+          date={comment.date}
+        />
+      );
+    });
+  };
+
   render() {
     return (
       <div
@@ -12,9 +25,11 @@ class PostCardComments extends Component {
           "PostCardComments--visible": this.props.commentOpen
         })}
       >
-        <PostCardCommentForm />
-        <PostCardCommentItem />
-        <PostCardCommentItem />
+        <PostCardCommentForm
+          postId={this.props.postId}
+          postIndex={this.props.postIndex}
+        />
+        {this.renderPostCardComments()}
       </div>
     );
   }
