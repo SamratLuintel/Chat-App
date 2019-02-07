@@ -23,6 +23,7 @@ export default (state = initialState, { type, payload }) => {
 
     case RESET_POSTS:
       return { ...state, list: [], scrollable: true };
+
     case UPDATE_SINGLE_POST:
       return update(state, {
         list: {

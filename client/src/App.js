@@ -60,7 +60,12 @@ class App extends Component {
         <Route exact path="/create-chat-group" component={CreateGroupChat} />
         <Route exact path="/chats" component={Chats} />
         <Switch>
-          <PrivateRoute exact path="/home" component={NewsFeed} />
+          <PrivateRoute
+            exact
+            path="/home"
+            RouteKey={true}
+            component={NewsFeed}
+          />
         </Switch>
         <Switch>
           <PrivateRoute

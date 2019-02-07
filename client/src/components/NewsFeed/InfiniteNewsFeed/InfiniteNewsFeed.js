@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import PostCard from "components/utils/PostCard/PostCard";
 import { connect } from "react-redux";
-import { fetchPost } from "store/actions/posts/posts";
+import { fetchPost, resetPost } from "store/actions/posts/posts";
 import { ClipLoader } from "react-spinners";
 import { css } from "react-emotion";
 
@@ -19,6 +19,7 @@ class InfiniteNewsFeed extends Component {
   };
 
   loadMorePost = async () => {
+    console.log("Load more post is called");
     if (!this.state.fetching) {
       this.setState({ fetching: true });
       console.log("Skip thing", this.state.skip);
@@ -49,6 +50,10 @@ class InfiniteNewsFeed extends Component {
     });
   };
 
+  componentWillUnmount = () => {
+    this.props.resetPost();
+    console.log("component will unmount called on infinite news feed");
+  };
   render() {
     return (
       <div className="InfiniteNewsFeed">
@@ -82,5 +87,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { fetchPost }
+  { fetchPost, resetPost }
 )(InfiniteNewsFeed);

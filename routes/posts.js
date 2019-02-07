@@ -217,22 +217,20 @@ module.exports = router => {
       res.status(400).send({ eroor: "Oops some error has occured" });
     }
   });
-
-  // @route POST api/posts/find-all/skip/limit
+  // @route POST api/posts/:id/skip/limit
   // @desc Fetch post (with Pagination)
   // @access Public
   router.get("/api/posts/:id/:skip/:limit", async (req, res) => {
     try {
       const skipNumber = parseInt(req.params.skip);
       const limitNumber = parseInt(req.params.limit);
-      console.log("Find all have been called", limitNumber);
-      const posts = await Post.find({ id: req.params.id })
+      const posts = await Post.find({ user: req.params.id })
         .sort({ date: -1 })
         .skip(skipNumber)
         .limit(limitNumber)
         .populate("user")
         .populate("comments.user");
-
+      console.log(posts);
       res.status(200).send(posts);
     } catch (error) {
       console.log(error);

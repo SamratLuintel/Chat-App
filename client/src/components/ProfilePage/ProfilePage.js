@@ -66,7 +66,6 @@ class ProfilePage extends Component {
 
   componentDidMount = () => {
     this.props.updatePageName("Profile Page");
-    this.props.resetPost();
     this.fetchPeople();
   };
 
@@ -129,5 +128,5 @@ class ProfilePage extends Component {
 }
 export default connect(
   null,
-  { updatePageName, resetPost }
+  { updatePageName }
 )(ProfilePage);

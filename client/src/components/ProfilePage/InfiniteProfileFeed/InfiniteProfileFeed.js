@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import PostCard from "components/utils/PostCard/PostCard";
 import { connect } from "react-redux";
-import { fetchPeoplePost } from "store/actions/posts/posts";
+import { fetchPeoplePost, resetPost } from "store/actions/posts/posts";
 import { ClipLoader } from "react-spinners";
 import { css } from "react-emotion";
 
@@ -34,6 +34,7 @@ class InfiniteNewsFeed extends Component {
   };
 
   renderPost = () => {
+    console.log("render post is called");
     if (!this.props.profile || !this.props.profile.keys) return;
     if (this.props.posts.list.length === 0)
       return (
@@ -56,6 +57,10 @@ class InfiniteNewsFeed extends Component {
         />
       );
     });
+  };
+
+  componentWillUnmount = () => {
+    this.props.resetPost();
   };
 
   render() {
@@ -91,5 +96,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { fetchPeoplePost }
+  { fetchPeoplePost, resetPost }
 )(InfiniteNewsFeed);

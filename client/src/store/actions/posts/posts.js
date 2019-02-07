@@ -11,7 +11,7 @@ import {
 
 export const fetchPost = (skip, limit) => async dispatch => {
   try {
-    console.log("fethc post have been called");
+    console.log("fetch post have been called");
     const res = await axios.get(`/api/posts/find-all/${skip}/${limit}`);
     console.log("Fetch post have been called with data", res.data);
     if (!res.data || res.data.length === 0) {
@@ -35,7 +35,7 @@ export const fetchPost = (skip, limit) => async dispatch => {
 };
 export const fetchPeoplePost = (skip, limit, id) => async dispatch => {
   try {
-    console.log("fethc post have been called");
+    console.log("fetch people post have been called", skip, limit, id);
     const res = await axios.get(`/api/posts/${id}/${skip}/${limit}`);
     console.log("Fetch post have been called with data", res.data);
     if (!res.data || res.data.length === 0) {
