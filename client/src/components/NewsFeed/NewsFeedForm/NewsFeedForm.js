@@ -4,7 +4,6 @@ import classnames from "classnames";
 import NewsFeedFormAction from "./NewsFeedFormAction/NewsFeedFormAction";
 import NewsFeedImage from "./NewsFeedImage/NewsFeedImage";
 import axios from "axios";
-import keys from "keys/keys";
 import {
   NotificationContainer,
   NotificationManager
@@ -77,6 +76,7 @@ class NewsFeedForm extends Component {
   };
 
   handleUploadImages = async images => {
+    const keys = this.props.profile.keys;
     let imagesId = [];
     console.log(keys);
     // uploads is an array that would hold all the post methods for each image to be uploaded, then we'd use axios.all()

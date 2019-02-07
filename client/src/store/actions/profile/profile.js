@@ -3,7 +3,8 @@ import {
   UPDATE_PROFILE_LOGGEDIN,
   UPDATE_PROFILE_LOGGEDOUT,
   JOIN_GLOBAL_ROOM,
-  UPDATE_LAST_PRIVATE_MESSAGES
+  UPDATE_LAST_PRIVATE_MESSAGES,
+  UPDATE_KEYS
 } from "store/types";
 
 export const signUpFormSubmit = async (
@@ -94,5 +95,26 @@ export const getLastMessages = () => async dispatch => {
     });
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const fetchKeys = () => async dispatch => {
+  try {
+    const res = await axios.get("/api/keys");
+    const keys = {
+      cloudinary: {
+        APIkey: res.data.cloudinaryApiKey,
+        APISecret: res.data.cloudinaryApiSecret,
+        uploadPreset: res.data.cloudinaryUploadPreset,
+        name: res.data.cloudinaryName
+      }
+    };
+    dispatch({
+      type: UPDATE_KEYS,
+      payload: keys
+    });
+    console.log("From fetch keys", res.data);
+  } catch (error) {
+    console.log(error);
   }
 };

@@ -5,7 +5,6 @@ import PostCardComments from "./PostCardComments/PostCardComments";
 import moment from "moment";
 import { connect } from "react-redux";
 import { addLike, removeLike, hidePost } from "store/actions/posts/posts";
-import keys from "keys/keys";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 
@@ -55,6 +54,7 @@ class PostCard extends Component {
   };
   render() {
     const { props } = this;
+    const keys = this.props.profile.keys;
     console.log(keys);
     const rawImageURL = `https://res.cloudinary.com/${
       keys.cloudinary.name

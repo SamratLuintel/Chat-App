@@ -4,7 +4,8 @@ import {
   UPDATE_ONLINE_FRIENDS,
   UPDATE_LAST_PRIVATE_MESSAGES,
   UPDATE_LOCAL_USER_IMAGE,
-  UPDATE_PROFILE_FRIENDS
+  UPDATE_PROFILE_FRIENDS,
+  UPDATE_KEYS
 } from "store/types";
 
 const initialState = null;
@@ -55,6 +56,11 @@ export default (state = initialState, action) => {
         //If user uploads a image in Edit Profile Settings it's value is updated
         //It is used for displaying the preview of updated image
         localUserImage: ""
+      };
+    case UPDATE_KEYS:
+      return {
+        ...state,
+        keys: action.payload
       };
     case UPDATE_LOCAL_USER_IMAGE:
       return {

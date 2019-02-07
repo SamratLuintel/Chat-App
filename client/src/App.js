@@ -5,7 +5,11 @@ import CreateGroupChat from "components/CreateGroupChat/CreateGroupChat";
 import EditGroupChat from "components/EditGroupChat/EditGroupChat";
 import GroupChat from "components/GroupChat/GroupChat";
 import { connect } from "react-redux";
-import { fetchUser, joinGlobalRoom } from "store/actions/profile/profile";
+import {
+  fetchUser,
+  joinGlobalRoom,
+  fetchKeys
+} from "store/actions/profile/profile";
 import { withRouter, Switch } from "react-router-dom";
 import PrivateRoute from "hoc/PrivateRoute";
 import PrivateChat from "components/PrivateChat/PrivateChat";
@@ -23,6 +27,7 @@ class App extends Component {
   };
   componentDidMount = () => {
     this.props.fetchUser();
+    this.props.fetchKeys();
   };
 
   componentDidUpdate = () => {
@@ -112,6 +117,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { fetchUser, joinGlobalRoom, joinRequest }
+    { fetchUser, joinGlobalRoom, joinRequest, fetchKeys }
   )(App)
 );

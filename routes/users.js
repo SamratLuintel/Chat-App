@@ -1,6 +1,6 @@
 const passport = require("passport");
 const mongoose = require("mongoose");
-
+const keys = require("../config/keys");
 const User = mongoose.model("users");
 
 const {
@@ -149,5 +149,9 @@ module.exports = router => {
     req.logOut();
     console.log("Log out is caleld");
     res.status(200).send({ msg: "Successfully logout" });
+  });
+
+  router.get("/api/keys", (req, res) => {
+    res.status(200).send(keys);
   });
 };
