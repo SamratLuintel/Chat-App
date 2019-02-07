@@ -20,6 +20,7 @@ class PrivateRoute extends Component {
       ...rest
     } = this.props;
     if (profile) {
+      console.log("There is a profile", profile);
       const Key = RouteKey ? location.pathname + location.search : null;
       return (
         <Route

@@ -25,9 +25,13 @@ class App extends Component {
   state = {
     roomJoined: false
   };
-  componentDidMount = () => {
-    this.props.fetchUser();
-    this.props.fetchKeys();
+  componentDidMount = async () => {
+    try {
+      await this.props.fetchUser();
+      this.props.fetchKeys();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   componentDidUpdate = () => {
@@ -58,14 +62,11 @@ class App extends Component {
       <div>
         <Route exact path="/" component={Landing} />
         <Route exact path="/create-chat-group" component={CreateGroupChat} />
-        <Route exact path="/chats" component={Chats} />
         <Switch>
-          <PrivateRoute
-            exact
-            path="/home"
-            RouteKey={true}
-            component={NewsFeed}
-          />
+          <PrivateRoute exact path="/chats" component={Chats} />
+        </Switch>
+        <Switch>
+          <PrivateRoute exact path="/home" component={NewsFeed} />
         </Switch>
         <Switch>
           <PrivateRoute
