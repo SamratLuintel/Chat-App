@@ -77,6 +77,7 @@ class InfiniteNewsFeed extends Component {
 }
 
 const mapStateToProps = state => ({
+  profile: state.profile,
   posts: state.posts
 });
 export default connect(
