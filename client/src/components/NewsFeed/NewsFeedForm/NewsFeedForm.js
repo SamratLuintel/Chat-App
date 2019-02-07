@@ -11,7 +11,6 @@ import {
 } from "react-notifications";
 import { putPostToTop } from "store/actions/posts/posts";
 import { connect } from "react-redux";
-
 class NewsFeedForm extends Component {
   state = {
     focused: false,
@@ -123,7 +122,7 @@ class NewsFeedForm extends Component {
         <div className="NewsFeedForm__main-area">
           <div className="NewsFeedForm__author-thumb">
             <img
-              src="https://randomuser.me/api/portraits/med/men/80.jpg"
+              src={this.props.profile.userImage}
               alt=""
               className="NewsFeedForm__author-thumb__image"
             />
@@ -164,7 +163,12 @@ class NewsFeedForm extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { putPostToTop }
 )(NewsFeedForm);
