@@ -34,6 +34,7 @@ class InfiniteNewsFeed extends Component {
   };
 
   renderPost = () => {
+    if (!this.props.profile || !this.props.profile.keys) return;
     if (this.props.posts.list.length === 0)
       return (
         <p className="InfiniteProfileFeed__error">
@@ -85,6 +86,7 @@ class InfiniteNewsFeed extends Component {
 }
 
 const mapStateToProps = state => ({
+  profile: state.profile,
   posts: state.posts
 });
 export default connect(

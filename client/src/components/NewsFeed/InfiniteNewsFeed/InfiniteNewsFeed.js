@@ -30,6 +30,7 @@ class InfiniteNewsFeed extends Component {
   };
 
   renderPost = () => {
+    if (!this.props.profile || !this.props.profile.keys) return;
     if (this.props.posts.list.length === 0) return;
 
     return this.props.posts.list.map((post, index) => {
