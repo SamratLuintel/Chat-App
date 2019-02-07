@@ -3,7 +3,8 @@ import {
   UPDATE_POSTS_SCROLLABLE,
   UPDATE_SINGLE_POST,
   PUT_SINGLE_POST_TO_TOP,
-  HIDE_POST
+  HIDE_POST,
+  RESET_POSTS
 } from "store/types";
 import update from "immutability-helper";
 
@@ -20,6 +21,8 @@ export default (state = initialState, { type, payload }) => {
     case UPDATE_POSTS_SCROLLABLE:
       return { ...state, scrollable: payload };
 
+    case RESET_POSTS:
+      return { ...state, list: [], scrollable: true };
     case UPDATE_SINGLE_POST:
       return update(state, {
         list: {

@@ -4,7 +4,7 @@ import classnames from "classnames";
 import NewsFeedFormAction from "./NewsFeedFormAction/NewsFeedFormAction";
 import NewsFeedImage from "./NewsFeedImage/NewsFeedImage";
 import axios from "axios";
-import keys from "config/keys";
+import keys from "keys/keys";
 import {
   NotificationContainer,
   NotificationManager
@@ -18,7 +18,8 @@ class NewsFeedForm extends Component {
     text: "",
     //keeps track of just images for now
     //later can be updaetd
-    files: []
+    files: [],
+    postDisabled: false
   };
 
   _onBlur = () => this.setState({ focused: false });
@@ -44,10 +45,14 @@ class NewsFeedForm extends Component {
     this.state.files.forEach(file => URL.revokeObjectURL(file.preview));
   }
 
+  setPostDisabled = bool => {
+    this.setState({ postDisabled: bool });
+  };
   postStatus = async () => {
     console.log("Post status have been called");
     let imagesId = [];
     try {
+      this.setState({ postDisabled: true });
       if (this.state.files.length !== 0) {
         imagesId = await this.handleUploadImages(this.state.files);
       }
@@ -64,10 +69,11 @@ class NewsFeedForm extends Component {
       // Update the post list on redux
       this.props.putPostToTop(res.data);
       // Reset
-      this.setState({ text: "", files: [] });
+      this.setState({ text: "", files: [], postDisabled: false });
     } catch (error) {
       console.log(error);
       if (error.response) console.log(error.response);
+      this.setState({ postDisabled: false });
     }
   };
 
@@ -150,6 +156,8 @@ class NewsFeedForm extends Component {
           <NewsFeedFormAction
             postStatus={this.postStatus}
             onDrop={this.onDrop}
+            postDisabled={this.state.postDisabled}
+            setPostDisabled={this.setPostDisabled}
           />
         </div>
       </div>

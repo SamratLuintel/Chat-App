@@ -33,12 +33,16 @@ class NewsFeedFormAction extends Component {
           </Dropzone>
         </div>
 
-        <div
+        <button
+          className={classNames({
+            "NewsFeedFormAction__post-btn": true,
+            "NewsFeedFormAction__post-btn--disabled": this.props.postDisabled
+          })}
           onClick={this.props.postStatus}
-          className="NewsFeedFormAction__post-btn"
+          disabled={this.props.postDisabled}
         >
           Post Status
-        </div>
+        </button>
       </div>
     );
   }

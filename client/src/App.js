@@ -3,7 +3,6 @@ import { Route } from "react-router-dom";
 import Landing from "components/Landing/Landing";
 import CreateGroupChat from "components/CreateGroupChat/CreateGroupChat";
 import EditGroupChat from "components/EditGroupChat/EditGroupChat";
-import Home from "components/Home/Home";
 import GroupChat from "components/GroupChat/GroupChat";
 import { connect } from "react-redux";
 import { fetchUser, joinGlobalRoom } from "store/actions/profile/profile";
@@ -16,6 +15,7 @@ import FindPeople from "components/FindPeople/FindPeople";
 import ProfilePage from "components/ProfilePage/ProfilePage";
 import { joinRequest } from "store/actions/friend/friend";
 import NewsFeed from "components/NewsFeed/NewsFeed";
+import Chats from "components/Chats/Chats";
 
 class App extends Component {
   state = {
@@ -53,9 +53,9 @@ class App extends Component {
       <div>
         <Route exact path="/" component={Landing} />
         <Route exact path="/create-chat-group" component={CreateGroupChat} />
-        <Route exact path="/newsfeed" component={NewsFeed} />
+        <Route exact path="/chats" component={Chats} />
         <Switch>
-          <PrivateRoute exact path="/home" component={Home} />
+          <PrivateRoute exact path="/home" component={NewsFeed} />
         </Switch>
         <Switch>
           <PrivateRoute

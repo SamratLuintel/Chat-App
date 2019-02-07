@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import ChatGroup from "components/Home/ChatGroups/ChatGroup/ChatGroup";
+import ChatGroup from "components/Chats/ChatGroups/ChatGroup/ChatGroup";
 import { connect } from "react-redux";
-import CreateChatGroup from "components/Home/ChatGroups/CreateChatGroup/CreateChatGroup";
+import CreateChatGroup from "components/Chats/ChatGroups/CreateChatGroup/CreateChatGroup";
 
 export class ChatGroups extends Component {
   filterByCountry = groups => {

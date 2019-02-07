@@ -198,13 +198,35 @@ module.exports = router => {
 
   // @route POST api/posts/find-all/skip/limit
   // @desc Fetch post (with Pagination)
-  // @access Private
+  // @access Public
   router.get("/api/posts/find-all/:skip/:limit", async (req, res) => {
     try {
       const skipNumber = parseInt(req.params.skip);
       const limitNumber = parseInt(req.params.limit);
       console.log("Find all have been called", limitNumber);
       const posts = await Post.find({})
+        .sort({ date: -1 })
+        .skip(skipNumber)
+        .limit(limitNumber)
+        .populate("user")
+        .populate("comments.user");
+
+      res.status(200).send(posts);
+    } catch (error) {
+      console.log(error);
+      res.status(400).send({ eroor: "Oops some error has occured" });
+    }
+  });
+
+  // @route POST api/posts/find-all/skip/limit
+  // @desc Fetch post (with Pagination)
+  // @access Public
+  router.get("/api/posts/:id/:skip/:limit", async (req, res) => {
+    try {
+      const skipNumber = parseInt(req.params.skip);
+      const limitNumber = parseInt(req.params.limit);
+      console.log("Find all have been called", limitNumber);
+      const posts = await Post.find({ id: req.params.id })
         .sort({ date: -1 })
         .skip(skipNumber)
         .limit(limitNumber)

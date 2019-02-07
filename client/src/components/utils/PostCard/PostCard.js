@@ -5,7 +5,7 @@ import PostCardComments from "./PostCardComments/PostCardComments";
 import moment from "moment";
 import { connect } from "react-redux";
 import { addLike, removeLike, hidePost } from "store/actions/posts/posts";
-import keys from "../../../config/keys";
+import keys from "keys/keys";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
 

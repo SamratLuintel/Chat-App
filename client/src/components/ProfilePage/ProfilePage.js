@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import { updatePageName } from "store/actions/page/page";
 import LeftMenu from "components/utils/LeftMenu/LeftMenu";
 import ApplicationSideNav from "components/utils/ApplicationSideNav/ApplicationSideNav";
+import InfiniteProfileFeed from "./InfiniteProfileFeed/InfiniteProfileFeed";
+import { resetPost } from "store/actions/posts/posts";
 
 const override = css`
   display: block;
@@ -64,6 +66,7 @@ class ProfilePage extends Component {
 
   componentDidMount = () => {
     this.props.updatePageName("Profile Page");
+    this.props.resetPost();
     this.fetchPeople();
   };
 
@@ -114,10 +117,8 @@ class ProfilePage extends Component {
                   email={this.state.email}
                 />
               </div>
-              <div className="col-md-6">
-                <div className="ProfilePage__user-posts">
-                  There are no posts to show
-                </div>
+              <div className="col-md-6 ProfilePage__users">
+                <InfiniteProfileFeed id={this.props.match.params.id} />
               </div>
             </div>
           </div>
@@ -128,5 +129,5 @@ class ProfilePage extends Component {
 }
 export default connect(
   null,
-  { updatePageName }
+  { updatePageName, resetPost }
 )(ProfilePage);

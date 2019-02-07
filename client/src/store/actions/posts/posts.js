@@ -5,7 +5,8 @@ import {
   UPDATE_POSTS_LIKES,
   UPDATE_SINGLE_POST,
   PUT_SINGLE_POST_TO_TOP,
-  HIDE_POST
+  HIDE_POST,
+  RESET_POSTS
 } from "store/types";
 
 export const fetchPost = (skip, limit) => async dispatch => {
@@ -31,6 +32,36 @@ export const fetchPost = (skip, limit) => async dispatch => {
     });
     console.log(error);
   }
+};
+export const fetchPeoplePost = (skip, limit, id) => async dispatch => {
+  try {
+    console.log("fethc post have been called");
+    const res = await axios.get(`/api/posts/${id}/${skip}/${limit}`);
+    console.log("Fetch post have been called with data", res.data);
+    if (!res.data || res.data.length === 0) {
+      dispatch({
+        type: UPDATE_POSTS_SCROLLABLE,
+        payload: false
+      });
+    }
+
+    dispatch({
+      type: UPDATE_POSTS_LISTS,
+      payload: res.data
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_POSTS_SCROLLABLE,
+      payload: false
+    });
+    console.log(error);
+  }
+};
+
+export const resetPost = () => dispatch => {
+  dispatch({
+    type: RESET_POSTS
+  });
 };
 
 export const addLike = (id, index) => async dispatch => {

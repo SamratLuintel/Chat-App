@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Filter from "components/Home/HomeActionBar/Filter/Filter";
-import GroupSearch from "components/Home/HomeActionBar/GroupSearch/GroupSearch";
+import Filter from "components/Chats/HomeActionBar/Filter/Filter";
+import GroupSearch from "components/Chats/HomeActionBar/GroupSearch/GroupSearch";
 
 class HomeActionBar extends Component {
   render() {
